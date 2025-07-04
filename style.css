@@ -19,7 +19,7 @@ header{
     background-color: rgba(255,255,255,0.1);
     top: 0;
     left: 0;
-    width: 100%;  /*edit*/
+    width: 100%;
     padding: 15px 200px;
     display: flex;
     justify-content: space-between;
@@ -71,10 +71,10 @@ section{
     display: flex;
     align-items: center;
     background-image: url(bg.jpg);
-    background-size: cover; /* Adjust to a specific width */
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-attachment: fixed; /* changed to scroll instead of fixed */
+    background-attachment: fixed;
 }
 
 .main .content{
@@ -161,7 +161,6 @@ section{
     margin-right: 30px;
 }
 
-
 /* About */
 
 .title{
@@ -244,7 +243,7 @@ section{
     margin-bottom: 20px;
 }
 
-.about .content .col-right .paragraph-text{
+.about .content .coldynamic .paragraph-text{
     font-size: 1em;
 }
 
@@ -290,7 +289,7 @@ section{
     margin-bottom: 5px;
 }
 
-.skills .content .col-right .br .info span{
+.skills .content .col-right .bar .info span{
     font-size: 18px;
     font-weight: 500;
 }
@@ -441,7 +440,6 @@ section{
     transform: scale(1.2);
 }
 
-
 /* Contact */
 
 .contact .content{
@@ -450,16 +448,16 @@ section{
     flex-wrap: wrap;
     flex-direction: column;
     margin-top: 20px;
-  }
-  
-  .contact .content .row{
+}
+
+.contact .content .row{
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     flex-direction: row;
-  }
-  
-  .contact .content .row .card{
+}
+
+.contact .content .row .card{
     background: #fff;
     width: 240px;
     margin: 20px;
@@ -470,60 +468,60 @@ section{
     flex-direction: column;
     box-shadow: 0 5px 25px rgba(1 1 1 / 15%);
     border-radius: 10px;
-  }
-  
-  .contact .content .row .card .contact-icon{
+}
+
+.contact .content .row .card .contact-icon{
     color: #3a6cf4;
     font-size: 4em;
     text-align: center;
     transition: transform 0.5s ease;
-  }
-  
-  .contact .content .row .card:hover .contact-icon{
+}
+
+.contact .content .row .card:hover .contact-icon{
     transform: translateY(-10px);
-  }
-  
-  .contact .content .row .card .info{
+}
+
+.contact .content .row .card .info{
     text-align: center;
-  }
-  
-  .contact .content .row .card .info h3{
+}
+
+.contact .content .row .card .info h3{
     color: #111;
     font-size: 1.2em;
     font-weight: 700;
     margin: 10px;
-  }
-  
-  .contact .content .row .card .info span{
+}
+
+.contact .content .row .card .info span{
     color: #666;
     font-weight: 500;
-  }
-  
-  .contact-form{
+}
+
+.contact-form{
     background: #fff;
     max-width: 600px;
     margin-top: 50px;
     padding: 50px;
     border-radius: 10px;
     box-shadow: 0 5px 25px rgba(1 1 1 / 15%);
-  }
-  
-  .contact-form h3{
+}
+
+.contact-form h3{
     color: #111;
     font-size: 1.6em;
     font-weight: 600;
     text-align: center;
     margin-bottom: 40px;
-  }
-  
-  .contact-form .input-box{
+}
+
+.contact-form .input-box{
     position: relative;
     width: 100%;
     margin-bottom: 20px;
-  }
-  
-  .contact-form .input-box input,
-  .contact-form .input-box textarea{
+}
+
+.contact-form .input-box input,
+.contact-form .input-box textarea{
     color: #111;
     width: 100%;
     padding: 10px;
@@ -533,9 +531,9 @@ section{
     border: 1px solid #111;
     border-radius: 5px;
     resize: none;
-  }
-  
-  .contact-form .input-box .send-btn{
+}
+
+.contact-form .input-box .send-btn{
     color: #fff;
     background: #3a6cf4;
     display: inline-block;
@@ -547,38 +545,36 @@ section{
     border: none;
     cursor: pointer;
     transition: 0.5s ease;
-  }
-  
-  .contact-form .input-box .send-btn:hover{
-    background: #235bf6;
-  }
+}
 
-  /* Footer */
-  
-  .footer{
+.contact-form .input-box .send-btn:hover{
+    background: #235bf6;
+}
+
+/* Footer */
+
+.footer{
     background: #000016;
     color: #fff;
     text-align: center;
     padding: 2em;
-  }
-  
-  .footer .footer-title{
+}
+
+.footer .footer-title{
     font-size: 20px;
     font-weight: 600;
-  }
-  
-  .footer p{
+}
+
+.footer p{
     font-size: 16px;
     margin-top: 10px;
-  }
-  
-  .footer p a{
+}
+
+.footer p a{
     color: #3a6cf4;
     font-weight: 600;
     text-decoration: none;
-  }
-  
-
+}
 
 @media (max-width:1040px) {
     
@@ -694,9 +690,8 @@ section{
  
     .contact-form{
         padding: 35px 40px;
-      }
+    }
 }
-
 
 .scrollToTop-btn{
     z-index: 999;
@@ -715,9 +710,4 @@ section{
     pointer-events: none;
     opacity: 0;
     transition: all 0.3s ease;
-  }
-
-
-
-
-
+}
