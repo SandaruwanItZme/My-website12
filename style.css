@@ -312,7 +312,7 @@ section{
 }
 
 .skills .content .col-right .bar .html::before{
-    width: 95%;
+    width: 0%;
     background-color: #e45126;
 }
 
