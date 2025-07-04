@@ -346,10 +346,14 @@ section{
     margin-top: 20px;
 }
 
-.title p{
+.title p {
     font-size: 1em;
-    width: 0%;
+    max-width: 600px;
+    width: 100%;
     text-align: center;
+    line-height: 1.6em;
+    margin: 0 auto;
+    padding: 0 10px;
 }
 
 .services .content .card{
