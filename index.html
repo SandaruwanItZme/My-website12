@@ -345,15 +345,15 @@
     </button>
 
     <script>
-        const bgMusic = document.getElementById("bg-music");
+        const bgmusic = document.getElementById("bg-music");
         const musicToggle = document.getElementById("music-toggle");
 
         musicToggle.addEventListener("click", () => {
-            if (bgMusic.paused) {
-                bgMusic.play();
+            if (bgmusic.paused) {
+                bgmusic.play();
                 musicToggle.textContent = "⏸"; // pause icon
             } else {
-                bgMusic.pause();
+                bgmusic.pause();
                 musicToggle.textContent = "▶"; // play icon
             }
         });
@@ -361,3 +361,4 @@
 
 </body>
 </html>
+
