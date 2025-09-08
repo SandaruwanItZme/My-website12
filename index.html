@@ -355,20 +355,44 @@
         
         // Set initial volume
         backgroundMusic.volume = 0.5;
-        
-        // Auto-play music (with user interaction requirement)
-        document.addEventListener('click', function initMusic() {
-            // Try to play music (browsers require user interaction for autoplay)
-            backgroundMusic.play().then(() => {
-                playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
-            }).catch(error => {
-                console.log('Autoplay prevented:', error);
-                // User needs to interact manually
-            });
+        // Auto-play music on page load with user gesture requirement
+function attemptAutoPlay() {
+    // Create a promise to attempt playback
+    const promise = backgroundMusic.play();
+    
+    if (promise !== undefined) {
+        promise.then(() => {
+            // Autoplay started successfully
+            playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+        }).catch(error => {
+            // Autoplay was prevented - show notification or require user interaction
+            console.log('Autoplay prevented:', error);
             
-            // Remove this event listener after first interaction
-            document.removeEventListener('click', initMusic);
-        }, { once: true });
+            // Add a notification for the user to interact
+            const musicInfo = document.querySelector('.music-info');
+            if (musicInfo) {
+                musicInfo.textContent = 'Click to play music';
+                musicInfo.style.cursor = 'pointer';
+                musicInfo.addEventListener('click', () => {
+                    backgroundMusic.play();
+                    playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                    musicInfo.textContent = 'Background Music';
+                    musicInfo.style.cursor = 'default';
+                });
+            }
+        });
+    }
+}
+
+// Try to autoplay when the page has loaded
+window.addEventListener('load', attemptAutoPlay);
+
+// Also try when the user interacts with the page (required by some browsers)
+document.addEventListener('click', function initMusic() {
+    attemptAutoPlay();
+    document.removeEventListener('click', initMusic);
+}, { once: true });
     </script>
 </body>
 </html>
+
