@@ -319,46 +319,7 @@
 
     </script>
 
-    <!-- Background Music -->
-    <audio id="bg-music" autoplay loop>
-        <source src="music.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
-
-    <!-- Music Control Button -->
-    <button id="music-toggle" style="
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        z-index: 1000;
-        background: #111;
-        color: #fff;
-        border: none;
-        border-radius: 50%;
-        width: 50px;
-        height: 50px;
-        font-size: 20px;
-        cursor: pointer;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-    ">
-        ⏸
-    </button>
-
-    <script>
-        const bgmusic = document.getElementById("bg-music");
-        const musicToggle = document.getElementById("music-toggle");
-
-        musicToggle.addEventListener("click", () => {
-            if (bgmusic.paused) {
-                bgmusic.play();
-                musicToggle.textContent = "⏸"; // pause icon
-            } else {
-                bgmusic.pause();
-                musicToggle.textContent = "▶"; // play icon
-            }
-        });
-    </script>
-
 </body>
 </html>
+
 
