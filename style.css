@@ -1268,3 +1268,37 @@ section{
 .skills .content .col-right .bar .line::before {
     animation: fillBar 1.5s ease-out forwards;
     }
+
+/* Add these new skill bar styles */
+.skills .content .col-right .bar .hardware::before {
+    width: 85%;
+    background-color: #4CAF50;
+}
+
+.skills .content .col-right .bar .troubleshooting::before {
+    width: 80%;
+    background-color: #FF9800;
+}
+
+.skills .content .col-right .bar .maintenance::before {
+    width: 75%;
+    background-color: #2196F3;
+}
+
+/* Contact link styles */
+.contact .card .info a {
+    color: #3a6cf4;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.contact .card .info a:hover {
+    color: #235bf6;
+    text-decoration: underline;
+}
+
+/* Fix for music player button */
+#playPauseBtn i {
+    font-size: 14px;
+}
