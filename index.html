@@ -3,270 +3,440 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Janaka Heshan - Portfolio</title>
-    <meta name="description" content="Janaka Heshan - Computer Hardware Technician & Web Developer portfolio. Professional IT services and web development solutions.">
-    <!-- Google AdSense Code -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2374997542805256"
-     crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="style.css">
+    <title>Janaka Heshan | Portfolio</title>
+    <meta name="description" content="Computer Hardware Technician & Web Developer - Professional IT solutions and web development services.">
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2374997542805256" crossorigin="anonymous"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS Animation -->
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <a href="#main" class="brand" data-aos="zoom-in" data-aos-duration="1000">Janaka Heshan</a>
-        <div class="menu-btn"></div>
-        <div class="navigation">
-            <a href="#main" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">Home</a>
-            <a href="#about" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">About</a>
-            <a href="#skills" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">Skills</a>
-            <a href="#services" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">Services</a>
-            <a href="#work" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="500">Work</a>
-            <a href="#contact" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600">Contact</a>
+    <!-- Header -->
+    <header class="header">
+        <div class="container nav-container">
+            <a href="#home" class="logo">
+                <i class="fas fa-code"></i>
+                <span>Janaka</span>Heshan
+            </a>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li>
+                        <button class="theme-toggle" id="themeToggle">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                    </li>
+                </ul>
+            </nav>
         </div>
     </header>
 
-    <section class="main" id="main">
-        <div class="content">
-            <h2 data-aos="fade-right" data-aos-duration="1000" data-aos-delay="800">Hello, I'm <br><span>Janaka Heshan</span></h2>
-            <div class="animated-text" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="900">
-                <h3>Web Developer</h3>
-                <h3>IT Technician</h3>
-                <h3>Tech Enthusiast</h3>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container hero-content">
+            <div class="hero-text" data-aos="fade-up">
+                <h1>
+                    Hi, I'm <span class="highlight">Janaka Heshan</span><br>
+                    <div class="typewriter" id="typewriter"></div>
+                </h1>
+                <p>
+                    Passionate Computer Hardware Technician & Web Developer with expertise in 
+                    system troubleshooting, hardware repair, and modern web development. 
+                    Delivering technical solutions with precision and creativity.
+                </p>
+                <div class="hero-btns">
+                    <a href="#contact" class="btn btn-primary">
+                        <i class="fas fa-paper-plane"></i> Hire Me
+                    </a>
+                    <a href="cv22.pdf" class="btn btn-outline" download>
+                        <i class="fas fa-download"></i> Download CV
+                    </a>
+                </div>
+                <div class="social-links">
+                    <a href="https://m.facebook.com/jheshansandaru/" class="social-link" target="_blank">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://www.instagram.com/janaka4226/" class="social-link" target="_blank">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://github.com/SadaruwanItzMe3" class="social-link" target="_blank">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/" class="social-link" target="_blank">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                </div>
             </div>
-            <a href="cv22.pdf" class="btn" target="_blank" data-aos="zoom-out" data-aos-duration="1000" data-aos-delay="1000">
-                Download CV
-            </a>
-            <div class="media-icons">
-                <a href="https://m.facebook.com/jheshansandaru/" target="_blank" data-aos="fade-in" data-aos-duration="1000" data-aos-delay="1200">
-                    <i class="fab fa-facebook-f"></i>
-                </a>
-                <a href="https://www.instagram.com/janaka4226/" target="_blank" data-aos="fade-in" data-aos-duration="1000" data-aos-delay="1300">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="https://x.com/username" target="_blank" data-aos="fade-in" data-aos-duration="1000" data-aos-delay="1400">
-                    <i class="fab fa-twitter"></i>
-                </a>
-                <a href="https://github.com/SadaruwanItzMe3" target="_blank" data-aos="fade-in" data-aos-duration="1000" data-aos-delay="1500">
-                    <i class="fab fa-github"></i>
-                </a>
+            <div class="hero-image" data-aos="fade-left">
+                <div class="image-container">
+                    <img src="img1.jpg" alt="Janaka Heshan">
+                </div>
             </div>
         </div>
     </section>
 
     <!-- About Section -->
-    <section class="about" id="about">
-        <div class="title reveal">
-            <h2 class="section-title" data-aos="fade-up" data-aos-duration="1000">About Me</h2>
-        </div>
-        <div class="content">
-            <div class="column col-left reveal">
-                <div class="img-card" data-aos="fade-right" data-aos-duration="2000" data-aos-delay="200">
-                    <img src="img1.jpg" alt="Janaka Heshan - Computer Hardware Technician">
-                </div>
+    <section class="section" id="about">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up">
+                <h2>About Me</h2>
+                <p>Get to know more about my background, experience, and achievements</p>
             </div>
-            <div class="column col-right reveal">
-                <h2 class="content-title" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">Hey There! I'm Janaka Heshan Sandaruwan</h2>
-                <p class="paragraph-text" data-aos="flip-up" data-aos-duration="1000" data-aos-delay="400">
-                    I am a passionate and detail-oriented Computer Hardware Technician with hands-on experience in diagnosing, assembling, and maintaining computer systems and peripherals. After successfully completing a comprehensive course in computer hardware, I have developed a strong foundation in troubleshooting, system optimization, and component-level repair.
-                    <br><br>
-                    I am highly enthusiastic about technology, quick to adapt to new tools, and enjoy solving technical challenges to help users get the best performance from their devices. I take pride in my problem-solving skills, teamwork, and commitment to delivering reliable technical support in any environment.
-                </p>
-                <a href="#contact" class="btn" data-aos="zoom-out-left" data-aos-duration="1000" data-aos-delay="600">Contact Me</a>
+            
+            <div class="about-content">
+                <div class="about-image" data-aos="fade-right">
+                    <img src="img1.jpg" alt="About Janaka Heshan">
+                </div>
+                <div class="about-text" data-aos="fade-left">
+                    <h3>Computer Hardware Technician & Developer</h3>
+                    <p>
+                        I am a dedicated Computer Hardware Technician with comprehensive hands-on experience 
+                        in diagnosing, assembling, and maintaining computer systems. My expertise extends to 
+                        component-level repair and system optimization, ensuring peak performance for all devices.
+                    </p>
+                    <p>
+                        With a solid foundation in web development technologies, I combine technical hardware 
+                        knowledge with modern programming skills to deliver complete technical solutions. I 
+                        thrive on solving complex problems and helping users maximize their technology investments.
+                    </p>
+                    
+                    <div class="stats">
+                        <div class="stat-item" data-aos="zoom-in">
+                            <span class="stat-number" data-count="50">0</span>
+                            <span class="stat-label">Projects Completed</span>
+                        </div>
+                        <div class="stat-item" data-aos="zoom-in" data-aos-delay="100">
+                            <span class="stat-number" data-count="3">0</span>
+                            <span class="stat-label">Years Experience</span>
+                        </div>
+                        <div class="stat-item" data-aos="zoom-in" data-aos-delay="200">
+                            <span class="stat-number" data-count="100">0</span>
+                            <span class="stat-label">Happy Clients</span>
+                        </div>
+                    </div>
+                    
+                    <a href="#contact" class="btn btn-primary">
+                        <i class="fas fa-envelope"></i> Contact Me
+                    </a>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Skill Section -->
-    <section class="skills" id="skills">
-        <div class="title">
-            <h2 class="section-title" data-aos="fade-up" data-aos-duration="1000">My Skills</h2>
-        </div>
-        <div class="content">
-            <div class="column col-left">
-                <h2 class="content-title" data-aos="fade-right" data-aos-duration="1000" data-aos-delay="200">My Skills and Experiences</h2>
-                <div class="paragraph-text" data-aos="flip-down" data-aos-duration="1000" data-aos-delay="300">
-                    I possess a solid foundation in computer hardware and software support, with hands-on experience in assembling PCs, diagnosing system issues, and performing component-level repairs. My technical skills include installing and configuring operating systems, setting up basic networks, and maintaining system performance. I am also proficient in using Microsoft Office applications and have a strong understanding of peripheral devices and troubleshooting techniques.
-                </div>
-                <a href="#services" class="btn" data-aos="zoom-in-right" data-aos-duration="1000" data-aos-delay="400">View Services</a>
+    <!-- Skills Section -->
+    <section class="section" id="skills">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up">
+                <h2>My Skills</h2>
+                <p>Technical expertise and professional capabilities</p>
             </div>
-            <div class="column col-right">
-                <div class="bar">
-                    <div class="info" data-aos="flip-up" data-aos-duration="1000" data-aos-delay="100">
-                        <span>HTML</span>
-                        <span>45%</span>
+            
+            <div class="skills-content">
+                <div class="skills-category" data-aos="fade-right">
+                    <h3>Technical Skills</h3>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Computer Hardware</span>
+                            <span class="skill-percent">90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="90"></div>
+                        </div>
                     </div>
-                    <div class="line html" data-aos="zoom-in-right" data-aos-duration="1000" data-aos-delay="140"></div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Troubleshooting</span>
+                            <span class="skill-percent">85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="85"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">System Maintenance</span>
+                            <span class="skill-percent">80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="80"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Network Setup</span>
+                            <span class="skill-percent">75%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="75"></div>
+                        </div>
+                    </div>
                 </div>
-                <div class="bar">
-                    <div class="info" data-aos="flip-up" data-aos-duration="1000" data-aos-delay="200">
-                        <span>CSS</span>
-                        <span>30%</span>
+                
+                <div class="skills-category" data-aos="fade-left">
+                    <h3>Development Skills</h3>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">HTML/CSS</span>
+                            <span class="skill-percent">85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="85"></div>
+                        </div>
                     </div>
-                    <div class="line css" data-aos="zoom-in-right" data-aos-duration="1000" data-aos-delay="240"></div>
-                </div>
-                <div class="bar">
-                    <div class="info" data-aos="flip-up" data-aos-duration="1000" data-aos-delay="300">
-                        <span>Computer Hardware</span>
-                        <span>85%</span>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">JavaScript</span>
+                            <span class="skill-percent">60%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="60"></div>
+                        </div>
                     </div>
-                    <div class="line hardware" data-aos="zoom-in-right" data-aos-duration="1000" data-aos-delay="340"></div>
-                </div>
-                <div class="bar">
-                    <div class="info" data-aos="flip-up" data-aos-duration="1000" data-aos-delay="400">
-                        <span>Troubleshooting</span>
-                        <span>80%</span>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Responsive Design</span>
+                            <span class="skill-percent">80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="80"></div>
+                        </div>
                     </div>
-                    <div class="line troubleshooting" data-aos="zoom-in-right" data-aos-duration="1000" data-aos-delay="440"></div>
-                </div>
-                <div class="bar">
-                    <div class="info" data-aos="flip-up" data-aos-duration="1000" data-aos-delay="500">
-                        <span>System Maintenance</span>
-                        <span>75%</span>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Problem Solving</span>
+                            <span class="skill-percent">90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="90"></div>
+                        </div>
                     </div>
-                    <div class="line maintenance" data-aos="zoom-in-right" data-aos-duration="1000" data-aos-delay="540"></div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Services Section -->
-    <section class="services" id="services">
-        <div class="title">
-            <h2 class="section-title" data-aos="fade-up" data-aos-duration="1000">My Services</h2>
-            <p data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
-                Hi, I'm a passionate and creative developer with a love for building clean, responsive websites and solving tech problems. I specialize in web design, development, and IT support, offering services that blend functionality with style.
-            </p>
-        </div>
-        <div class="content">
-            <div class="card" data-aos="fade-right" data-aos-duration="1000" data-aos-delay="400">
-                <div class="service-icon">
-                    <i class="fas fa-desktop"></i>
-                </div>
-                <div class="info">
+    <section class="section" id="services">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up">
+                <h2>My Services</h2>
+                <p>Professional services I offer to clients</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card" data-aos="zoom-in">
+                    <div class="service-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
                     <h3>Computer Repair</h3>
-                    <p>Professional diagnosis and repair of computer hardware issues, component replacement, and system optimization for peak performance.</p>
+                    <p>
+                        Comprehensive hardware diagnosis, component replacement, system 
+                        optimization, and preventive maintenance for all computer systems.
+                    </p>
                 </div>
-            </div>
-            <div class="card" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
-                <div class="service-icon">
-                    <i class="fas fa-code"></i>
-                </div>
-                <div class="info">
+                
+                <div class="service-card" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="service-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
                     <h3>Web Development</h3>
-                    <p>Custom website development using modern technologies. Responsive design and clean code for optimal user experience.</p>
+                    <p>
+                        Custom website development using modern technologies with responsive 
+                        design, clean code, and optimal user experience.
+                    </p>
                 </div>
-            </div>
-            <div class="card" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="400">
-                <div class="service-icon">
-                    <i class="fas fa-tools"></i>
-                </div>
-                <div class="info">
+                
+                <div class="service-card" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="service-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
                     <h3>IT Support</h3>
-                    <p>Comprehensive technical support including software installation, system setup, network configuration, and troubleshooting.</p>
+                    <p>
+                        Complete technical support including software installation, network 
+                        configuration, troubleshooting, and system setup.
+                    </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Work Section -->
-    <section class="work" id="work">
-        <div class="title">
-            <h2 class="section-title" data-aos="fade-up" data-aos-duration="1000">My Work</h2>
-        </div>
-        <div class="content">
-            <div class="card" data-aos="fade-right" data-aos-duration="1000" data-aos-delay="200">
-                <div class="card-img">
-                    <img src="work1.jpg" alt="Web Development Project">
-                </div>
+    <!-- Portfolio Section -->
+    <section class="section" id="portfolio">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up">
+                <h2>My Portfolio</h2>
+                <p>Showcase of my recent projects and work</p>
             </div>
-            <div class="card" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
-                <div class="card-img">
-                    <img src="work2.jpg" alt="Hardware Repair Project">
-                </div>
+            
+            <div class="portfolio-filter" data-aos="fade-up">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="hardware">Hardware</button>
+                <button class="filter-btn" data-filter="web">Web Development</button>
+                <button class="filter-btn" data-filter="repair">Repair</button>
             </div>
-            <div class="card" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
-                <div class="card-img">
-                    <img src="work3.jpg" alt="IT Support Project">
+            
+            <div class="portfolio-grid">
+                <!-- Project 1 -->
+                <div class="portfolio-item" data-category="hardware" data-aos="fade-up">
+                    <div class="portfolio-img">
+                        <img src="work1.jpg" alt="PC Assembly Project">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Custom PC Assembly</h3>
+                        <p>High-performance gaming PC build with custom cooling solution and RGB lighting.</p>
+                        <div class="portfolio-tags">
+                            <span class="tag">Hardware</span>
+                            <span class="tag">Assembly</span>
+                            <span class="tag">Gaming</span>
+                        </div>
+                        <div class="portfolio-links">
+                            <a href="#" class="btn btn-outline btn-small">
+                                <i class="fas fa-eye"></i> View Details
+                            </a>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="card" data-aos="fade-right" data-aos-duration="1000" data-aos-delay="400">
-                <div class="card-img">
-                    <img src="work4.jpg" alt="Computer Assembly">
+                
+                <!-- Project 2 -->
+                <div class="portfolio-item" data-category="web" data-aos="fade-up" data-aos-delay="100">
+                    <div class="portfolio-img">
+                        <img src="work2.jpg" alt="Website Development">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>E-commerce Website</h3>
+                        <p>Responsive online store with product management and secure payment integration.</p>
+                        <div class="portfolio-tags">
+                            <span class="tag">Web Development</span>
+                            <span class="tag">E-commerce</span>
+                            <span class="tag">Responsive</span>
+                        </div>
+                        <div class="portfolio-links">
+                            <a href="#" class="btn btn-outline btn-small">
+                                <i class="fas fa-eye"></i> View Details
+                            </a>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="card" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
-                <div class="card-img">
-                    <img src="work5.jpg" alt="System Optimization">
-                </div>
-            </div>
-            <div class="card" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="400">
-                <div class="card-img">
-                    <img src="work6.jpg" alt="Technical Project">
+                
+                <!-- Project 3 -->
+                <div class="portfolio-item" data-category="repair" data-aos="fade-up" data-aos-delay="200">
+                    <div class="portfolio-img">
+                        <img src="work3.jpg" alt="Laptop Repair">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Laptop Screen Replacement</h3>
+                        <p>Professional laptop screen replacement with quality parts and warranty.</p>
+                        <div class="portfolio-tags">
+                            <span class="tag">Repair</span>
+                            <span class="tag">Laptop</span>
+                            <span class="tag">Hardware</span>
+                        </div>
+                        <div class="portfolio-links">
+                            <a href="#" class="btn btn-outline btn-small">
+                                <i class="fas fa-eye"></i> View Details
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section class="contact" id="contact">
-        <div class="title reveal">
-            <h2 class="section-title">Contact Me</h2>
-        </div>
-        <div class="content">
-            <div class="row">
-                <div class="card reveal">
-                    <div class="contact-icon">
-                        <i class="fas fa-map-marker-alt"></i>
-                    </div>
-                    <div class="info">
-                        <h3>Address</h3>
-                        <span>Kegalle, Sri Lanka</span>
-                    </div>
-                </div>
-                <div class="card reveal">
-                    <div class="contact-icon">
-                        <i class="fas fa-phone"></i>
-                    </div>
-                    <div class="info">
-                        <h3>Phone</h3>
-                        <a href="tel:+94704804941">+94 704 804 941</a>
-                    </div>
-                </div>
-                <div class="card reveal">
-                    <div class="contact-icon">
-                        <i class="fas fa-envelope"></i>
-                    </div>
-                    <div class="info">
-                        <h3>Email Address</h3>
-                        <a href="mailto:heshanmd.ml@gmail.com">heshanmd.ml@gmail.com</a>
-                    </div>
-                </div>
-                <div class="card reveal">
-                    <div class="contact-icon">
-                        <i class="fas fa-globe"></i>
-                    </div>
-                    <div class="info">
-                        <h3>Website</h3>
-                        <a href="https://itzmesanduphotofolio.netlify.app/" target="_blank">Visit My Site</a>
-                    </div>
-                </div>
+    <section class="section" id="contact">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up">
+                <h2>Contact Me</h2>
+                <p>Get in touch for collaborations or inquiries</p>
             </div>
-            <div class="row">
-                <div class="contact-form reveal">
-                    <h3>Send Message</h3>
-                    <div class="input-box">
-                        <input type="text" placeholder="Name" required>
+            
+            <div class="contact-content">
+                <div class="contact-info" data-aos="fade-right">
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="info-content">
+                            <h3>Location</h3>
+                            <p>Kegalle, Sri Lanka</p>
+                        </div>
                     </div>
-                    <div class="input-box">
-                        <input type="email" placeholder="Email" required>
+                    
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="info-content">
+                            <h3>Phone</h3>
+                            <a href="tel:+94704804941">+94 704 804 941</a>
+                        </div>
                     </div>
-                    <div class="input-box">
-                        <textarea rows="8" placeholder="Message" required></textarea>
+                    
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="info-content">
+                            <h3>Email</h3>
+                            <a href="mailto:heshanmd.ml@gmail.com">heshanmd.ml@gmail.com</a>
+                        </div>
                     </div>
-                    <div class="input-box">
-                        <input type="submit" class="send-btn" value="Send Message">
+                    
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <div class="info-content">
+                            <h3>Website</h3>
+                            <a href="https://itzmesanduphotofolio.netlify.app/" target="_blank">Visit Portfolio</a>
+                        </div>
                     </div>
+                </div>
+                
+                <div class="contact-form" data-aos="fade-left">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" class="form-control" placeholder="Your Name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" class="form-control" placeholder="Your Email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" class="form-control" placeholder="Subject" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" class="form-control" placeholder="Your Message" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i> Send Message
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -274,141 +444,104 @@
 
     <!-- Footer -->
     <footer class="footer">
-        <span class="footer-title">Janaka Heshan</span>
-        <p>Copyright @2025 <a href="#">ItzSandu</a>. All Rights Reserved.</p>
-        <p><a href="privacy.html" style="color: #3a6cf4; text-decoration: none;">Privacy Policy</a></p>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>Janaka Heshan</h3>
+                    <p>Computer Hardware Technician & Web Developer dedicated to providing top-notch technical solutions.</p>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#skills">Skills</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#portfolio">Portfolio</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Computer Repair</a></li>
+                        <li><a href="#">Web Development</a></li>
+                        <li><a href="#">IT Support</a></li>
+                        <li><a href="#">System Maintenance</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Contact Info</h3>
+                    <ul class="footer-links">
+                        <li><a href="tel:+94704804941">+94 704 804 941</a></li>
+                        <li><a href="mailto:heshanmd.ml@gmail.com">heshanmd.ml@gmail.com</a></li>
+                        <li><a href="#">Kegalle, Sri Lanka</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Janaka Heshan. All Rights Reserved. | 
+                   <a href="privacy.html">Privacy Policy</a></p>
+            </div>
+        </div>
     </footer>
 
-    <!-- Music Player -->
-    <div class="music-player">
+    <!-- Enhanced Music Player -->
+    <div class="music-player-container">
+        <div class="playlist" id="playlist">
+            <div class="playlist-item active" data-src="teserbgmusic.mp3">
+                <div class="title">Background Music 1</div>
+                <div class="duration">2:45</div>
+            </div>
+            <!-- Add more playlist items here -->
+        </div>
+        
+        <div class="music-player" id="musicPlayer">
+            <div class="music-info">
+                <div class="music-title" id="musicTitle">Background Music 1</div>
+                <div class="music-artist">Janaka Heshan</div>
+                <div class="music-progress">
+                    <div class="progress-bar" id="progressBar">
+                        <div class="progress" id="progress"></div>
+                    </div>
+                    <div class="time">
+                        <span id="currentTime">0:00</span>
+                        <span id="duration">0:00</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="music-controls">
+                <button class="music-btn" id="prevBtn">
+                    <i class="fas fa-step-backward"></i>
+                </button>
+                <button class="music-btn" id="playPauseBtn">
+                    <i class="fas fa-play"></i>
+                </button>
+                <button class="music-btn" id="nextBtn">
+                    <i class="fas fa-step-forward"></i>
+                </button>
+                <button class="music-btn" id="playlistBtn">
+                    <i class="fas fa-list"></i>
+                </button>
+            </div>
+        </div>
+        
         <button class="music-toggle" id="musicToggle">
             <i class="fas fa-music"></i>
         </button>
-        <div class="music-controls">
-            <div class="music-info">Background Music</div>
-            <audio id="backgroundMusic" loop>
-                <source src="teserbgmusic.mp3" type="audio/mpeg">
-                Your browser does not support the audio element.
-            </audio>
-            <button id="playPauseBtn">
-                <i class="fas fa-play"></i>
-            </button>
-            <div class="volume-control">
-                <i class="fas fa-volume-up"></i>
-                <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.1" value="0.5">
-            </div>
-        </div>
     </div>
 
+    <!-- Audio Element -->
+    <audio id="backgroundMusic">
+        <source src="teserbgmusic.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- JavaScript Files -->
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <script>
-        AOS.init({offset: 0});
-        
-        // Navigation functionality
-        const menuBtn = document.querySelector(".menu-btn");
-        const navigation = document.querySelector(".navigation");
-        const navigationItems = document.querySelectorAll(".navigation a");
-
-        menuBtn.addEventListener("click", () => {
-            menuBtn.classList.toggle("active");
-            navigation.classList.toggle("active");
-        });
-
-        // Navigation Effects
-        window.addEventListener("scroll", function(){
-            const header = document.querySelector("header");
-            header.classList.toggle("sticky", window.scrollY > 0);
-        });
-
-        navigationItems.forEach((navigationItem) => {
-            navigationItem.addEventListener("click", () => {
-                menuBtn.classList.remove("active");
-                navigation.classList.remove("active");
-            });
-        });
-
-        // Smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-
-        // Music Player Functionality
-        const musicPlayer = document.querySelector('.music-player');
-        const musicToggle = document.getElementById('musicToggle');
-        const playPauseBtn = document.getElementById('playPauseBtn');
-        const backgroundMusic = document.getElementById('backgroundMusic');
-        const volumeSlider = document.getElementById('volumeSlider');
-        
-        // Toggle music player expand/collapse
-        musicToggle.addEventListener('click', () => {
-            musicPlayer.classList.toggle('collapsed');
-        });
-        
-        // Play/Pause functionality
-        playPauseBtn.addEventListener('click', () => {
-            if (backgroundMusic.paused) {
-                backgroundMusic.play();
-                playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
-            } else {
-                backgroundMusic.pause();
-                playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
-            }
-        });
-        
-        // Volume control
-        volumeSlider.addEventListener('input', () => {
-            backgroundMusic.volume = volumeSlider.value;
-        });
-        
-        // Set initial volume
-        backgroundMusic.volume = 0.5;
-
-        // Auto-play music
-        function attemptAutoPlay() {
-            const promise = backgroundMusic.play();
-            if (promise !== undefined) {
-                promise.then(() => {
-                    playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
-                }).catch(error => {
-                    console.log('Autoplay prevented:', error);
-                    const musicInfo = document.querySelector('.music-info');
-                    if (musicInfo) {
-                        musicInfo.textContent = 'Click to play music';
-                        musicInfo.style.cursor = 'pointer';
-                        musicInfo.addEventListener('click', () => {
-                            backgroundMusic.play();
-                            playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
-                            musicInfo.textContent = 'Background Music';
-                            musicInfo.style.cursor = 'default';
-                        });
-                    }
-                });
-            }
-        }
-
-        window.addEventListener('load', attemptAutoPlay);
-        document.addEventListener('click', function initMusic() {
-            attemptAutoPlay();
-            document.removeEventListener('click', initMusic);
-        }, { once: true });
-
-        // Form submission
-        const contactForm = document.querySelector('.contact-form');
-        if (contactForm) {
-            contactForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                alert('Thank you for your message! I will get back to you soon.');
-                this.reset();
-            });
-        }
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-<script src="common.js"></script>
-<script src="music-player.js"></script>
+    <script src="app.js"></script>
+</body>
+                        </html>
