@@ -4,15 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacy Policy - Janaka Heshan</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-        
-        body {
+        /* Add privacy page specific styles here */
+        .privacy-page {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
@@ -27,27 +23,31 @@
             box-shadow: 0 20px 40px rgba(0,0,0,0.1);
         }
         
-        h1 {
+        .privacy-title {
             color: #333;
             text-align: center;
             margin-bottom: 30px;
             font-size: 2.5em;
         }
         
-        h2 {
+        .privacy-section {
+            margin: 25px 0;
+        }
+        
+        .privacy-section h2 {
             color: #3a6cf4;
             margin: 25px 0 15px 0;
             font-size: 1.5em;
         }
         
-        p {
+        .privacy-section p {
             color: #666;
             line-height: 1.8;
             margin-bottom: 15px;
             font-size: 1em;
         }
         
-        ul {
+        .privacy-section ul {
             color: #666;
             line-height: 1.8;
             margin-left: 20px;
@@ -85,66 +85,133 @@
     </style>
 </head>
 <body>
-    <div class="privacy-container">
-        <h1>Privacy Policy</h1>
-        
-        <p><strong>Last Updated:</strong> October 1, 2025</p>
-        
-        <h2>Introduction</h2>
-        <p>Welcome to Janaka Heshan's portfolio website. This Privacy Policy explains how we collect, use, and protect your personal information when you visit our website.</p>
-        
-        <h2>Information We Collect</h2>
-        <p>We may collect the following types of information:</p>
-        <ul>
-            <li><strong>Personal Information:</strong> When you contact us through our contact form, we may collect your name, email address, and message content.</li>
-            <li><strong>Usage Data:</strong> We collect information about how you interact with our website, including IP address, browser type, pages visited, and time spent on the site.</li>
-            <li><strong>Cookies:</strong> We use cookies and similar tracking technologies to enhance your browsing experience.</li>
-        </ul>
-        
-        <h2>How We Use Your Information</h2>
-        <p>We use the collected information for:</p>
-        <ul>
-            <li>Responding to your inquiries and messages</li>
-            <li>Improving our website and user experience</li>
-            <li>Analyzing website traffic and usage patterns</li>
-            <li>Providing personalized content and recommendations</li>
-        </ul>
-        
-        <h2>Google AdSense</h2>
-        <p>We use Google AdSense to display advertisements on our website. Google AdSense may use cookies and web beacons to serve personalized ads based on your interests.</p>
-        <p>Third-party vendors, including Google, use cookies to serve ads based on a user's prior visits to your website or other websites.</p>
-        <p>Google's use of advertising cookies enables it and its partners to serve ads to your users based on their visit to your sites and/or other sites on the Internet.</p>
-        <p>Users may opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads">Google Ads Settings</a>.</p>
-        
-        <h2>Data Protection</h2>
-        <p>We implement appropriate security measures to protect your personal information from unauthorized access, alteration, or disclosure.</p>
-        
-        <h2>Third-Party Links</h2>
-        <p>Our website may contain links to external sites. We are not responsible for the privacy practices or content of these third-party websites.</p>
-        
-        <h2>Your Rights</h2>
-        <p>You have the right to:</p>
-        <ul>
-            <li>Access your personal information</li>
-            <li>Correct inaccurate information</li>
-            <li>Request deletion of your information</li>
-            <li>Opt-out of marketing communications</li>
-        </ul>
-        
-        <h2>Contact Us</h2>
-        <div class="contact-info">
-            <p>If you have any questions about this Privacy Policy, please contact us:</p>
-            <p>Email: heshanmd.ml@gmail.com</p>
-            <p>Phone: +94 704 804 941</p>
-            <p>Address: Kegalle, Sri Lanka</p>
+    <!-- Navigation for privacy page -->
+    <header>
+        <a href="index.html" class="brand">Janaka Heshan</a>
+        <div class="menu-btn"></div>
+        <div class="navigation">
+            <a href="index.html">Home</a>
+            <a href="index.html#about">About</a>
+            <a href="index.html#skills">Skills</a>
+            <a href="index.html#services">Services</a>
+            <a href="index.html#work">Work</a>
+            <a href="index.html#contact">Contact</a>
+            <a href="privacy.html">Privacy</a>
         </div>
-        
-        <h2>Changes to This Policy</h2>
-        <p>We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new policy on this page.</p>
-        
-        <p class="last-updated">This policy is effective as of October 1, 2025.</p>
-        
-        <a href="index.html" class="back-home">Back to Home</a>
+    </header>
+
+    <section class="privacy-page">
+        <div class="privacy-container">
+            <h1 class="privacy-title">Privacy Policy</h1>
+            
+            <p><strong>Last Updated:</strong> October 1, 2025</p>
+            
+            <div class="privacy-section">
+                <h2>Introduction</h2>
+                <p>Welcome to Janaka Heshan's portfolio website. This Privacy Policy explains how we collect, use, and protect your personal information when you visit our website.</p>
+            </div>
+            
+            <div class="privacy-section">
+                <h2>Information We Collect</h2>
+                <p>We may collect the following types of information:</p>
+                <ul>
+                    <li><strong>Personal Information:</strong> When you contact us through our contact form, we may collect your name, email address, and message content.</li>
+                    <li><strong>Usage Data:</strong> We collect information about how you interact with our website, including IP address, browser type, pages visited, and time spent on the site.</li>
+                    <li><strong>Cookies:</strong> We use cookies and similar tracking technologies to enhance your browsing experience.</li>
+                </ul>
+            </div>
+            
+            <div class="privacy-section">
+                <h2>How We Use Your Information</h2>
+                <p>We use the collected information for:</p>
+                <ul>
+                    <li>Responding to your inquiries and messages</li>
+                    <li>Improving our website and user experience</li>
+                    <li>Analyzing website traffic and usage patterns</li>
+                    <li>Providing personalized content and recommendations</li>
+                </ul>
+            </div>
+            
+            <div class="privacy-section">
+                <h2>Google AdSense</h2>
+                <p>We use Google AdSense to display advertisements on our website. Google AdSense may use cookies and web beacons to serve personalized ads based on your interests.</p>
+                <p>Third-party vendors, including Google, use cookies to serve ads based on a user's prior visits to your website or other websites.</p>
+                <p>Google's use of advertising cookies enables it and its partners to serve ads to your users based on their visit to your sites and/or other sites on the Internet.</p>
+                <p>Users may opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads">Google Ads Settings</a>.</p>
+            </div>
+            
+            <div class="privacy-section">
+                <h2>Data Protection</h2>
+                <p>We implement appropriate security measures to protect your personal information from unauthorized access, alteration, or disclosure.</p>
+            </div>
+            
+            <div class="privacy-section">
+                <h2>Third-Party Links</h2>
+                <p>Our website may contain links to external sites. We are not responsible for the privacy practices or content of these third-party websites.</p>
+            </div>
+            
+            <div class="privacy-section">
+                <h2>Your Rights</h2>
+                <p>You have the right to:</p>
+                <ul>
+                    <li>Access your personal information</li>
+                    <li>Correct inaccurate information</li>
+                    <li>Request deletion of your information</li>
+                    <li>Opt-out of marketing communications</li>
+                </ul>
+            </div>
+            
+            <div class="privacy-section">
+                <h2>Contact Us</h2>
+                <div class="contact-info">
+                    <p>If you have any questions about this Privacy Policy, please contact us:</p>
+                    <p>Email: heshanmd.ml@gmail.com</p>
+                    <p>Phone: +94 704 804 941</p>
+                    <p>Address: Kegalle, Sri Lanka</p>
+                </div>
+            </div>
+            
+            <div class="privacy-section">
+                <h2>Changes to This Policy</h2>
+                <p>We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new policy on this page.</p>
+            </div>
+            
+            <p class="last-updated">This policy is effective as of October 1, 2025.</p>
+            
+            <a href="index.html" class="back-home">Back to Home</a>
+        </div>
+    </section>
+
+    <!-- Music Player (same as index.html) -->
+    <div class="music-player">
+        <button class="music-toggle" id="musicToggle">
+            <i class="fas fa-music"></i>
+        </button>
+        <div class="music-controls">
+            <div class="music-info">Background Music</div>
+            <audio id="backgroundMusic" loop>
+                <source src="teserbgmusic.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+            <button id="playPauseBtn">
+                <i class="fas fa-play"></i>
+            </button>
+            <div class="volume-control">
+                <i class="fas fa-volume-up"></i>
+                <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.1" value="0.5">
+            </div>
+        </div>
     </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <span class="footer-title">Janaka Heshan</span>
+        <p>Copyright @2025 <a href="#">ItzSandu</a>. All Rights Reserved.</p>
+        <p><a href="privacy.html" style="color: #3a6cf4; text-decoration: none;">Privacy Policy</a></p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="common.js"></script>
+    <script src="music-player.js"></script>
 </body>
 </html>
