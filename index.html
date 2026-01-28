@@ -489,51 +489,8 @@
         </div>
     </footer>
 
-    <!-- Enhanced Music Player -->
-    <div class="music-player-container">
-        <div class="playlist" id="playlist">
-            <div class="playlist-item active" data-src="MONTAGEM ALQUIMIA.mp3">
-                <div class="title">MONTAGEM ALQUIMIA.mp3</div>
-                <div class="duration"defalut</div>
-            </div>
-            <!-- Add more playlist items here -->
-        </div>
-        
-        <div class="music-player" id="musicPlayer">
-            <div class="music-info">
-                <div class="music-title" id="musicTitle">Background Music 1</div>
-                <div class="music-artist">Janaka Heshan</div>
-                <div class="music-progress">
-                    <div class="progress-bar" id="progressBar">
-                        <div class="progress" id="progress"></div>
-                    </div>
-                    <div class="time">
-                        <span id="currentTime">0:00</span>
-                        <span id="duration">0:00</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="music-controls">
-                <button class="music-btn" id="prevBtn">
-                    <i class="fas fa-step-backward"></i>
-                </button>
-                <button class="music-btn" id="playPauseBtn">
-                    <i class="fas fa-play"></i>
-                </button>
-                <button class="music-btn" id="nextBtn">
-                    <i class="fas fa-step-forward"></i>
-                </button>
-                <button class="music-btn" id="playlistBtn">
-                    <i class="fas fa-list"></i>
-                </button>
-            </div>
-        </div>
-        
-        <button class="music-toggle" id="musicToggle">
-            <i class="fas fa-music"></i>
-        </button>
-    </div>
+    <!-- Music Player will be injected by music-player.js -->
+    <div id="music-player-container"></div>
 
     <!-- Audio Element -->
     <audio id="backgroundMusic">
@@ -543,6 +500,6 @@
     <!-- JavaScript Files -->
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="app.js"></script>
+    <script src="music-player.js" defer></script>
 </body>
-                        </html>
-
+</html>
