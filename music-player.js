@@ -1,164 +1,362 @@
-// music-player.js
+// music-player.js - Enhanced version
 class MusicPlayer {
     constructor() {
-        this.musicPlayer = document.querySelector('.music-player');
-        this.musicToggle = document.getElementById('musicToggle');
-        this.playPauseBtn = document.getElementById('playPauseBtn');
-        this.backgroundMusic = document.getElementById('backgroundMusic');
-        this.volumeSlider = document.getElementById('volumeSlider');
-        this.musicInfo = document.querySelector('.music-info');
-        this.playlist = [];
-        this.currentTrackIndex = 0;
+        this.isMobile = window.innerWidth <= 768;
+        this.isPlaying = false;
+        this.isExpanded = false;
+        this.currentTime = 0;
+        this.duration = 0;
         
-        this.initializePlayer();
+        this.initialize();
     }
     
-    initializePlayer() {
-        if (!this.backgroundMusic) return;
-        
-        // Initialize playlist with default track
-        this.playlist = [
-            {
-                src: 'MONTAGEM ALQUIMIA.mp3',
-                title: 'MONTAGEM ALQUIMIA'
-            }
-            // Add more tracks here in the future
-            // Example:
-            // {
-            //     src: 'music2.mp3',
-            //     title: 'Background Music 2'
-            // }
-        ];
-        
-        // Set up event listeners
+    initialize() {
+        this.createPlayerElements();
+        this.setupAudio();
         this.setupEventListeners();
+        this.setupMediaQueries();
+    }
+    
+    createPlayerElements() {
+        // Create music player container
+        const container = document.createElement('div');
+        container.className = 'music-player-container';
+        container.innerHTML = `
+            <div class="playlist" id="playlist">
+                <div class="playlist-item active" data-src="MONTAGEM ALQUIMIA.mp3">
+                    <div class="title">MONTAGEM ALQUIMIA</div>
+                    <div class="duration">2:45</div>
+                </div>
+                <div class="playlist-item" data-src="teserbgmusic.mp3">
+                    <div class="title">Teser Background</div>
+                    <div class="duration">3:20</div>
+                </div>
+            </div>
+            
+            <div class="music-player ${this.isMobile ? 'mobile' : ''}" id="musicPlayer">
+                <div class="music-info">
+                    <div class="music-title" id="musicTitle">MONTAGEM ALQUIMIA</div>
+                    <div class="music-artist">Janaka Heshan</div>
+                    <div class="music-progress">
+                        <div class="progress-bar" id="progressBar">
+                            <div class="progress" id="progress"></div>
+                        </div>
+                        <div class="time">
+                            <span id="currentTime">0:00</span>
+                            <span id="duration">0:00</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="music-controls">
+                    <button class="music-btn" id="prevBtn">
+                        <i class="fas fa-step-backward"></i>
+                    </button>
+                    <button class="music-btn" id="playPauseBtn">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    <button class="music-btn" id="nextBtn">
+                        <i class="fas fa-step-forward"></i>
+                    </button>
+                    <button class="music-btn" id="playlistBtn">
+                        <i class="fas fa-list"></i>
+                    </button>
+                    <button class="music-btn" id="volumeBtn">
+                        <i class="fas fa-volume-up"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <button class="music-toggle" id="musicToggle">
+                <i class="fas fa-music"></i>
+            </button>
+        `;
         
-        // Load first track
-        this.loadTrack(this.currentTrackIndex);
+        document.getElementById('music-player-container').appendChild(container);
         
-        // Attempt auto-play
-        this.attemptAutoPlay();
+        // Store references
+        this.musicPlayer = document.getElementById('musicPlayer');
+        this.playPauseBtn = document.getElementById('playPauseBtn');
+        this.prevBtn = document.getElementById('prevBtn');
+        this.nextBtn = document.getElementById('nextBtn');
+        this.playlistBtn = document.getElementById('playlistBtn');
+        this.volumeBtn = document.getElementById('volumeBtn');
+        this.musicToggle = document.getElementById('musicToggle');
+        this.playlist = document.getElementById('playlist');
+        this.musicTitle = document.getElementById('musicTitle');
+        this.currentTimeEl = document.getElementById('currentTime');
+        this.durationEl = document.getElementById('duration');
+        this.progress = document.getElementById('progress');
+        this.progressBar = document.getElementById('progressBar');
+        
+        // Create volume control
+        this.createVolumeControl();
+    }
+    
+    createVolumeControl() {
+        const volumeControl = document.createElement('div');
+        volumeControl.className = 'volume-control';
+        volumeControl.innerHTML = `
+            <input type="range" id="volumeSlider" min="0" max="1" step="0.1" value="0.5">
+        `;
+        this.musicPlayer.appendChild(volumeControl);
+        this.volumeSlider = document.getElementById('volumeSlider');
+    }
+    
+    setupAudio() {
+        this.audio = document.getElementById('backgroundMusic');
+        if (!this.audio) {
+            this.audio = new Audio();
+            this.audio.src = 'MONTAGEM ALQUIMIA.mp3';
+            this.audio.volume = 0.5;
+            document.body.appendChild(this.audio);
+        }
+        
+        this.playlistItems = document.querySelectorAll('.playlist-item');
+        
+        // Update time displays
+        this.audio.addEventListener('loadedmetadata', () => {
+            this.duration = this.audio.duration;
+            this.durationEl.textContent = this.formatTime(this.duration);
+        });
+        
+        this.audio.addEventListener('timeupdate', () => {
+            this.currentTime = this.audio.currentTime;
+            this.currentTimeEl.textContent = this.formatTime(this.currentTime);
+            const progressPercent = (this.currentTime / this.duration) * 100;
+            this.progress.style.width = `${progressPercent}%`;
+        });
+        
+        this.audio.addEventListener('ended', () => {
+            this.playNext();
+        });
     }
     
     setupEventListeners() {
-        // Toggle music player expand/collapse
-        if (this.musicToggle) {
-            this.musicToggle.addEventListener('click', () => {
-                this.musicPlayer.classList.toggle('collapsed');
-            });
-        }
+        // Play/Pause
+        this.playPauseBtn.addEventListener('click', () => this.togglePlay());
         
-        // Play/Pause functionality
-        if (this.playPauseBtn) {
-            this.playPauseBtn.addEventListener('click', () => {
-                this.togglePlayPause();
-            });
-        }
+        // Previous/Next
+        this.prevBtn.addEventListener('click', () => this.playPrevious());
+        this.nextBtn.addEventListener('click', () => this.playNext());
+        
+        // Playlist toggle
+        this.playlistBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            this.togglePlaylist();
+        });
         
         // Volume control
-        if (this.volumeSlider) {
-            this.volumeSlider.addEventListener('input', () => {
-                this.backgroundMusic.volume = this.volumeSlider.value;
-            });
-        }
+        this.volumeBtn.addEventListener('click', () => {
+            this.volumeSlider.classList.toggle('visible');
+        });
         
-        // Track ended - play next
-        if (this.backgroundMusic) {
-            this.backgroundMusic.addEventListener('ended', () => {
-                this.playNext();
-            });
-        }
+        this.volumeSlider.addEventListener('input', (e) => {
+            this.audio.volume = e.target.value;
+            this.updateVolumeIcon(e.target.value);
+        });
         
-        // Global click to initialize audio (for autoplay policies)
-        document.addEventListener('click', () => {
-            if (this.backgroundMusic.paused) {
-                this.attemptAutoPlay();
+        // Music toggle (expand/collapse)
+        this.musicToggle.addEventListener('click', () => this.togglePlayer());
+        
+        // Playlist item selection
+        this.playlistItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const src = item.getAttribute('data-src');
+                const title = item.querySelector('.title').textContent;
+                this.playTrack(src, title);
+                
+                // Update active state
+                this.playlistItems.forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+                
+                // Close playlist on mobile
+                if (this.isMobile) {
+                    this.playlist.classList.remove('visible');
+                }
+            });
+        });
+        
+        // Progress bar click
+        this.progressBar.addEventListener('click', (e) => {
+            const rect = this.progressBar.getBoundingClientRect();
+            const percent = (e.clientX - rect.left) / rect.width;
+            this.audio.currentTime = percent * this.duration;
+        });
+        
+        // Close playlist when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!this.playlist.contains(e.target) && !this.playlistBtn.contains(e.target)) {
+                this.playlist.classList.remove('visible');
             }
-        }, { once: true });
+            
+            if (this.volumeSlider && !this.volumeSlider.contains(e.target) && !this.volumeBtn.contains(e.target)) {
+                this.volumeSlider.classList.remove('visible');
+            }
+        });
+        
+        // Touch events for mobile
+        if (this.isMobile) {
+            let touchStartX = 0;
+            let touchStartY = 0;
+            
+            this.musicPlayer.addEventListener('touchstart', (e) => {
+                touchStartX = e.touches[0].clientX;
+                touchStartY = e.touches[0].clientY;
+            });
+            
+            this.musicPlayer.addEventListener('touchmove', (e) => {
+                const touchX = e.touches[0].clientX;
+                const touchY = e.touches[0].clientY;
+                const deltaX = touchX - touchStartX;
+                const deltaY = touchY - touchStartY;
+                
+                // Horizontal swipe for progress
+                if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50) {
+                    e.preventDefault();
+                    const progressPercent = (this.audio.currentTime / this.duration) + (deltaX / 500);
+                    this.audio.currentTime = Math.max(0, Math.min(this.duration, progressPercent * this.duration));
+                }
+            });
+        }
     }
     
-    loadTrack(index) {
-        if (index < 0 || index >= this.playlist.length) return;
+    setupMediaQueries() {
+        const mediaQuery = window.matchMedia('(max-width: 768px)');
         
-        this.currentTrackIndex = index;
-        const track = this.playlist[index];
+        const handleMediaChange = (e) => {
+            this.isMobile = e.matches;
+            if (this.isMobile) {
+                this.musicPlayer.classList.add('mobile');
+                this.musicPlayer.classList.remove('expanded');
+                this.isExpanded = false;
+            } else {
+                this.musicPlayer.classList.remove('mobile');
+            }
+        };
         
-        this.backgroundMusic.src = track.src;
-        if (this.musicInfo) {
-            this.musicInfo.textContent = track.title;
-        }
-        
-        // Preload the next track for smoother transitions
-        if (index + 1 < this.playlist.length) {
-            const nextTrack = new Audio();
-            nextTrack.src = this.playlist[index + 1].src;
-            nextTrack.preload = 'auto';
-        }
+        mediaQuery.addEventListener('change', handleMediaChange);
     }
     
-    togglePlayPause() {
-        if (this.backgroundMusic.paused) {
-            this.backgroundMusic.play();
+    togglePlay() {
+        if (this.audio.paused) {
+            this.audio.play();
+            this.isPlaying = true;
             this.playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+            
+            // Show player on mobile when playing
+            if (this.isMobile && !this.isExpanded) {
+                this.musicPlayer.classList.add('expanded');
+                this.isExpanded = true;
+            }
         } else {
-            this.backgroundMusic.pause();
+            this.audio.pause();
+            this.isPlaying = false;
             this.playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
         }
     }
     
-    playNext() {
-        const nextIndex = (this.currentTrackIndex + 1) % this.playlist.length;
-        this.loadTrack(nextIndex);
-        this.backgroundMusic.play();
+    playTrack(src, title) {
+        this.audio.src = src;
+        this.audio.play();
+        this.isPlaying = true;
+        this.musicTitle.textContent = title;
         this.playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+        
+        // Update metadata
+        this.audio.addEventListener('loadedmetadata', () => {
+            this.duration = this.audio.duration;
+            this.durationEl.textContent = this.formatTime(this.duration);
+        }, { once: true });
+    }
+    
+    playNext() {
+        const activeItem = document.querySelector('.playlist-item.active');
+        const nextItem = activeItem.nextElementSibling || this.playlistItems[0];
+        
+        if (nextItem) {
+            const src = nextItem.getAttribute('data-src');
+            const title = nextItem.querySelector('.title').textContent;
+            this.playTrack(src, title);
+            
+            this.playlistItems.forEach(item => item.classList.remove('active'));
+            nextItem.classList.add('active');
+        }
     }
     
     playPrevious() {
-        const prevIndex = (this.currentTrackIndex - 1 + this.playlist.length) % this.playlist.length;
-        this.loadTrack(prevIndex);
-        this.backgroundMusic.play();
-        this.playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
-    }
-    
-    attemptAutoPlay() {
-        if (!this.backgroundMusic) return;
+        const activeItem = document.querySelector('.playlist-item.active');
+        const prevItem = activeItem.previousElementSibling || this.playlistItems[this.playlistItems.length - 1];
         
-        const playPromise = this.backgroundMusic.play();
-        
-        if (playPromise !== undefined) {
-            playPromise.then(() => {
-                this.playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
-            }).catch(error => {
-                console.log('Autoplay prevented:', error);
-                this.showPlayPrompt();
-            });
+        if (prevItem) {
+            const src = prevItem.getAttribute('data-src');
+            const title = prevItem.querySelector('.title').textContent;
+            this.playTrack(src, title);
+            
+            this.playlistItems.forEach(item => item.classList.remove('active'));
+            prevItem.classList.add('active');
         }
     }
     
-    showPlayPrompt() {
-        if (this.musicInfo) {
-            this.musicInfo.textContent = 'Click to play music';
-            this.musicInfo.style.cursor = 'pointer';
-            
-            const playHandler = () => {
-                this.backgroundMusic.play();
-                this.playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
-                this.musicInfo.textContent = this.playlist[this.currentTrackIndex].title;
-                this.musicInfo.style.cursor = 'default';
-                this.musicInfo.removeEventListener('click', playHandler);
-            };
-            
-            this.musicInfo.addEventListener('click', playHandler);
+    togglePlaylist() {
+        this.playlist.classList.toggle('visible');
+        
+        // On mobile, collapse player when opening playlist
+        if (this.isMobile && this.playlist.classList.contains('visible')) {
+            this.musicPlayer.classList.remove('expanded');
+            this.isExpanded = false;
         }
     }
     
-    addTrack(src, title) {
-        this.playlist.push({ src, title });
-        console.log(`Track added: ${title}`);
+    togglePlayer() {
+        if (this.isMobile) {
+            // On mobile, toggle expanded state
+            this.isExpanded = !this.isExpanded;
+            this.musicPlayer.classList.toggle('expanded', this.isExpanded);
+        } else {
+            // On desktop, toggle minimized state
+            this.musicPlayer.classList.toggle('minimized');
+        }
+    }
+    
+    updateVolumeIcon(volume) {
+        let icon = 'fa-volume-up';
+        if (volume == 0) icon = 'fa-volume-mute';
+        else if (volume < 0.5) icon = 'fa-volume-down';
+        
+        this.volumeBtn.innerHTML = `<i class="fas ${icon}"></i>`;
+    }
+    
+    formatTime(seconds) {
+        const mins = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
     }
 }
 
 // Initialize music player when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    window.musicPlayer = new MusicPlayer();
+    // Delay initialization to ensure all elements are loaded
+    setTimeout(() => {
+        window.musicPlayer = new MusicPlayer();
+        
+        // Store user preference for music player
+        const musicPreference = localStorage.getItem('musicPlayerEnabled');
+        if (musicPreference === 'false') {
+            document.querySelector('.music-player-container').style.display = 'none';
+        }
+        
+        // Add option to disable music player
+        const disableBtn = document.createElement('button');
+        disableBtn.className = 'music-disable-btn';
+        disableBtn.innerHTML = '<i class="fas fa-times"></i>';
+        disableBtn.title = 'Disable music player';
+        disableBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            document.querySelector('.music-player-container').style.display = 'none';
+            localStorage.setItem('musicPlayerEnabled', 'false');
+        });
+        
+        document.querySelector('.music-player-container').appendChild(disableBtn);
+    }, 1000);
 });
