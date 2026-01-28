@@ -19,8 +19,8 @@ class MusicPlayer {
         // Initialize playlist with default track
         this.playlist = [
             {
-                src: 'teserbgmusic.mp3',
-                title: 'Background Music 1'
+                src: 'MONTAGEM ALQUIMIA - SLOWED_spotdown.org.mp3',
+                title: 'MONTAGEM ALQUIMIA'
             }
             // Add more tracks here in the future
             // Example:
