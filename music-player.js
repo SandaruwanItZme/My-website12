@@ -23,15 +23,14 @@ class MusicPlayer {
         container.className = 'music-player-container';
         container.innerHTML = `
             <div class="playlist" id="playlist">
-                <div class="playlist-item active" data-src="MONTAGEM ALQUIMIA.mp3">
+                <div class="playlist-item active" data-src="abc.mp3">
                     <div class="title">MONTAGEM ALQUIMIA</div>
-                    <div class="duration">2:45</div>
-                </div>
-                <div class="playlist-item" data-src="teserbgmusic.mp3">
+                
+        
+                <div class="playlist-item" data-src="xyz.mp3">
                     <div class="title">Teser Background</div>
-                    <div class="duration">3:20</div>
-                </div>
-            </div>
+    
+            
             
             <div class="music-player ${this.isMobile ? 'mobile' : ''}" id="musicPlayer">
                 <div class="music-info">
