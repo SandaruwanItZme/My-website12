@@ -19,7 +19,7 @@ class MusicPlayer {
         // Initialize playlist with default track
         this.playlist = [
             {
-                src: 'MONTAGEM ALQUIMIA - SLOWED_spotdown.org.mp3',
+                src: 'MONTAGEM ALQUIMIA.mp3',
                 title: 'MONTAGEM ALQUIMIA'
             }
             // Add more tracks here in the future
