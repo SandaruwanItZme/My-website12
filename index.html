@@ -489,17 +489,14 @@
         </div>
     </footer>
 
-    <!-- Music Player will be injected by music-player.js -->
+    <!-- Music Player Container -->
     <div id="music-player-container"></div>
 
-    <!-- Audio Element -->
-    <audio id="backgroundMusic">
-        <source src="teserbgmusic.mp3" type="audio/mpeg">
-    </audio>
+    <!-- Audio Element (hidden) -->
+    <audio id="backgroundMusic" preload="auto" loop></audio>
 
     <!-- JavaScript Files -->
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <script src="app.js"></script>
-    <script src="music-player.js" defer></script>
+    <script src="script.js"></script>
 </body>
 </html>
