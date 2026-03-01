@@ -1,237 +1,3 @@
-// Initialize AOS
-document.addEventListener('DOMContentLoaded', function() {
-    AOS.init({
-        duration: 800,
-        offset: 100,
-        once: true,
-        easing: 'ease-out'
-    });
-});
-
-// ==================== THEME MANAGER ====================
-class ThemeManager {
-    constructor() {
-        this.themeToggle = document.getElementById('themeToggle');
-        this.currentTheme = localStorage.getItem('theme') || 'dark';
-        this.init();
-    }
-    
-    init() {
-        this.applyTheme();
-        this.setupEventListeners();
-    }
-    
-    applyTheme() {
-        if (this.currentTheme === 'light') {
-            document.body.classList.add('light-mode');
-            if (this.themeToggle) {
-                this.themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-            }
-        } else {
-            document.body.classList.remove('light-mode');
-            if (this.themeToggle) {
-                this.themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-            }
-        }
-    }
-    
-    setupEventListeners() {
-        if (this.themeToggle) {
-            this.themeToggle.addEventListener('click', () => {
-                this.currentTheme = this.currentTheme === 'dark' ? 'light' : 'dark';
-                localStorage.setItem('theme', this.currentTheme);
-                this.applyTheme();
-            });
-        }
-    }
-}
-
-// ==================== NAVIGATION ====================
-class Navigation {
-    constructor() {
-        this.mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        this.navLinks = document.getElementById('navLinks');
-        this.init();
-    }
-    
-    init() {
-        if (!this.mobileMenuBtn || !this.navLinks) return;
-        
-        this.setupEventListeners();
-        this.setActiveLink();
-    }
-    
-    setupEventListeners() {
-        this.mobileMenuBtn.addEventListener('click', () => this.toggleMobileMenu());
-        
-        // Close menu when clicking a link
-        const links = this.navLinks.querySelectorAll('a');
-        links.forEach(link => {
-            link.addEventListener('click', () => {
-                this.closeMobileMenu();
-            });
-        });
-        
-        // Close menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!this.navLinks.contains(e.target) && !this.mobileMenuBtn.contains(e.target)) {
-                this.closeMobileMenu();
-            }
-        });
-        
-        // Update active link on scroll
-        window.addEventListener('scroll', () => this.setActiveLink());
-    }
-    
-    toggleMobileMenu() {
-        this.navLinks.classList.toggle('active');
-        if (this.mobileMenuBtn) {
-            this.mobileMenuBtn.innerHTML = this.navLinks.classList.contains('active') 
-                ? '<i class="fas fa-times"></i>' 
-                : '<i class="fas fa-bars"></i>';
-        }
-    }
-    
-    closeMobileMenu() {
-        this.navLinks.classList.remove('active');
-        if (this.mobileMenuBtn) {
-            this.mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-        }
-    }
-    
-    setActiveLink() {
-        const sections = document.querySelectorAll('section[id]');
-        const scrollPosition = window.scrollY + 100;
-        
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.offsetHeight;
-            const sectionId = section.getAttribute('id');
-            
-            if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-                const activeLink = document.querySelector(`.nav-links a[href="#${sectionId}"]`);
-                if (activeLink) {
-                    document.querySelectorAll('.nav-links a').forEach(link => {
-                        link.classList.remove('active');
-                    });
-                    activeLink.classList.add('active');
-                }
-            }
-        });
-    }
-}
-
-// ==================== TYPEWRITER ====================
-class TypeWriter {
-    constructor() {
-        this.typewriterEl = document.getElementById('typewriter');
-        this.texts = [
-            'Computer Hardware Technician',
-            'Web Developer',
-            'IT Support Specialist',
-            'Problem Solver'
-        ];
-        this.currentTextIndex = 0;
-        this.currentCharIndex = 0;
-        this.isDeleting = false;
-        this.init();
-    }
-    
-    init() {
-        if (!this.typewriterEl) return;
-        this.type();
-    }
-    
-    type() {
-        const currentText = this.texts[this.currentTextIndex];
-        
-        if (this.isDeleting) {
-            this.typewriterEl.textContent = currentText.substring(0, this.currentCharIndex - 1);
-            this.currentCharIndex--;
-        } else {
-            this.typewriterEl.textContent = currentText.substring(0, this.currentCharIndex + 1);
-            this.currentCharIndex++;
-        }
-        
-        if (!this.isDeleting && this.currentCharIndex === currentText.length) {
-            setTimeout(() => this.isDeleting = true, 1500);
-        } else if (this.isDeleting && this.currentCharIndex === 0) {
-            this.isDeleting = false;
-            this.currentTextIndex = (this.currentTextIndex + 1) % this.texts.length;
-        }
-        
-        const speed = this.isDeleting ? 50 : 100;
-        setTimeout(() => this.type(), speed);
-    }
-}
-
-// ==================== PORTFOLIO FILTER ====================
-class PortfolioFilter {
-    constructor() {
-        this.filterBtns = document.querySelectorAll('.filter-btn');
-        this.portfolioItems = document.querySelectorAll('.portfolio-item');
-        this.init();
-    }
-    
-    init() {
-        if (!this.filterBtns.length) return;
-        
-        this.filterBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const filter = btn.getAttribute('data-filter');
-                
-                // Update active button
-                this.filterBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                
-                // Filter items
-                this.portfolioItems.forEach(item => {
-                    if (filter === 'all' || item.getAttribute('data-category') === filter) {
-                        item.style.display = 'block';
-                        setTimeout(() => {
-                            item.style.opacity = '1';
-                            item.style.transform = 'scale(1)';
-                        }, 50);
-                    } else {
-                        item.style.opacity = '0';
-                        item.style.transform = 'scale(0.8)';
-                        setTimeout(() => {
-                            item.style.display = 'none';
-                        }, 300);
-                    }
-                });
-            });
-        });
-    }
-}
-
-// ==================== CONTACT FORM ====================
-class ContactForm {
-    constructor() {
-        this.form = document.getElementById('contactForm');
-        this.init();
-    }
-    
-    init() {
-        if (!this.form) return;
-        
-        this.form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            // Get form data
-            const formData = new FormData(this.form);
-            const data = Object.fromEntries(formData);
-            
-            // Here you would typically send the data to a server
-            console.log('Form submitted:', data);
-            
-            // Show success message
-            alert('Thank you for your message! I will get back to you soon.');
-            this.form.reset();
-        });
-    }
-}
-
 // ==================== MUSIC PLAYER ====================
 class MusicPlayer {
     constructor() {
@@ -240,16 +6,20 @@ class MusicPlayer {
         this.isExpanded = false;
         this.currentTrackIndex = 0;
         
+        // YOUR SIMPLE SONG NAMES HERE
         this.playlist = [
-            { title: 'MONTAGEM ALQUIMIA', artist: 'Janaka Heshan', src: 'MONTAGEM ALQUIMIA.mp3' },
-            { title: 'Teser Background', artist: 'Janaka Heshan', src: 'teserbgmusic.mp3' }
+            { title: 'Track 1', artist: 'Janaka Heshan', src: 'abc.mp3' },
+            { title: 'Track 2', artist: 'Janaka Heshan', src: 'xyz.mp3' }
         ];
         
         this.init();
     }
     
     init() {
-        if (!this.audio) return;
+        if (!this.audio) {
+            console.error('Audio element not found');
+            return;
+        }
         
         this.createPlayer();
         this.setupAudio();
@@ -348,19 +118,30 @@ class MusicPlayer {
         
         // Update time displays
         this.audio.addEventListener('loadedmetadata', () => {
-            this.durationEl.textContent = this.formatTime(this.audio.duration);
+            if (this.durationEl) {
+                this.durationEl.textContent = this.formatTime(this.audio.duration);
+            }
         });
         
         this.audio.addEventListener('timeupdate', () => {
-            this.currentTimeEl.textContent = this.formatTime(this.audio.currentTime);
-            const progressPercent = (this.audio.currentTime / this.audio.duration) * 100;
-            if (this.progress) {
+            if (this.currentTimeEl) {
+                this.currentTimeEl.textContent = this.formatTime(this.audio.currentTime);
+            }
+            if (this.progress && this.audio.duration) {
+                const progressPercent = (this.audio.currentTime / this.audio.duration) * 100;
                 this.progress.style.width = `${progressPercent}%`;
             }
         });
         
         this.audio.addEventListener('ended', () => {
             this.playNext();
+        });
+        
+        this.audio.addEventListener('error', (e) => {
+            console.error('Audio error:', e);
+            if (this.musicTitle) {
+                this.musicTitle.textContent = 'File not found';
+            }
         });
         
         // Load saved state
@@ -380,7 +161,9 @@ class MusicPlayer {
         }
         
         if (wasPlaying) {
-            this.audio.play().catch(() => {});
+            this.audio.play().catch(err => {
+                console.log('Auto-play prevented:', err);
+            });
             this.isPlaying = true;
             if (this.playPauseBtn) {
                 this.playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
@@ -461,6 +244,11 @@ class MusicPlayer {
                     if (this.playlistEl) {
                         this.playlistEl.classList.remove('visible');
                     }
+                    
+                    // Auto play when selecting from playlist
+                    if (this.audio.paused) {
+                        this.togglePlay();
+                    }
                 });
             });
         }
@@ -511,7 +299,9 @@ class MusicPlayer {
         
         // Auto-play if was playing
         if (this.isPlaying) {
-            this.audio.play().catch(() => {});
+            this.audio.play().catch(err => {
+                console.log('Play failed:', err);
+            });
         }
     }
     
@@ -519,7 +309,10 @@ class MusicPlayer {
         if (!this.audio) return;
         
         if (this.audio.paused) {
-            this.audio.play();
+            this.audio.play().catch(err => {
+                console.log('Play failed:', err);
+                alert('Music files not found! Please make sure abc.mp3 and xyz.mp3 are in the same folder.');
+            });
             this.isPlaying = true;
             if (this.playPauseBtn) {
                 this.playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
@@ -543,6 +336,11 @@ class MusicPlayer {
                 item.classList.toggle('active', i === nextIndex);
             });
         }
+        
+        // Auto play
+        if (this.audio.paused) {
+            this.togglePlay();
+        }
     }
     
     playPrevious() {
@@ -554,6 +352,11 @@ class MusicPlayer {
             this.playlistItems.forEach((item, i) => {
                 item.classList.toggle('active', i === prevIndex);
             });
+        }
+        
+        // Auto play
+        if (this.audio.paused) {
+            this.togglePlay();
         }
     }
     
@@ -568,70 +371,9 @@ class MusicPlayer {
     }
     
     formatTime(seconds) {
-        if (isNaN(seconds)) return '0:00';
+        if (isNaN(seconds) || !isFinite(seconds)) return '0:00';
         const mins = Math.floor(seconds / 60);
         const secs = Math.floor(seconds % 60);
         return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
     }
 }
-
-// ==================== INITIALIZE EVERYTHING ====================
-document.addEventListener('DOMContentLoaded', function() {
-    // Initialize all components
-    new ThemeManager();
-    new Navigation();
-    new TypeWriter();
-    new PortfolioFilter();
-    new ContactForm();
-    
-    // Initialize counters
-    const counters = document.querySelectorAll('.stat-number');
-    counters.forEach(counter => {
-        const target = parseInt(counter.getAttribute('data-count'));
-        let current = 0;
-        const increment = target / 100;
-        
-        const updateCounter = () => {
-            if (current < target) {
-                current += increment;
-                counter.textContent = Math.floor(current);
-                setTimeout(updateCounter, 20);
-            } else {
-                counter.textContent = target;
-            }
-        };
-        
-        // Start counter when in viewport
-        const observer = new IntersectionObserver((entries) => {
-            if (entries[0].isIntersecting) {
-                updateCounter();
-                observer.unobserve(counter);
-            }
-        }, { threshold: 0.5 });
-        
-        observer.observe(counter);
-    });
-    
-    // Initialize skill bars
-    const skillBars = document.querySelectorAll('.skill-progress');
-    skillBars.forEach(bar => {
-        const width = bar.getAttribute('data-width');
-        
-        const observer = new IntersectionObserver((entries) => {
-            if (entries[0].isIntersecting) {
-                bar.style.width = `${width}%`;
-                observer.unobserve(bar);
-            }
-        }, { threshold: 0.5 });
-        
-        observer.observe(bar);
-    });
-    
-    // Initialize music player if enabled
-    const musicEnabled = localStorage.getItem('musicPlayerEnabled') !== 'false';
-    if (musicEnabled) {
-        setTimeout(() => {
-            new MusicPlayer();
-        }, 500);
-    }
-});
