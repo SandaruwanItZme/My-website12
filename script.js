@@ -185,9 +185,9 @@ const progressBar = document.getElementById('progressBar');
 const musicToggle = document.getElementById('musicToggle');
 const musicPlayer = document.getElementById('musicPlayer');
 
-// Playlist - YOUR SONGS HERE (abc.mp3 and xyz.mp3)
+// Playlist - YOUR SONGS HERE (example.mp3)
 const playlist = [
-    { title: 'Track 1', src: 'abc.mp3' },
+    { title: 'Track 1', src: 'TIKI TIKI (Slowed) - Unique Vibes.mp3' },
     { title: 'Track 2', src: 'xyz.mp3' }
 ];
 
