@@ -498,6 +498,24 @@
     <!-- JavaScript Files -->
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="script.js"></script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-analytics.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDGQj2tHGDCffsitficrAs5aJZkYgtrtG4",
+  authDomain: "portfolio-db-24e18.firebaseapp.com",
+  projectId: "portfolio-db-24e18",
+  storageBucket: "portfolio-db-24e18.firebasestorage.app",
+  messagingSenderId: "340358944423",
+  appId: "1:340358944423:web:70606bb68e28d54bec582",
+  measurementId: "G-S2DNLVQTJS"
+};
+
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+</script>
 </body>
 </html>
+
 
