@@ -185,10 +185,14 @@ const progressBar = document.getElementById('progressBar');
 const musicToggle = document.getElementById('musicToggle');
 const musicPlayer = document.getElementById('musicPlayer');
 
-// Playlist - YOUR SONGS HERE (example.mp3)
+// UPDATE THIS PART - Your playlist with your actual audio file
 const playlist = [
-    { title: 'Track 1', src: 'TIKI TIKI (Slowed) - Unique Vibes.mp3' },
-    { title: 'Track 2', src: 'xyz.mp3' }
+    { 
+        title: 'TIKI TIKI (Slowed)', 
+        artist: 'Unique Vibes',
+        src: 'audio/TIKI TIKI (Slowed) - Unique Vibes.mp3' 
+    }
+    // You can add more tracks here if you have more files
 ];
 
 let currentTrack = 0;
@@ -200,6 +204,9 @@ function loadTrack(index) {
     
     audio.src = playlist[index].src;
     musicTitle.textContent = playlist[index].title;
+    // If you want to show artist name, add this:
+    const artistEl = document.querySelector('.music-artist');
+    if (artistEl) artistEl.textContent = playlist[index].artist;
     audio.load();
 }
 
