@@ -9,7 +9,6 @@ AOS.init({
 const themeToggle = document.getElementById('themeToggle');
 let currentTheme = localStorage.getItem('theme') || 'dark';
 
-// Apply saved theme
 if (currentTheme === 'light') {
     document.body.classList.add('light-mode');
     themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
@@ -40,7 +39,6 @@ if (mobileMenuBtn) {
     });
 }
 
-// Close menu when clicking a link
 document.querySelectorAll('.nav-links a').forEach(link => {
     link.addEventListener('click', () => {
         navLinks.classList.remove('active');
@@ -169,181 +167,208 @@ const skillObserver = new IntersectionObserver((entries) => {
 
 skillBars.forEach(bar => skillObserver.observe(bar));
 
-// ==================== MUSIC PLAYER ====================
-const audio = document.getElementById('backgroundMusic');
-const playPauseBtn = document.getElementById('playPauseBtn');
-const prevBtn = document.getElementById('prevBtn');
-const nextBtn = document.getElementById('nextBtn');
-const volumeBtn = document.getElementById('volumeBtn');
-const volumeControl = document.getElementById('volumeControl');
-const volumeSlider = document.getElementById('volumeSlider');
-const musicTitle = document.getElementById('musicTitle');
-const currentTimeEl = document.getElementById('currentTime');
-const durationEl = document.getElementById('duration');
-const progress = document.getElementById('progress');
-const progressBar = document.getElementById('progressBar');
-const musicToggle = document.getElementById('musicToggle');
-const musicPlayer = document.getElementById('musicPlayer');
-
-// UPDATE THIS PART - Your playlist with your actual audio file
-const playlist = [
-    { 
-        title: 'TIKI TIKI (Slowed)', 
-        artist: 'Unique Vibes',
-        src: 'audio/TIKI TIKI (Slowed) - Unique Vibes.mp3' 
-    }
-    // You can add more tracks here if you have more files
-];
-
-let currentTrack = 0;
-let isPlaying = false;
-
-// Load first track
-function loadTrack(index) {
-    if (!audio || !playlist[index]) return;
+// ==================== MUSIC PLAYER - FIXED VERSION ====================
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Music player initializing...');
     
-    audio.src = playlist[index].src;
-    musicTitle.textContent = playlist[index].title;
-    // If you want to show artist name, add this:
-    const artistEl = document.querySelector('.music-artist');
-    if (artistEl) artistEl.textContent = playlist[index].artist;
-    audio.load();
-}
-
-loadTrack(0);
-
-// Play/Pause
-function togglePlay() {
-    if (audio.paused) {
-        audio.play()
-            .then(() => {
-                isPlaying = true;
-                playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
-            })
-            .catch(err => {
-                console.log('Play failed:', err);
-                alert('Music files not found! Please add abc.mp3 and xyz.mp3');
-            });
-    } else {
-        audio.pause();
-        isPlaying = false;
-        playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+    const audio = document.getElementById('backgroundMusic');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const volumeBtn = document.getElementById('volumeBtn');
+    const volumeControl = document.getElementById('volumeControl');
+    const volumeSlider = document.getElementById('volumeSlider');
+    const musicTitle = document.getElementById('musicTitle');
+    const musicArtist = document.getElementById('musicArtist');
+    const currentTimeEl = document.getElementById('currentTime');
+    const durationEl = document.getElementById('duration');
+    const progress = document.getElementById('progress');
+    const progressBar = document.getElementById('progressBar');
+    const musicToggle = document.getElementById('musicToggle');
+    const musicPlayer = document.getElementById('musicPlayer');
+    
+    // Check if all elements exist
+    if (!audio) {
+        console.error('Audio element not found!');
+        return;
     }
-}
-
-playPauseBtn.addEventListener('click', togglePlay);
-
-// Next track
-function nextTrack() {
-    currentTrack = (currentTrack + 1) % playlist.length;
-    loadTrack(currentTrack);
-    if (isPlaying) {
-        audio.play().catch(() => {});
-    }
-}
-
-nextBtn.addEventListener('click', nextTrack);
-
-// Previous track
-function prevTrack() {
-    currentTrack = (currentTrack - 1 + playlist.length) % playlist.length;
-    loadTrack(currentTrack);
-    if (isPlaying) {
-        audio.play().catch(() => {});
-    }
-}
-
-prevBtn.addEventListener('click', prevTrack);
-
-// Update time
-audio.addEventListener('timeupdate', () => {
-    if (audio.duration) {
-        const current = audio.currentTime;
-        const duration = audio.duration;
+    
+    console.log('Audio element found:', audio);
+    console.log('Audio source:', audio.querySelector('source')?.src || audio.src);
+    
+    // Playlist - using your actual file
+    const playlist = [
+        { 
+            title: 'TIKI TIKI (Slowed)', 
+            artist: 'Unique Vibes',
+            src: 'audio/TIKI TIKI (Slowed) - Unique Vibes.mp3' 
+        }
+    ];
+    
+    let currentTrack = 0;
+    let isPlaying = false;
+    
+    // Load the track
+    function loadTrack(index) {
+        if (!playlist[index]) return;
         
-        currentTimeEl.textContent = formatTime(current);
-        durationEl.textContent = formatTime(duration);
+        const track = playlist[index];
+        console.log('Loading track:', track.title);
         
-        const progressPercent = (current / duration) * 100;
-        progress.style.width = progressPercent + '%';
+        // Set source directly
+        audio.src = track.src;
+        audio.load();
+        
+        if (musicTitle) musicTitle.textContent = track.title;
+        if (musicArtist) musicArtist.textContent = track.artist;
     }
-});
-
-// Format time
-function formatTime(seconds) {
-    const mins = Math.floor(seconds / 60);
-    const secs = Math.floor(seconds % 60);
-    return mins + ':' + (secs < 10 ? '0' : '') + secs;
-}
-
-// Click on progress bar
-progressBar.addEventListener('click', (e) => {
-    const rect = progressBar.getBoundingClientRect();
-    const percent = (e.clientX - rect.left) / rect.width;
-    audio.currentTime = percent * audio.duration;
-});
-
-// Volume control
-volumeBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    volumeControl.classList.toggle('visible');
-});
-
-volumeSlider.addEventListener('input', (e) => {
-    audio.volume = e.target.value;
-    updateVolumeIcon(e.target.value);
-});
-
-function updateVolumeIcon(volume) {
-    let icon = 'fa-volume-up';
-    if (volume == 0) icon = 'fa-volume-mute';
-    else if (volume < 0.5) icon = 'fa-volume-down';
-    volumeBtn.innerHTML = `<i class="fas ${icon}"></i>`;
-}
-
-// Close volume control when clicking outside
-document.addEventListener('click', (e) => {
-    if (!volumeControl.contains(e.target) && !volumeBtn.contains(e.target)) {
-        volumeControl.classList.remove('visible');
+    
+    // Load first track
+    loadTrack(0);
+    
+    // Play/Pause function
+    function togglePlay() {
+        console.log('Toggle play clicked. Audio paused?', audio.paused);
+        
+        if (audio.paused) {
+            audio.play()
+                .then(() => {
+                    console.log('Playback started successfully');
+                    isPlaying = true;
+                    if (playPauseBtn) playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                })
+                .catch(error => {
+                    console.error('Playback failed:', error);
+                    alert('Cannot play audio. File might be missing or format not supported.\n\nMake sure the file exists at: audio/TIKI TIKI (Slowed) - Unique Vibes.mp3');
+                });
+        } else {
+            audio.pause();
+            isPlaying = false;
+            if (playPauseBtn) playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+        }
     }
-});
-
-// Mobile toggle
-if (musicToggle) {
-    musicToggle.addEventListener('click', () => {
-        musicPlayer.classList.toggle('mobile-collapsed');
+    
+    // Event Listeners
+    if (playPauseBtn) {
+        playPauseBtn.addEventListener('click', togglePlay);
+    }
+    
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            // Just restart current track if only one song
+            audio.currentTime = 0;
+            if (!audio.paused) {
+                audio.play();
+            }
+        });
+    }
+    
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            // Restart current track if only one song
+            audio.currentTime = 0;
+            if (!audio.paused) {
+                audio.play();
+            }
+        });
+    }
+    
+    // Volume control
+    if (volumeBtn && volumeControl && volumeSlider) {
+        volumeBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            volumeControl.classList.toggle('visible');
+        });
+        
+        volumeSlider.addEventListener('input', (e) => {
+            audio.volume = e.target.value;
+            
+            // Update volume icon
+            let icon = 'fa-volume-up';
+            if (e.target.value == 0) icon = 'fa-volume-mute';
+            else if (e.target.value < 0.5) icon = 'fa-volume-down';
+            volumeBtn.innerHTML = `<i class="fas ${icon}"></i>`;
+        });
+    }
+    
+    // Progress bar
+    if (progressBar && progress) {
+        progressBar.addEventListener('click', (e) => {
+            const rect = progressBar.getBoundingClientRect();
+            const percent = (e.clientX - rect.left) / rect.width;
+            audio.currentTime = percent * audio.duration;
+        });
+    }
+    
+    // Time updates
+    audio.addEventListener('timeupdate', () => {
+        if (audio.duration) {
+            const current = audio.currentTime;
+            const duration = audio.duration;
+            
+            if (currentTimeEl) {
+                currentTimeEl.textContent = formatTime(current);
+            }
+            if (durationEl) {
+                durationEl.textContent = formatTime(duration);
+            }
+            if (progress) {
+                const percent = (current / duration) * 100;
+                progress.style.width = percent + '%';
+            }
+        }
     });
-}
-
-// Auto next when track ends
-audio.addEventListener('ended', () => {
-    nextTrack();
-});
-
-// Load saved state
-const savedTime = sessionStorage.getItem('musicTime');
-const wasPlaying = sessionStorage.getItem('musicPlaying') === 'true';
-const savedVolume = sessionStorage.getItem('musicVolume');
-
-if (savedTime) {
-    audio.currentTime = parseFloat(savedTime);
-}
-if (savedVolume) {
-    audio.volume = parseFloat(savedVolume);
-    volumeSlider.value = savedVolume;
-    updateVolumeIcon(savedVolume);
-}
-if (wasPlaying) {
-    audio.play().catch(() => {});
-    isPlaying = true;
-    playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
-}
-
-// Save state before leaving
-window.addEventListener('beforeunload', () => {
-    sessionStorage.setItem('musicPlaying', !audio.paused);
-    sessionStorage.setItem('musicTime', audio.currentTime);
-    sessionStorage.setItem('musicVolume', audio.volume);
+    
+    // Metadata loaded
+    audio.addEventListener('loadedmetadata', () => {
+        console.log('Audio metadata loaded, duration:', audio.duration);
+        if (durationEl) {
+            durationEl.textContent = formatTime(audio.duration);
+        }
+    });
+    
+    // Error handling
+    audio.addEventListener('error', (e) => {
+        console.error('Audio error:', e);
+        console.error('Error code:', audio.error ? audio.error.code : 'unknown');
+        console.error('Error message:', audio.error ? audio.error.message : 'unknown');
+        
+        let errorMsg = 'Audio file error. ';
+        if (audio.error) {
+            switch(audio.error.code) {
+                case 1: errorMsg += 'User aborted.'; break;
+                case 2: errorMsg += 'Network error.'; break;
+                case 3: errorMsg += 'Decoding error.'; break;
+                case 4: errorMsg += 'File not found or unsupported format.'; break;
+                default: errorMsg += 'Unknown error.';
+            }
+        }
+        alert(errorMsg + '\n\nMake sure the file exists at: audio/TIKI TIKI (Slowed) - Unique Vibes.mp3');
+    });
+    
+    // Format time helper
+    function formatTime(seconds) {
+        if (isNaN(seconds) || !isFinite(seconds)) return '0:00';
+        const mins = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+    }
+    
+    // Close volume control when clicking outside
+    document.addEventListener('click', (e) => {
+        if (volumeControl && !volumeControl.contains(e.target) && !volumeBtn?.contains(e.target)) {
+            volumeControl.classList.remove('visible');
+        }
+    });
+    
+    // Mobile toggle
+    if (musicToggle && musicPlayer) {
+        musicToggle.addEventListener('click', () => {
+            musicPlayer.classList.toggle('mobile-collapsed');
+        });
+    }
+    
+    console.log('Music player initialized successfully');
 });
 
 // ==================== ACTIVE NAVIGATION ====================
