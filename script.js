@@ -167,9 +167,9 @@ const skillObserver = new IntersectionObserver((entries) => {
 
 skillBars.forEach(bar => skillObserver.observe(bar));
 
-// ==================== MUSIC PLAYER - FIXED VERSION ====================
+// ==================== MUSIC PLAYER WITH AUTOPLAY ====================
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('Music player initializing...');
+    console.log('Music player initializing with autoplay...');
     
     const audio = document.getElementById('backgroundMusic');
     const playPauseBtn = document.getElementById('playPauseBtn');
@@ -187,14 +187,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const musicToggle = document.getElementById('musicToggle');
     const musicPlayer = document.getElementById('musicPlayer');
     
-    // Check if all elements exist
     if (!audio) {
         console.error('Audio element not found!');
         return;
     }
-    
-    console.log('Audio element found:', audio);
-    console.log('Audio source:', audio.querySelector('source')?.src || audio.src);
     
     // Playlist - using your actual file
     const playlist = [
@@ -207,6 +203,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     let currentTrack = 0;
     let isPlaying = false;
+    let autoplayAttempted = false;
     
     // Load the track
     function loadTrack(index) {
@@ -215,7 +212,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const track = playlist[index];
         console.log('Loading track:', track.title);
         
-        // Set source directly
         audio.src = track.src;
         audio.load();
         
@@ -228,18 +224,14 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Play/Pause function
     function togglePlay() {
-        console.log('Toggle play clicked. Audio paused?', audio.paused);
-        
         if (audio.paused) {
             audio.play()
                 .then(() => {
-                    console.log('Playback started successfully');
                     isPlaying = true;
                     if (playPauseBtn) playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
                 })
                 .catch(error => {
                     console.error('Playback failed:', error);
-                    alert('Cannot play audio. File might be missing or format not supported.\n\nMake sure the file exists at: audio/TIKI TIKI (Slowed) - Unique Vibes.mp3');
                 });
         } else {
             audio.pause();
@@ -248,6 +240,118 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
+    // ==================== AUTOPLAY FUNCTIONALITY ====================
+    function attemptAutoplay() {
+        if (autoplayAttempted) return;
+        autoplayAttempted = true;
+        
+        console.log('Attempting autoplay...');
+        
+        // Set initial low volume
+        audio.volume = 0.3;
+        
+        // Try to play (modern browsers will likely block this)
+        audio.play()
+            .then(() => {
+                // Autoplay succeeded!
+                console.log('Autoplay successful!');
+                isPlaying = true;
+                if (playPauseBtn) playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                
+                // Show subtle unmute hint
+                setTimeout(() => {
+                    const unmuteHint = document.createElement('div');
+                    unmuteHint.innerHTML = '🔊 Click anywhere to adjust volume';
+                    unmuteHint.style.cssText = `
+                        position: fixed;
+                        bottom: 100px;
+                        right: 30px;
+                        background: rgba(58,108,244,0.9);
+                        color: white;
+                        padding: 8px 16px;
+                        border-radius: 30px;
+                        font-size: 13px;
+                        z-index: 10000;
+                        backdrop-filter: blur(5px);
+                        border: 1px solid rgba(255,255,255,0.2);
+                        animation: fadeOut 4s forwards;
+                    `;
+                    document.body.appendChild(unmuteHint);
+                    
+                    setTimeout(() => {
+                        if (unmuteHint.parentNode) unmuteHint.remove();
+                    }, 4000);
+                }, 2000);
+            })
+            .catch(error => {
+                // Autoplay blocked - show play button
+                console.log('Autoplay blocked, showing play button');
+                
+                const playButton = document.createElement('button');
+                playButton.innerHTML = '<i class="fas fa-play" style="margin-right: 8px;"></i> Play Music';
+                playButton.style.cssText = `
+                    position: fixed;
+                    bottom: 100px;
+                    right: 30px;
+                    background: linear-gradient(135deg, #3a6cf4, #00d4ff);
+                    color: white;
+                    border: none;
+                    padding: 12px 25px;
+                    border-radius: 50px;
+                    font-size: 15px;
+                    font-weight: 600;
+                    cursor: pointer;
+                    z-index: 10000;
+                    box-shadow: 0 10px 30px rgba(58,108,244,0.5);
+                    display: flex;
+                    align-items: center;
+                    border: 1px solid rgba(255,255,255,0.2);
+                    animation: pulse 2s infinite;
+                `;
+                
+                playButton.onclick = function() {
+                    togglePlay();
+                    this.remove();
+                };
+                
+                document.body.appendChild(playButton);
+                
+                // Add animation styles
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes pulse {
+                        0% { transform: scale(1); }
+                        50% { transform: scale(1.05); }
+                        100% { transform: scale(1); }
+                    }
+                    @keyframes fadeOut {
+                        0% { opacity: 0; transform: translateX(100%); }
+                        10% { opacity: 1; transform: translateX(0); }
+                        80% { opacity: 1; transform: translateX(0); }
+                        100% { opacity: 0; transform: translateX(100%); }
+                    }
+                `;
+                document.head.appendChild(style);
+            });
+    }
+    
+    // Try autoplay after a short delay (ensures DOM is fully ready)
+    setTimeout(attemptAutoplay, 1000);
+    
+    // Also try on first user interaction with the page
+    const userInteractionEvents = ['click', 'scroll', 'touchstart', 'keydown'];
+    userInteractionEvents.forEach(eventType => {
+        document.addEventListener(eventType, function autoplayOnInteraction() {
+            if (!isPlaying && !autoplayAttempted) {
+                attemptAutoplay();
+            }
+            // Remove listeners after first interaction
+            userInteractionEvents.forEach(e => {
+                document.removeEventListener(e, autoplayOnInteraction);
+            });
+        }, { once: true });
+    });
+    
     // Event Listeners
     if (playPauseBtn) {
         playPauseBtn.addEventListener('click', togglePlay);
@@ -255,7 +359,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (prevBtn) {
         prevBtn.addEventListener('click', () => {
-            // Just restart current track if only one song
             audio.currentTime = 0;
             if (!audio.paused) {
                 audio.play();
@@ -265,7 +368,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (nextBtn) {
         nextBtn.addEventListener('click', () => {
-            // Restart current track if only one song
             audio.currentTime = 0;
             if (!audio.paused) {
                 audio.play();
@@ -283,7 +385,6 @@ document.addEventListener('DOMContentLoaded', function() {
         volumeSlider.addEventListener('input', (e) => {
             audio.volume = e.target.value;
             
-            // Update volume icon
             let icon = 'fa-volume-up';
             if (e.target.value == 0) icon = 'fa-volume-mute';
             else if (e.target.value < 0.5) icon = 'fa-volume-down';
@@ -321,7 +422,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Metadata loaded
     audio.addEventListener('loadedmetadata', () => {
-        console.log('Audio metadata loaded, duration:', audio.duration);
         if (durationEl) {
             durationEl.textContent = formatTime(audio.duration);
         }
@@ -330,20 +430,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Error handling
     audio.addEventListener('error', (e) => {
         console.error('Audio error:', e);
-        console.error('Error code:', audio.error ? audio.error.code : 'unknown');
-        console.error('Error message:', audio.error ? audio.error.message : 'unknown');
         
-        let errorMsg = 'Audio file error. ';
-        if (audio.error) {
-            switch(audio.error.code) {
-                case 1: errorMsg += 'User aborted.'; break;
-                case 2: errorMsg += 'Network error.'; break;
-                case 3: errorMsg += 'Decoding error.'; break;
-                case 4: errorMsg += 'File not found or unsupported format.'; break;
-                default: errorMsg += 'Unknown error.';
-            }
+        // Only show error if user tried to play
+        if (isPlaying) {
+            alert('Audio file not found. Please make sure the file exists at: audio/TIKI TIKI (Slowed) - Unique Vibes.mp3');
         }
-        alert(errorMsg + '\n\nMake sure the file exists at: audio/TIKI TIKI (Slowed) - Unique Vibes.mp3');
     });
     
     // Format time helper
@@ -368,7 +459,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    console.log('Music player initialized successfully');
+    console.log('Music player with autoplay initialized');
 });
 
 // ==================== ACTIVE NAVIGATION ====================
