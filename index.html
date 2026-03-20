@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Janaka Heshan | Portfolio</title>
+    <title>Janaka Heshan | Neo Portfolio</title>
+    <meta name="description" content="Computer Hardware Technician & Web Developer - Gaming & Tech Portfolio">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -15,12 +16,40 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Login Modal -->
+    <div class="login-modal" id="loginModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeModal">&times;</span>
+            <div class="modal-header">
+                <i class="fas fa-user-astronaut"></i>
+                <h2>Welcome Back</h2>
+                <p>Login to access exclusive content</p>
+            </div>
+            <form id="loginForm">
+                <div class="input-group">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" placeholder="Email Address" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" placeholder="Password" required>
+                </div>
+                <button type="submit" class="login-btn">
+                    <i class="fas fa-rocket"></i> Launch Access
+                </button>
+                <div class="demo-cred">
+                    <p>Demo: demo@example.com / any password</p>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <!-- Header -->
     <header class="header">
         <div class="container nav-container">
             <a href="#home" class="logo">
                 <i class="fas fa-code"></i>
-                <span>Janaka</span>Heshan
+                <span>JANAKA</span>HESHAN
             </a>
             
             <button class="mobile-menu-btn" id="mobileMenuBtn">
@@ -29,13 +58,18 @@
             
             <nav>
                 <ul class="nav-links" id="navLinks">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#skills">Skills</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#portfolio">Portfolio</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                    <li><a href="privacy.html">Privacy</a></li>
+                    <li><a href="#home" class="active">HOME</a></li>
+                    <li><a href="#about">ABOUT</a></li>
+                    <li><a href="#skills">SKILLS</a></li>
+                    <li><a href="#services">SERVICES</a></li>
+                    <li><a href="#portfolio">PORTFOLIO</a></li>
+                    <li><a href="#gaming" id="gamingTab">GAMING</a></li>
+                    <li><a href="#contact">CONTACT</a></li>
+                    <li>
+                        <button class="login-icon" id="loginIcon">
+                            <i class="fas fa-user-astronaut"></i>
+                        </button>
+                    </li>
                     <li>
                         <button class="theme-toggle" id="themeToggle">
                             <i class="fas fa-moon"></i>
@@ -48,42 +82,43 @@
 
     <!-- Hero Section -->
     <section class="hero" id="home">
+        <div class="hero-bg-gradient"></div>
         <div class="container hero-content">
             <div class="hero-text" data-aos="fade-up">
-                <h1>
-                    Hi, I'm <span class="highlight">Janaka Heshan</span><br>
-                    <span class="typewriter" id="typewriter"></span>
-                </h1>
-                <p>
-                    Computer Hardware Technician & Web Developer with expertise in system troubleshooting, 
-                    hardware repair, and modern web development.
-                </p>
-                <div class="hero-btns">
-                    <a href="#contact" class="btn btn-primary">
-                        <i class="fas fa-paper-plane"></i> Hire Me
-                    </a>
-                    <a href="cv22.pdf" class="btn btn-outline" download>
-                        <i class="fas fa-download"></i> Download CV
-                    </a>
+                <div class="hero-badge">
+                    <i class="fas fa-bolt"></i> DIGITAL ARTISAN
                 </div>
-                <div class="social-links">
-                    <a href="https://m.facebook.com/jheshansandaru/" class="social-link" target="_blank">
-                        <i class="fab fa-facebook-f"></i>
+                <h1>
+                    DISCOVER DIGITAL ART<br>
+                    AND <span class="highlight">COLLECT NPTS</span>
+                </h1>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-value">27K+</span>
+                        <span class="stat-label">ARTISTS</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">876K+</span>
+                        <span class="stat-label">ARTWORK</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">20K+</span>
+                        <span class="stat-label">AUCTION</span>
+                    </div>
+                </div>
+                <div class="hero-btns">
+                    <a href="#portfolio" class="btn btn-primary">
+                        <i class="fas fa-play"></i> LET'S ORBIT →
                     </a>
-                    <a href="https://www.instagram.com/janaka4226/" class="social-link" target="_blank">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="https://github.com/SadaruwanItzMe3" class="social-link" target="_blank">
-                        <i class="fab fa-github"></i>
-                    </a>
-                    <a href="#" class="social-link" target="_blank">
-                        <i class="fab fa-linkedin-in"></i>
+                    <a href="#gaming" class="btn btn-outline">
+                        <i class="fas fa-gamepad"></i> PLAY VIDEO
                     </a>
                 </div>
             </div>
             <div class="hero-image" data-aos="fade-left">
                 <div class="image-container">
                     <img src="images/img1.jpg" alt="Janaka Heshan">
+                    <div class="glow-effect"></div>
                 </div>
             </div>
         </div>
@@ -93,7 +128,7 @@
     <section class="section" id="about">
         <div class="container">
             <div class="section-title" data-aos="fade-up">
-                <h2>About Me</h2>
+                <h2>ABOUT <span class="highlight">ME</span></h2>
                 <p>Get to know more about my background and experience</p>
             </div>
             
@@ -102,7 +137,7 @@
                     <img src="images/img1.jpg" alt="About Janaka Heshan">
                 </div>
                 <div class="about-text" data-aos="fade-left">
-                    <h3>Computer Hardware Technician & Developer</h3>
+                    <h3>Computer Hardware Technician & <span class="highlight">Developer</span></h3>
                     <p>
                         I am a dedicated Computer Hardware Technician with hands-on experience in diagnosing, 
                         assembling, and maintaining computer systems. My expertise extends to component-level 
@@ -129,7 +164,7 @@
                     </div>
                     
                     <a href="#contact" class="btn btn-primary">
-                        <i class="fas fa-envelope"></i> Contact Me
+                        <i class="fas fa-paper-plane"></i> CONTACT ME
                     </a>
                 </div>
             </div>
@@ -140,7 +175,7 @@
     <section class="section" id="skills">
         <div class="container">
             <div class="section-title" data-aos="fade-up">
-                <h2>My Skills</h2>
+                <h2>MY <span class="highlight">SKILLS</span></h2>
                 <p>Technical expertise and professional capabilities</p>
             </div>
             
@@ -214,7 +249,7 @@
     <section class="section" id="services">
         <div class="container">
             <div class="section-title" data-aos="fade-up">
-                <h2>My Services</h2>
+                <h2>MY <span class="highlight">SERVICES</span></h2>
                 <p>Professional services I offer to clients</p>
             </div>
             
@@ -250,7 +285,7 @@
     <section class="section" id="portfolio">
         <div class="container">
             <div class="section-title" data-aos="fade-up">
-                <h2>My Portfolio</h2>
+                <h2>MY <span class="highlight">PORTFOLIO</span></h2>
                 <p>Showcase of my recent projects</p>
             </div>
             
@@ -262,7 +297,6 @@
             </div>
             
             <div class="portfolio-grid">
-                <!-- Project 1 -->
                 <div class="portfolio-item" data-category="hardware">
                     <div class="portfolio-img">
                         <img src="images/work1.jpg" alt="PC Assembly">
@@ -277,7 +311,6 @@
                     </div>
                 </div>
                 
-                <!-- Project 2 -->
                 <div class="portfolio-item" data-category="web">
                     <div class="portfolio-img">
                         <img src="images/work2.jpg" alt="Website">
@@ -292,7 +325,6 @@
                     </div>
                 </div>
                 
-                <!-- Project 3 -->
                 <div class="portfolio-item" data-category="repair">
                     <div class="portfolio-img">
                         <img src="images/work3.jpg" alt="Laptop Repair">
@@ -310,11 +342,109 @@
         </div>
     </section>
 
+    <!-- GAMING SECTION (New Tab) -->
+    <section class="section gaming-section" id="gaming">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up">
+                <h2>GAMING <span class="highlight">HUB</span></h2>
+                <p>My gaming setup, achievements, and live streams</p>
+            </div>
+            
+            <div class="gaming-content">
+                <!-- Gaming Stats -->
+                <div class="gaming-stats" data-aos="fade-up">
+                    <div class="gaming-stat-card">
+                        <i class="fas fa-trophy"></i>
+                        <span class="stat-value">156</span>
+                        <span class="stat-label">Hours Played</span>
+                    </div>
+                    <div class="gaming-stat-card">
+                        <i class="fas fa-gamepad"></i>
+                        <span class="stat-value">24</span>
+                        <span class="stat-label">Games Completed</span>
+                    </div>
+                    <div class="gaming-stat-card">
+                        <i class="fas fa-users"></i>
+                        <span class="stat-value">1.2K</span>
+                        <span class="stat-label">Stream Followers</span>
+                    </div>
+                    <div class="gaming-stat-card">
+                        <i class="fas fa-crown"></i>
+                        <span class="stat-value">8</span>
+                        <span class="stat-label">Achievements</span>
+                    </div>
+                </div>
+                
+                <!-- Gaming Setup -->
+                <div class="gaming-setup" data-aos="fade-right">
+                    <h3><i class="fas fa-desktop"></i> Gaming Setup</h3>
+                    <div class="setup-list">
+                        <div class="setup-item">
+                            <span class="setup-label">CPU:</span>
+                            <span>Intel Core i5 8th Gen</span>
+                        </div>
+                        <div class="setup-item">
+                            <span class="setup-label">GPU:</span>
+                            <span>NVIDIA GTX 1060</span>
+                        </div>
+                        <div class="setup-item">
+                            <span class="setup-label">RAM:</span>
+                            <span>16 GB DDR5</span>
+                        </div>
+                        <div class="setup-item">
+                            <span class="setup-label">Monitor:</span>
+                            <span>23-inch 144Hz</span>
+                        </div>
+                        <div class="setup-item">
+                            <span class="setup-label">Audio:</span>
+                            <span>Fantech HG11 Headset</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Featured Games -->
+                <div class="featured-games" data-aos="fade-left">
+                    <h3><i class="fas fa-gamepad"></i> Featured Games</h3>
+                    <div class="games-grid">
+                        <div class="game-card">
+                            <i class="fas fa-robot"></i>
+                            <span>CS:GO</span>
+                        </div>
+                        <div class="game-card">
+                            <i class="fas fa-dragon"></i>
+                            <span>Valorant</span>
+                        </div>
+                        <div class="game-card">
+                            <i class="fas fa-space-shuttle"></i>
+                            <span>Apex Legends</span>
+                        </div>
+                        <div class="game-card">
+                            <i class="fas fa-fort-awesome"></i>
+                            <span>Fortnite</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Live Stream Preview -->
+                <div class="live-stream" data-aos="zoom-in">
+                    <div class="stream-preview">
+                        <i class="fas fa-circle live-badge"></i>
+                        <h4>LIVE NOW</h4>
+                        <p>Gaming Session - TIKI TIKI Beats</p>
+                        <a href="#" class="btn btn-primary btn-small">
+                            <i class="fas fa-play"></i> Watch Stream
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Contact Section -->
     <section class="section" id="contact">
         <div class="container">
             <div class="section-title" data-aos="fade-up">
-                <h2>Contact Me</h2>
+                <h2>CONTACT <span class="highlight">ME</span></h2>
                 <p>Get in touch for collaborations or inquiries</p>
             </div>
             
@@ -366,7 +496,7 @@
                             <textarea id="message" class="form-control" placeholder="Your Message" required></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-paper-plane"></i> Send Message
+                            <i class="fas fa-paper-plane"></i> SEND MESSAGE
                         </button>
                     </form>
                 </div>
@@ -379,7 +509,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-col">
-                    <h3>Janaka Heshan</h3>
+                    <h3>JANAKA HESHAN</h3>
                     <p>Computer Hardware Technician & Web Developer</p>
                 </div>
                 <div class="footer-col">
@@ -388,18 +518,18 @@
                         <li><a href="#home">Home</a></li>
                         <li><a href="#about">About</a></li>
                         <li><a href="#skills">Skills</a></li>
+                        <li><a href="#gaming">Gaming</a></li>
                         <li><a href="#contact">Contact</a></li>
                     </ul>
                 </div>
             </div>
             <div class="copyright">
-                <p>&copy; 2025 Janaka Heshan. All Rights Reserved. | 
-                   <a href="privacy.html">Privacy Policy</a></p>
+                <p>&copy; 2025 Janaka Heshan. All Rights Reserved.</p>
             </div>
         </div>
     </footer>
 
-    <!-- MUSIC PLAYER - FIXED VERSION -->
+    <!-- Music Player -->
     <div class="music-player-container" id="musicPlayerContainer">
         <div class="music-player" id="musicPlayer">
             <div class="music-info">
@@ -424,18 +554,15 @@
         </div>
         <button class="music-toggle" id="musicToggle"><i class="fas fa-music"></i></button>
         <div class="volume-control" id="volumeControl">
-            <input type="range" id="volumeSlider" min="0" max="1" step="0.1" value="0.7">
+            <input type="range" id="volumeSlider" min="0" max="1" step="0.1" value="0.5">
         </div>
     </div>
 
-    <!-- AUDIO ELEMENT - THIS IS CRITICAL -->
     <audio id="backgroundMusic" preload="auto">
         <source src="audio/TIKI TIKI (Slowed) - Unique Vibes.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
     </audio>
 
-    <!-- Scripts -->
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="script.js"></script>
 </body>
-                       </html>
+                            </html>
