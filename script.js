@@ -617,3 +617,46 @@ window.addEventListener('load', () => {
 });
 
 console.log('Portfolio with Gaming Hub initialized!');
+// Login Modal
+const loginIcon = document.getElementById('loginIcon');
+const loginModal = document.getElementById('loginModal');
+const closeModal = document.getElementById('closeModal');
+const loginFormModal = document.getElementById('loginForm');
+
+if (loginIcon && loginModal) {
+    loginIcon.addEventListener('click', () => {
+        loginModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    });
+    
+    if (closeModal) {
+        closeModal.addEventListener('click', () => {
+            loginModal.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    }
+    
+    window.addEventListener('click', (e) => {
+        if (e.target === loginModal) {
+            loginModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+    
+    if (loginFormModal) {
+        loginFormModal.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            if (username === 'admin' && password === 'admin123') {
+                alert('✅ Welcome Admin!\n\nYou can now edit content in the Admin Dashboard.');
+                loginModal.classList.remove('active');
+                document.body.style.overflow = '';
+                loginFormModal.reset();
+            } else {
+                alert('❌ Invalid credentials!\n\nDemo: admin / admin123');
+            }
+        });
+    }
+}
