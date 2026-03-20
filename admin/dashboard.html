@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Portfolio Manager</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <!-- Login Screen -->
+    <div class="login-screen" id="loginScreen">
+        <div class="login-container">
+            <div class="login-header">
+                <i class="fas fa-crown"></i>
+                <h2>Admin Portal</h2>
+                <p>Portfolio Content Manager</p>
+            </div>
+            <form id="adminLoginForm">
+                <div class="input-group">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="username" placeholder="Username" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="password" placeholder="Password" required>
+                </div>
+                <button type="submit" class="login-btn">
+                    <i class="fas fa-sign-in-alt"></i> Login to Dashboard
+                </button>
+            </form>
+            <div class="demo-info">
+                <p>Demo Login: <strong>admin</strong> / <strong>admin123</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Dashboard -->
+    <div class="dashboard" id="dashboard" style="display: none;">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-crown"></i>
+                <h3>Portfolio CMS</h3>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-section="hero">
+                    <i class="fas fa-home"></i> Hero Section
+                </a>
+                <a href="#" class="nav-item" data-section="about">
+                    <i class="fas fa-user"></i> About
+                </a>
+                <a href="#" class="nav-item" data-section="skills">
+                    <i class="fas fa-code"></i> Skills
+                </a>
+                <a href="#" class="nav-item" data-section="services">
+                    <i class="fas fa-tools"></i> Services
+                </a>
+                <a href="#" class="nav-item" data-section="portfolio">
+                    <i class="fas fa-images"></i> Portfolio
+                </a>
+                <a href="#" class="nav-item" data-section="gaming">
+                    <i class="fas fa-gamepad"></i> Gaming
+                </a>
+                <a href="#" class="nav-item" data-section="contact">
+                    <i class="fas fa-envelope"></i> Contact
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <button class="logout-btn" id="logoutBtn">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+                <button class="save-all-btn" id="saveAllBtn">
+                    <i class="fas fa-save"></i> Save All
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-bar">
+                <h2 id="sectionTitle">Hero Section</h2>
+                <div class="top-bar-actions">
+                    <button class="preview-btn" id="previewBtn">
+                        <i class="fas fa-eye"></i> Preview Site
+                    </button>
+                    <button class="save-btn" id="saveBtn">
+                        <i class="fas fa-save"></i> Save Changes
+                    </button>
+                </div>
+            </header>
+
+            <!-- Hero Section Editor -->
+            <div class="editor-section active" id="heroEditor">
+                <div class="editor-card">
+                    <h3><i class="fas fa-edit"></i> Hero Section Content</h3>
+                    <div class="form-group">
+                        <label>Hero Badge Text</label>
+                        <input type="text" id="heroBadge" class="form-control" placeholder="DIGITAL ARTISAN">
+                    </div>
+                    <div class="form-group">
+                        <label>Main Title</label>
+                        <textarea id="heroTitle" class="form-control" rows="3" placeholder="DISCOVER DIGITAL ART AND COLLECT NPTS"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Hero Description</label>
+                        <textarea id="heroDesc" class="form-control" rows="3" placeholder="Your description here..."></textarea>
+                    </div>
+                    <div class="stats-editor">
+                        <h4>Hero Statistics</h4>
+                        <div class="stat-row">
+                            <input type="text" id="stat1Value" placeholder="Value" class="form-control">
+                            <input type="text" id="stat1Label" placeholder="Label" class="form-control">
+                        </div>
+                        <div class="stat-row">
+                            <input type="text" id="stat2Value" placeholder="Value" class="form-control">
+                            <input type="text" id="stat2Label" placeholder="Label" class="form-control">
+                        </div>
+                        <div class="stat-row">
+                            <input type="text" id="stat3Value" placeholder="Value" class="form-control">
+                            <input type="text" id="stat3Label" placeholder="Label" class="form-control">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- About Section Editor -->
+            <div class="editor-section" id="aboutEditor">
+                <div class="editor-card">
+                    <h3><i class="fas fa-user-edit"></i> About Section</h3>
+                    <div class="form-group">
+                        <label>About Title</label>
+                        <input type="text" id="aboutTitle" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Subtitle</label>
+                        <input type="text" id="aboutSubtitle" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Description Paragraph 1</label>
+                        <textarea id="aboutDesc1" class="form-control" rows="4"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Description Paragraph 2</label>
+                        <textarea id="aboutDesc2" class="form-control" rows="4"></textarea>
+                    </div>
+                    <div class="stats-editor">
+                        <h4>Statistics</h4>
+                        <div class="stat-row">
+                            <input type="number" id="aboutStat1" placeholder="Projects" class="form-control">
+                            <input type="text" id="aboutStat1Label" placeholder="Label" class="form-control">
+                        </div>
+                        <div class="stat-row">
+                            <input type="number" id="aboutStat2" placeholder="Years" class="form-control">
+                            <input type="text" id="aboutStat2Label" placeholder="Label" class="form-control">
+                        </div>
+                        <div class="stat-row">
+                            <input type="number" id="aboutStat3" placeholder="Clients" class="form-control">
+                            <input type="text" id="aboutStat3Label" placeholder="Label" class="form-control">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Skills Section Editor -->
+            <div class="editor-section" id="skillsEditor">
+                <div class="editor-card">
+                    <h3><i class="fas fa-chart-line"></i> Technical Skills</h3>
+                    <div id="technicalSkillsList">
+                        <!-- Dynamic skill items will be added here -->
+                    </div>
+                    <button class="add-btn" id="addTechSkill"><i class="fas fa-plus"></i> Add Technical Skill</button>
+                    
+                    <h3 style="margin-top: 30px;"><i class="fas fa-laptop-code"></i> Development Skills</h3>
+                    <div id="devSkillsList">
+                        <!-- Dynamic skill items will be added here -->
+                    </div>
+                    <button class="add-btn" id="addDevSkill"><i class="fas fa-plus"></i> Add Development Skill</button>
+                </div>
+            </div>
+
+            <!-- Services Section Editor -->
+            <div class="editor-section" id="servicesEditor">
+                <div class="editor-card">
+                    <h3><i class="fas fa-cogs"></i> Services</h3>
+                    <div id="servicesList">
+                        <!-- Dynamic service items will be added here -->
+                    </div>
+                    <button class="add-btn" id="addService"><i class="fas fa-plus"></i> Add Service</button>
+                </div>
+            </div>
+
+            <!-- Portfolio Section Editor -->
+            <div class="editor-section" id="portfolioEditor">
+                <div class="editor-card">
+                    <h3><i class="fas fa-folder-open"></i> Portfolio Items</h3>
+                    <div id="portfolioList">
+                        <!-- Dynamic portfolio items will be added here -->
+                    </div>
+                    <button class="add-btn" id="addPortfolio"><i class="fas fa-plus"></i> Add Portfolio Item</button>
+                </div>
+            </div>
+
+            <!-- Gaming Section Editor -->
+            <div class="editor-section" id="gamingEditor">
+                <div class="editor-card">
+                    <h3><i class="fas fa-gamepad"></i> Gaming Stats</h3>
+                    <div id="gamingStatsList">
+                        <!-- Dynamic gaming stats will be added here -->
+                    </div>
+                    <button class="add-btn" id="addGamingStat"><i class="fas fa-plus"></i> Add Gaming Stat</button>
+                    
+                    <h3 style="margin-top: 30px;"><i class="fas fa-desktop"></i> Gaming Setup</h3>
+                    <div id="gamingSetupList">
+                        <!-- Dynamic gaming setup items will be added here -->
+                    </div>
+                    <button class="add-btn" id="addGamingSetup"><i class="fas fa-plus"></i> Add Setup Item</button>
+                    
+                    <h3 style="margin-top: 30px;"><i class="fas fa-star"></i> Featured Games</h3>
+                    <div id="gamesList">
+                        <!-- Dynamic games will be added here -->
+                    </div>
+                    <button class="add-btn" id="addGame"><i class="fas fa-plus"></i> Add Game</button>
+                </div>
+            </div>
+
+            <!-- Contact Section Editor -->
+            <div class="editor-section" id="contactEditor">
+                <div class="editor-card">
+                    <h3><i class="fas fa-address-card"></i> Contact Information</h3>
+                    <div class="form-group">
+                        <label>Location</label>
+                        <input type="text" id="contactLocation" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Phone</label>
+                        <input type="text" id="contactPhone" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="contactEmail" class="form-control">
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+</html>
