@@ -3,9 +3,332 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard | Portfolio Manager</title>
+    <title>Admin Dashboard | Janaka Heshan</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="dashboard.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0a0a0f;
+            overflow-x: hidden;
+        }
+
+        /* Login Screen */
+        .login-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+
+        .login-container {
+            background: rgba(17, 17, 26, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 50px;
+            border-radius: 30px;
+            width: 90%;
+            max-width: 450px;
+            border: 1px solid rgba(108, 92, 231, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation: slideUp 0.5s ease;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .login-header i {
+            font-size: 4rem;
+            background: linear-gradient(135deg, #6c5ce7, #00cec9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+        }
+
+        .login-header h2 {
+            color: white;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .login-header p {
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .input-group i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6c5ce7;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 14px 14px 14px 45px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(108, 92, 231, 0.3);
+            border-radius: 12px;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #6c5ce7;
+            background: rgba(108, 92, 231, 0.1);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #6c5ce7, #00cec9);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(108, 92, 231, 0.4);
+        }
+
+        .demo-info {
+            text-align: center;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #666;
+            font-size: 0.85rem;
+        }
+
+        .demo-info strong {
+            color: #6c5ce7;
+        }
+
+        /* Dashboard */
+        .dashboard {
+            display: none;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: #11111a;
+            border-right: 1px solid rgba(108, 92, 231, 0.2);
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .sidebar-header {
+            padding: 30px 25px;
+            border-bottom: 1px solid rgba(108, 92, 231, 0.2);
+            text-align: center;
+        }
+
+        .sidebar-header i {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #6c5ce7, #00cec9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .sidebar-header h3 {
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .sidebar-nav {
+            padding: 20px 0;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 25px;
+            color: #888;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+            cursor: pointer;
+        }
+
+        .nav-item i {
+            width: 24px;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            color: #6c5ce7;
+            background: rgba(108, 92, 231, 0.1);
+            border-left-color: #6c5ce7;
+        }
+
+        .sidebar-footer {
+            padding: 20px;
+            border-top: 1px solid rgba(108, 92, 231, 0.2);
+        }
+
+        .logout-btn, .save-all-btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .logout-btn {
+            background: rgba(255, 71, 87, 0.2);
+            color: #ff4757;
+        }
+
+        .logout-btn:hover {
+            background: #ff4757;
+            color: white;
+        }
+
+        .save-all-btn {
+            background: linear-gradient(135deg, #6c5ce7, #00cec9);
+            color: white;
+        }
+
+        .main-content {
+            margin-left: 280px;
+            padding: 20px;
+        }
+
+        .top-bar {
+            background: #11111a;
+            padding: 20px 30px;
+            border-radius: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            border: 1px solid rgba(108, 92, 231, 0.2);
+        }
+
+        .top-bar h2 {
+            color: white;
+        }
+
+        .save-btn {
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #6c5ce7, #00cec9);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .editor-section {
+            display: none;
+            background: #11111a;
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(108, 92, 231, 0.2);
+        }
+
+        .editor-section.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #888;
+            margin-bottom: 8px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(108, 92, 231, 0.3);
+            border-radius: 10px;
+            color: white;
+            font-size: 0.95rem;
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 12px 20px;
+            border-radius: 10px;
+            color: white;
+            z-index: 10000;
+            animation: slideIn 0.3s ease;
+        }
+
+        .notification.success { background: #00d26a; }
+        .notification.error { background: #ff4757; }
+        .notification.info { background: #6c5ce7; }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s;
+            }
+            .sidebar.active { transform: translateX(0); }
+            .main-content { margin-left: 0; }
+        }
+    </style>
 </head>
 <body>
     <!-- Login Screen -->
@@ -19,233 +342,435 @@
             <form id="adminLoginForm">
                 <div class="input-group">
                     <i class="fas fa-user"></i>
-                    <input type="text" id="username" placeholder="Username" required>
+                    <input type="text" id="adminUsername" placeholder="Username" required>
                 </div>
                 <div class="input-group">
                     <i class="fas fa-lock"></i>
-                    <input type="password" id="password" placeholder="Password" required>
+                    <input type="password" id="adminPassword" placeholder="Password" required>
                 </div>
                 <button type="submit" class="login-btn">
                     <i class="fas fa-sign-in-alt"></i> Login to Dashboard
                 </button>
             </form>
             <div class="demo-info">
-                <p>Demo Login: <strong>admin</strong> / <strong>admin123</strong></p>
+                <p>🔐 <strong>admin</strong> / <strong>admin123</strong></p>
             </div>
         </div>
     </div>
 
-    <!-- Main Dashboard -->
-    <div class="dashboard" id="dashboard" style="display: none;">
-        <!-- Sidebar -->
-        <aside class="sidebar">
+    <!-- Dashboard -->
+    <div class="dashboard" id="dashboard">
+        <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
                 <i class="fas fa-crown"></i>
                 <h3>Portfolio CMS</h3>
             </div>
             <nav class="sidebar-nav">
-                <a href="#" class="nav-item active" data-section="hero">
-                    <i class="fas fa-home"></i> Hero Section
-                </a>
-                <a href="#" class="nav-item" data-section="about">
-                    <i class="fas fa-user"></i> About
-                </a>
-                <a href="#" class="nav-item" data-section="skills">
-                    <i class="fas fa-code"></i> Skills
-                </a>
-                <a href="#" class="nav-item" data-section="services">
-                    <i class="fas fa-tools"></i> Services
-                </a>
-                <a href="#" class="nav-item" data-section="portfolio">
-                    <i class="fas fa-images"></i> Portfolio
-                </a>
-                <a href="#" class="nav-item" data-section="gaming">
-                    <i class="fas fa-gamepad"></i> Gaming
-                </a>
-                <a href="#" class="nav-item" data-section="contact">
-                    <i class="fas fa-envelope"></i> Contact
-                </a>
+                <div class="nav-item active" data-section="hero"><i class="fas fa-home"></i> Hero Section</div>
+                <div class="nav-item" data-section="about"><i class="fas fa-user"></i> About</div>
+                <div class="nav-item" data-section="skills"><i class="fas fa-code"></i> Skills</div>
+                <div class="nav-item" data-section="services"><i class="fas fa-tools"></i> Services</div>
+                <div class="nav-item" data-section="portfolio"><i class="fas fa-images"></i> Portfolio</div>
+                <div class="nav-item" data-section="gaming"><i class="fas fa-gamepad"></i> Gaming</div>
+                <div class="nav-item" data-section="contact"><i class="fas fa-envelope"></i> Contact</div>
             </nav>
             <div class="sidebar-footer">
-                <button class="logout-btn" id="logoutBtn">
-                    <i class="fas fa-sign-out-alt"></i> Logout
-                </button>
-                <button class="save-all-btn" id="saveAllBtn">
-                    <i class="fas fa-save"></i> Save All
-                </button>
+                <button class="save-all-btn" id="saveAllBtn"><i class="fas fa-save"></i> Save All Changes</button>
+                <button class="logout-btn" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</button>
             </div>
         </aside>
 
-        <!-- Main Content -->
         <main class="main-content">
-            <header class="top-bar">
+            <div class="top-bar">
                 <h2 id="sectionTitle">Hero Section</h2>
-                <div class="top-bar-actions">
-                    <button class="preview-btn" id="previewBtn">
-                        <i class="fas fa-eye"></i> Preview Site
-                    </button>
-                    <button class="save-btn" id="saveBtn">
-                        <i class="fas fa-save"></i> Save Changes
-                    </button>
-                </div>
-            </header>
+                <button class="save-btn" id="saveBtn"><i class="fas fa-save"></i> Save</button>
+            </div>
 
-            <!-- Hero Section Editor -->
+            <!-- Hero Editor -->
             <div class="editor-section active" id="heroEditor">
-                <div class="editor-card">
-                    <h3><i class="fas fa-edit"></i> Hero Section Content</h3>
-                    <div class="form-group">
-                        <label>Hero Badge Text</label>
-                        <input type="text" id="heroBadge" class="form-control" placeholder="DIGITAL ARTISAN">
-                    </div>
-                    <div class="form-group">
-                        <label>Main Title</label>
-                        <textarea id="heroTitle" class="form-control" rows="3" placeholder="DISCOVER DIGITAL ART AND COLLECT NPTS"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>Hero Description</label>
-                        <textarea id="heroDesc" class="form-control" rows="3" placeholder="Your description here..."></textarea>
-                    </div>
-                    <div class="stats-editor">
-                        <h4>Hero Statistics</h4>
-                        <div class="stat-row">
-                            <input type="text" id="stat1Value" placeholder="Value" class="form-control">
-                            <input type="text" id="stat1Label" placeholder="Label" class="form-control">
-                        </div>
-                        <div class="stat-row">
-                            <input type="text" id="stat2Value" placeholder="Value" class="form-control">
-                            <input type="text" id="stat2Label" placeholder="Label" class="form-control">
-                        </div>
-                        <div class="stat-row">
-                            <input type="text" id="stat3Value" placeholder="Value" class="form-control">
-                            <input type="text" id="stat3Label" placeholder="Label" class="form-control">
-                        </div>
-                    </div>
+                <div class="form-group">
+                    <label>Hero Badge</label>
+                    <input type="text" id="heroBadge" class="form-control" value="DIGITAL ARTISAN">
+                </div>
+                <div class="form-group">
+                    <label>Main Title</label>
+                    <textarea id="heroTitle" class="form-control" rows="3">DISCOVER DIGITAL ART\nAND COLLECT NPTS</textarea>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="heroDesc" class="form-control" rows="3">Passionate Computer Hardware Technician & Web Developer with expertise in system troubleshooting, hardware repair, and modern web development.</textarea>
+                </div>
+                <div class="form-group">
+                    <label>Stat 1 Value</label>
+                    <input type="text" id="stat1Value" class="form-control" value="27K+">
+                </div>
+                <div class="form-group">
+                    <label>Stat 1 Label</label>
+                    <input type="text" id="stat1Label" class="form-control" value="ARTISTS">
+                </div>
+                <div class="form-group">
+                    <label>Stat 2 Value</label>
+                    <input type="text" id="stat2Value" class="form-control" value="876K+">
+                </div>
+                <div class="form-group">
+                    <label>Stat 2 Label</label>
+                    <input type="text" id="stat2Label" class="form-control" value="ARTWORK">
+                </div>
+                <div class="form-group">
+                    <label>Stat 3 Value</label>
+                    <input type="text" id="stat3Value" class="form-control" value="20K+">
+                </div>
+                <div class="form-group">
+                    <label>Stat 3 Label</label>
+                    <input type="text" id="stat3Label" class="form-control" value="AUCTION">
                 </div>
             </div>
 
-            <!-- About Section Editor -->
+            <!-- About Editor -->
             <div class="editor-section" id="aboutEditor">
-                <div class="editor-card">
-                    <h3><i class="fas fa-user-edit"></i> About Section</h3>
-                    <div class="form-group">
-                        <label>About Title</label>
-                        <input type="text" id="aboutTitle" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label>Subtitle</label>
-                        <input type="text" id="aboutSubtitle" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label>Description Paragraph 1</label>
-                        <textarea id="aboutDesc1" class="form-control" rows="4"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>Description Paragraph 2</label>
-                        <textarea id="aboutDesc2" class="form-control" rows="4"></textarea>
-                    </div>
-                    <div class="stats-editor">
-                        <h4>Statistics</h4>
-                        <div class="stat-row">
-                            <input type="number" id="aboutStat1" placeholder="Projects" class="form-control">
-                            <input type="text" id="aboutStat1Label" placeholder="Label" class="form-control">
-                        </div>
-                        <div class="stat-row">
-                            <input type="number" id="aboutStat2" placeholder="Years" class="form-control">
-                            <input type="text" id="aboutStat2Label" placeholder="Label" class="form-control">
-                        </div>
-                        <div class="stat-row">
-                            <input type="number" id="aboutStat3" placeholder="Clients" class="form-control">
-                            <input type="text" id="aboutStat3Label" placeholder="Label" class="form-control">
-                        </div>
-                    </div>
+                <div class="form-group">
+                    <label>Subtitle</label>
+                    <input type="text" id="aboutSubtitle" class="form-control" value="Computer Hardware Technician & Developer">
+                </div>
+                <div class="form-group">
+                    <label>Description 1</label>
+                    <textarea id="aboutDesc1" class="form-control" rows="4">I am a dedicated Computer Hardware Technician with hands-on experience in diagnosing, assembling, and maintaining computer systems. My expertise extends to component-level repair and system optimization.</textarea>
+                </div>
+                <div class="form-group">
+                    <label>Description 2</label>
+                    <textarea id="aboutDesc2" class="form-control" rows="4">With a foundation in web development, I combine technical hardware knowledge with modern programming skills to deliver complete technical solutions.</textarea>
+                </div>
+                <div class="form-group">
+                    <label>Projects Count</label>
+                    <input type="number" id="aboutStat1" class="form-control" value="50">
+                </div>
+                <div class="form-group">
+                    <label>Years Count</label>
+                    <input type="number" id="aboutStat2" class="form-control" value="3">
+                </div>
+                <div class="form-group">
+                    <label>Clients Count</label>
+                    <input type="number" id="aboutStat3" class="form-control" value="100">
                 </div>
             </div>
 
-            <!-- Skills Section Editor -->
+            <!-- Skills Editor -->
             <div class="editor-section" id="skillsEditor">
-                <div class="editor-card">
-                    <h3><i class="fas fa-chart-line"></i> Technical Skills</h3>
-                    <div id="technicalSkillsList">
-                        <!-- Dynamic skill items will be added here -->
-                    </div>
-                    <button class="add-btn" id="addTechSkill"><i class="fas fa-plus"></i> Add Technical Skill</button>
-                    
-                    <h3 style="margin-top: 30px;"><i class="fas fa-laptop-code"></i> Development Skills</h3>
-                    <div id="devSkillsList">
-                        <!-- Dynamic skill items will be added here -->
-                    </div>
-                    <button class="add-btn" id="addDevSkill"><i class="fas fa-plus"></i> Add Development Skill</button>
-                </div>
+                <h3>Technical Skills</h3>
+                <div id="techSkills"></div>
+                <button class="add-skill-btn" onclick="addTechSkill()" style="background: #6c5ce7; color: white; border: none; padding: 10px 20px; border-radius: 8px; margin: 10px 0; cursor: pointer;"><i class="fas fa-plus"></i> Add Skill</button>
+                
+                <h3 style="margin-top: 30px;">Development Skills</h3>
+                <div id="devSkills"></div>
+                <button class="add-skill-btn" onclick="addDevSkill()" style="background: #6c5ce7; color: white; border: none; padding: 10px 20px; border-radius: 8px; margin: 10px 0; cursor: pointer;"><i class="fas fa-plus"></i> Add Skill</button>
             </div>
 
-            <!-- Services Section Editor -->
+            <!-- Services Editor -->
             <div class="editor-section" id="servicesEditor">
-                <div class="editor-card">
-                    <h3><i class="fas fa-cogs"></i> Services</h3>
-                    <div id="servicesList">
-                        <!-- Dynamic service items will be added here -->
-                    </div>
-                    <button class="add-btn" id="addService"><i class="fas fa-plus"></i> Add Service</button>
-                </div>
+                <div id="servicesList"></div>
+                <button onclick="addService()" style="background: #6c5ce7; color: white; border: none; padding: 10px 20px; border-radius: 8px; margin-top: 10px; cursor: pointer;"><i class="fas fa-plus"></i> Add Service</button>
             </div>
 
-            <!-- Portfolio Section Editor -->
+            <!-- Portfolio Editor -->
             <div class="editor-section" id="portfolioEditor">
-                <div class="editor-card">
-                    <h3><i class="fas fa-folder-open"></i> Portfolio Items</h3>
-                    <div id="portfolioList">
-                        <!-- Dynamic portfolio items will be added here -->
-                    </div>
-                    <button class="add-btn" id="addPortfolio"><i class="fas fa-plus"></i> Add Portfolio Item</button>
-                </div>
+                <div id="portfolioList"></div>
+                <button onclick="addPortfolio()" style="background: #6c5ce7; color: white; border: none; padding: 10px 20px; border-radius: 8px; margin-top: 10px; cursor: pointer;"><i class="fas fa-plus"></i> Add Portfolio</button>
             </div>
 
-            <!-- Gaming Section Editor -->
+            <!-- Gaming Editor -->
             <div class="editor-section" id="gamingEditor">
-                <div class="editor-card">
-                    <h3><i class="fas fa-gamepad"></i> Gaming Stats</h3>
-                    <div id="gamingStatsList">
-                        <!-- Dynamic gaming stats will be added here -->
-                    </div>
-                    <button class="add-btn" id="addGamingStat"><i class="fas fa-plus"></i> Add Gaming Stat</button>
-                    
-                    <h3 style="margin-top: 30px;"><i class="fas fa-desktop"></i> Gaming Setup</h3>
-                    <div id="gamingSetupList">
-                        <!-- Dynamic gaming setup items will be added here -->
-                    </div>
-                    <button class="add-btn" id="addGamingSetup"><i class="fas fa-plus"></i> Add Setup Item</button>
-                    
-                    <h3 style="margin-top: 30px;"><i class="fas fa-star"></i> Featured Games</h3>
-                    <div id="gamesList">
-                        <!-- Dynamic games will be added here -->
-                    </div>
-                    <button class="add-btn" id="addGame"><i class="fas fa-plus"></i> Add Game</button>
-                </div>
+                <h3>Gaming Stats</h3>
+                <div id="gamingStats"></div>
+                <button onclick="addGamingStat()" style="background: #6c5ce7; color: white; border: none; padding: 10px 20px; border-radius: 8px; margin: 10px 0; cursor: pointer;"><i class="fas fa-plus"></i> Add Stat</button>
+                
+                <h3>Gaming Setup</h3>
+                <div id="gamingSetup"></div>
+                <button onclick="addGamingSetup()" style="background: #6c5ce7; color: white; border: none; padding: 10px 20px; border-radius: 8px; margin: 10px 0; cursor: pointer;"><i class="fas fa-plus"></i> Add Setup Item</button>
+                
+                <h3>Featured Games</h3>
+                <div id="gamesList"></div>
+                <button onclick="addGame()" style="background: #6c5ce7; color: white; border: none; padding: 10px 20px; border-radius: 8px; margin: 10px 0; cursor: pointer;"><i class="fas fa-plus"></i> Add Game</button>
             </div>
 
-            <!-- Contact Section Editor -->
+            <!-- Contact Editor -->
             <div class="editor-section" id="contactEditor">
-                <div class="editor-card">
-                    <h3><i class="fas fa-address-card"></i> Contact Information</h3>
-                    <div class="form-group">
-                        <label>Location</label>
-                        <input type="text" id="contactLocation" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label>Phone</label>
-                        <input type="text" id="contactPhone" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input type="email" id="contactEmail" class="form-control">
-                    </div>
+                <div class="form-group">
+                    <label>Location</label>
+                    <input type="text" id="contactLocation" class="form-control" value="Kegalle, Sri Lanka">
+                </div>
+                <div class="form-group">
+                    <label>Phone</label>
+                    <input type="text" id="contactPhone" class="form-control" value="+94 704 804 941">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="contactEmail" class="form-control" value="heshanmd.ml@gmail.com">
                 </div>
             </div>
         </main>
     </div>
 
-    <script src="config.js"></script>
-    <script src="dashboard.js"></script>
+    <script>
+        // Admin Credentials
+        const ADMIN_USERNAME = 'admin';
+        const ADMIN_PASSWORD = 'admin123';
+        
+        let currentContent = {
+            hero: { badge: 'DIGITAL ARTISAN', title: 'DISCOVER DIGITAL ART\nAND COLLECT NPTS', description: 'Passionate Computer Hardware Technician & Web Developer...', stats: [{ value: '27K+', label: 'ARTISTS' }, { value: '876K+', label: 'ARTWORK' }, { value: '20K+', label: 'AUCTION' }] },
+            about: { subtitle: 'Computer Hardware Technician & Developer', desc1: 'I am a dedicated Computer Hardware Technician...', desc2: 'With a foundation in web development...', stats: [50, 3, 100] },
+            skills: { technical: [{ name: 'Computer Hardware', percent: 90 }, { name: 'Troubleshooting', percent: 85 }, { name: 'System Maintenance', percent: 80 }], development: [{ name: 'HTML/CSS', percent: 85 }, { name: 'JavaScript', percent: 60 }, { name: 'Responsive Design', percent: 80 }] },
+            services: [{ icon: 'fa-tools', title: 'Computer Repair', desc: 'Hardware diagnosis, component replacement...' }, { icon: 'fa-laptop-code', title: 'Web Development', desc: 'Custom website development...' }, { icon: 'fa-headset', title: 'IT Support', desc: 'Software installation, network configuration...' }],
+            portfolio: [{ title: 'Custom PC Assembly', desc: 'Gaming PC build with custom cooling.', category: 'hardware', image: 'images/work1.jpg', tags: ['Hardware', 'Assembly'] }, { title: 'E-commerce Website', desc: 'Responsive online store.', category: 'web', image: 'images/work2.jpg', tags: ['Web', 'E-commerce'] }, { title: 'Laptop Screen Replacement', desc: 'Professional repair service.', category: 'repair', image: 'images/work3.jpg', tags: ['Repair', 'Laptop'] }],
+            gaming: { stats: [{ icon: 'fa-trophy', value: '156', label: 'Hours Played' }, { icon: 'fa-gamepad', value: '24', label: 'Games Completed' }, { icon: 'fa-users', value: '1.2K', label: 'Stream Followers' }, { icon: 'fa-crown', value: '8', label: 'Achievements' }], setup: [{ label: 'CPU', value: 'Intel Core i5 8th Gen' }, { label: 'GPU', value: 'NVIDIA GTX 1060' }, { label: 'RAM', value: '16 GB DDR5' }, { label: 'Monitor', value: '23-inch 144Hz' }, { label: 'Audio', value: 'Fantech HG11 Headset' }], games: [{ icon: 'fa-robot', name: 'CS:GO' }, { icon: 'fa-dragon', name: 'Valorant' }, { icon: 'fa-space-shuttle', name: 'Apex Legends' }, { icon: 'fa-fort-awesome', name: 'Fortnite' }] },
+            contact: { location: 'Kegalle, Sri Lanka', phone: '+94 704 804 941', email: 'heshanmd.ml@gmail.com' }
+        };
+
+        // Login
+        document.getElementById('adminLoginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const username = document.getElementById('adminUsername').value;
+            const password = document.getElementById('adminPassword').value;
+            
+            if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+                document.getElementById('loginScreen').style.display = 'none';
+                document.getElementById('dashboard').style.display = 'flex';
+                loadContent();
+                showNotification('Login successful!', 'success');
+            } else {
+                showNotification('Invalid username or password', 'error');
+            }
+        });
+
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            document.getElementById('loginScreen').style.display = 'flex';
+            document.getElementById('dashboard').style.display = 'none';
+            showNotification('Logged out', 'info');
+        });
+
+        // Navigation
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', () => {
+                document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+                item.classList.add('active');
+                document.querySelectorAll('.editor-section').forEach(section => section.classList.remove('active'));
+                document.getElementById(item.dataset.section + 'Editor').classList.add('active');
+                document.getElementById('sectionTitle').textContent = item.textContent.trim();
+            });
+        });
+
+        // Load Content
+        function loadContent() {
+            const saved = localStorage.getItem('portfolio_content');
+            if (saved) {
+                currentContent = JSON.parse(saved);
+            }
+            
+            // Populate forms
+            document.getElementById('heroBadge').value = currentContent.hero.badge;
+            document.getElementById('heroTitle').value = currentContent.hero.title;
+            document.getElementById('heroDesc').value = currentContent.hero.description;
+            document.getElementById('stat1Value').value = currentContent.hero.stats[0]?.value || '';
+            document.getElementById('stat1Label').value = currentContent.hero.stats[0]?.label || '';
+            document.getElementById('stat2Value').value = currentContent.hero.stats[1]?.value || '';
+            document.getElementById('stat2Label').value = currentContent.hero.stats[1]?.label || '';
+            document.getElementById('stat3Value').value = currentContent.hero.stats[2]?.value || '';
+            document.getElementById('stat3Label').value = currentContent.hero.stats[2]?.label || '';
+            
+            document.getElementById('aboutSubtitle').value = currentContent.about.subtitle;
+            document.getElementById('aboutDesc1').value = currentContent.about.desc1;
+            document.getElementById('aboutDesc2').value = currentContent.about.desc2;
+            document.getElementById('aboutStat1').value = currentContent.about.stats[0];
+            document.getElementById('aboutStat2').value = currentContent.about.stats[1];
+            document.getElementById('aboutStat3').value = currentContent.about.stats[2];
+            
+            renderSkills();
+            renderServices();
+            renderPortfolio();
+            renderGaming();
+            
+            document.getElementById('contactLocation').value = currentContent.contact.location;
+            document.getElementById('contactPhone').value = currentContent.contact.phone;
+            document.getElementById('contactEmail').value = currentContent.contact.email;
+        }
+
+        function renderSkills() {
+            const techContainer = document.getElementById('techSkills');
+            techContainer.innerHTML = '';
+            currentContent.skills.technical.forEach((skill, i) => {
+                techContainer.innerHTML += `<div class="skill-item" style="margin-bottom:15px;"><input type="text" class="form-control" value="${skill.name}" placeholder="Name" style="margin-bottom:5px;"><input type="number" class="form-control" value="${skill.percent}" placeholder="Percent"><button onclick="removeSkill('technical', ${i})" style="background:#ff4757; color:white; border:none; padding:5px 10px; margin-top:5px; border-radius:5px; cursor:pointer;">Delete</button></div>`;
+            });
+            
+            const devContainer = document.getElementById('devSkills');
+            devContainer.innerHTML = '';
+            currentContent.skills.development.forEach((skill, i) => {
+                devContainer.innerHTML += `<div class="skill-item" style="margin-bottom:15px;"><input type="text" class="form-control" value="${skill.name}" placeholder="Name" style="margin-bottom:5px;"><input type="number" class="form-control" value="${skill.percent}" placeholder="Percent"><button onclick="removeSkill('development', ${i})" style="background:#ff4757; color:white; border:none; padding:5px 10px; margin-top:5px; border-radius:5px; cursor:pointer;">Delete</button></div>`;
+            });
+        }
+
+        function renderServices() {
+            const container = document.getElementById('servicesList');
+            container.innerHTML = '';
+            currentContent.services.forEach((service, i) => {
+                container.innerHTML += `<div style="margin-bottom:20px; padding:15px; background:rgba(255,255,255,0.05); border-radius:10px;"><input type="text" class="form-control" value="${service.icon}" placeholder="Icon" style="margin-bottom:5px;"><input type="text" class="form-control" value="${service.title}" placeholder="Title" style="margin-bottom:5px;"><textarea class="form-control" placeholder="Description" rows="2">${service.desc}</textarea><button onclick="removeService(${i})" style="background:#ff4757; color:white; border:none; padding:5px 10px; margin-top:5px; border-radius:5px; cursor:pointer;">Delete</button></div>`;
+            });
+        }
+
+        function renderPortfolio() {
+            const container = document.getElementById('portfolioList');
+            container.innerHTML = '';
+            currentContent.portfolio.forEach((item, i) => {
+                container.innerHTML += `<div style="margin-bottom:20px; padding:15px; background:rgba(255,255,255,0.05); border-radius:10px;"><input type="text" class="form-control" value="${item.image}" placeholder="Image Path" style="margin-bottom:5px;"><input type="text" class="form-control" value="${item.title}" placeholder="Title" style="margin-bottom:5px;"><input type="text" class="form-control" value="${item.desc}" placeholder="Description" style="margin-bottom:5px;"><select class="form-control" style="margin-bottom:5px;"><option value="hardware" ${item.category==='hardware'?'selected':''}>Hardware</option><option value="web" ${item.category==='web'?'selected':''}>Web</option><option value="repair" ${item.category==='repair'?'selected':''}>Repair</option></select><input type="text" class="form-control" value="${item.tags.join(', ')}" placeholder="Tags (comma separated)"><button onclick="removePortfolio(${i})" style="background:#ff4757; color:white; border:none; padding:5px 10px; margin-top:5px; border-radius:5px; cursor:pointer;">Delete</button></div>`;
+            });
+        }
+
+        function renderGaming() {
+            const statsContainer = document.getElementById('gamingStats');
+            statsContainer.innerHTML = '';
+            currentContent.gaming.stats.forEach((stat, i) => {
+                statsContainer.innerHTML += `<div style="margin-bottom:15px;"><input type="text" class="form-control" value="${stat.icon}" placeholder="Icon" style="margin-bottom:5px;"><input type="text" class="form-control" value="${stat.value}" placeholder="Value" style="margin-bottom:5px;"><input type="text" class="form-control" value="${stat.label}" placeholder="Label"><button onclick="removeGamingStat(${i})" style="background:#ff4757; color:white; border:none; padding:5px 10px; margin-top:5px; border-radius:5px; cursor:pointer;">Delete</button></div>`;
+            });
+            
+            const setupContainer = document.getElementById('gamingSetup');
+            setupContainer.innerHTML = '';
+            currentContent.gaming.setup.forEach((item, i) => {
+                setupContainer.innerHTML += `<div style="margin-bottom:15px;"><input type="text" class="form-control" value="${item.label}" placeholder="Label" style="margin-bottom:5px;"><input type="text" class="form-control" value="${item.value}" placeholder="Value"><button onclick="removeGamingSetup(${i})" style="background:#ff4757; color:white; border:none; padding:5px 10px; margin-top:5px; border-radius:5px; cursor:pointer;">Delete</button></div>`;
+            });
+            
+            const gamesContainer = document.getElementById('gamesList');
+            gamesContainer.innerHTML = '';
+            currentContent.gaming.games.forEach((game, i) => {
+                gamesContainer.innerHTML += `<div style="margin-bottom:15px;"><input type="text" class="form-control" value="${game.icon}" placeholder="Icon" style="margin-bottom:5px;"><input type="text" class="form-control" value="${game.name}" placeholder="Game Name"><button onclick="removeGame(${i})" style="background:#ff4757; color:white; border:none; padding:5px 10px; margin-top:5px; border-radius:5px; cursor:pointer;">Delete</button></div>`;
+            });
+        }
+
+        // Save Functions
+        function saveAll() {
+            currentContent.hero = {
+                badge: document.getElementById('heroBadge').value,
+                title: document.getElementById('heroTitle').value,
+                description: document.getElementById('heroDesc').value,
+                stats: [
+                    { value: document.getElementById('stat1Value').value, label: document.getElementById('stat1Label').value },
+                    { value: document.getElementById('stat2Value').value, label: document.getElementById('stat2Label').value },
+                    { value: document.getElementById('stat3Value').value, label: document.getElementById('stat3Label').value }
+                ]
+            };
+            
+            currentContent.about = {
+                subtitle: document.getElementById('aboutSubtitle').value,
+                desc1: document.getElementById('aboutDesc1').value,
+                desc2: document.getElementById('aboutDesc2').value,
+                stats: [
+                    parseInt(document.getElementById('aboutStat1').value) || 0,
+                    parseInt(document.getElementById('aboutStat2').value) || 0,
+                    parseInt(document.getElementById('aboutStat3').value) || 0
+                ]
+            };
+            
+            // Save skills from DOM
+            const techSkills = [];
+            document.querySelectorAll('#techSkills .skill-item').forEach(item => {
+                const inputs = item.querySelectorAll('input');
+                techSkills.push({ name: inputs[0].value, percent: parseInt(inputs[1].value) || 0 });
+            });
+            if (techSkills.length) currentContent.skills.technical = techSkills;
+            
+            const devSkills = [];
+            document.querySelectorAll('#devSkills .skill-item').forEach(item => {
+                const inputs = item.querySelectorAll('input');
+                devSkills.push({ name: inputs[0].value, percent: parseInt(inputs[1].value) || 0 });
+            });
+            if (devSkills.length) currentContent.skills.development = devSkills;
+            
+            // Save services from DOM
+            const services = [];
+            document.querySelectorAll('#servicesList > div').forEach(div => {
+                const inputs = div.querySelectorAll('input, textarea');
+                if (inputs.length >= 3) {
+                    services.push({ icon: inputs[0].value, title: inputs[1].value, desc: inputs[2].value });
+                }
+            });
+            if (services.length) currentContent.services = services;
+            
+            // Save portfolio from DOM
+            const portfolio = [];
+            document.querySelectorAll('#portfolioList > div').forEach(div => {
+                const inputs = div.querySelectorAll('input, select');
+                if (inputs.length >= 5) {
+                    portfolio.push({
+                        image: inputs[0].value,
+                        title: inputs[1].value,
+                        desc: inputs[2].value,
+                        category: inputs[3].value,
+                        tags: inputs[4].value.split(',').map(t => t.trim())
+                    });
+                }
+            });
+            if (portfolio.length) currentContent.portfolio = portfolio;
+            
+            // Save gaming from DOM
+            const gamingStats = [];
+            document.querySelectorAll('#gamingStats > div').forEach(div => {
+                const inputs = div.querySelectorAll('input');
+                if (inputs.length >= 3) {
+                    gamingStats.push({ icon: inputs[0].value, value: inputs[1].value, label: inputs[2].value });
+                }
+            });
+            if (gamingStats.length) currentContent.gaming.stats = gamingStats;
+            
+            const gamingSetup = [];
+            document.querySelectorAll('#gamingSetup > div').forEach(div => {
+                const inputs = div.querySelectorAll('input');
+                if (inputs.length >= 2) {
+                    gamingSetup.push({ label: inputs[0].value, value: inputs[1].value });
+                }
+            });
+            if (gamingSetup.length) currentContent.gaming.setup = gamingSetup;
+            
+            const games = [];
+            document.querySelectorAll('#gamesList > div').forEach(div => {
+                const inputs = div.querySelectorAll('input');
+                if (inputs.length >= 2) {
+                    games.push({ icon: inputs[0].value, name: inputs[1].value });
+                }
+            });
+            if (games.length) currentContent.gaming.games = games;
+            
+            currentContent.contact = {
+                location: document.getElementById('contactLocation').value,
+                phone: document.getElementById('contactPhone').value,
+                email: document.getElementById('contactEmail').value
+            };
+            
+            localStorage.setItem('portfolio_content', JSON.stringify(currentContent));
+            showNotification('All changes saved! Content updated on main site.', 'success');
+        }
+
+        function showNotification(msg, type) {
+            const notif = document.createElement('div');
+            notif.className = `notification ${type}`;
+            notif.innerHTML = `<i class="fas ${type==='success'?'fa-check-circle':type==='error'?'fa-exclamation-circle':'fa-info-circle'}"></i> ${msg}`;
+            document.body.appendChild(notif);
+            setTimeout(() => notif.remove(), 3000);
+        }
+
+        // Add/Remove Functions
+        window.addTechSkill = () => { currentContent.skills.technical.push({ name: 'New Skill', percent: 50 }); renderSkills(); };
+        window.addDevSkill = () => { currentContent.skills.development.push({ name: 'New Skill', percent: 50 }); renderSkills(); };
+        window.removeSkill = (type, index) => { currentContent.skills[type].splice(index, 1); renderSkills(); };
+        window.addService = () => { currentContent.services.push({ icon: 'fa-plus', title: 'New Service', desc: 'Service description here' }); renderServices(); };
+        window.removeService = (index) => { currentContent.services.splice(index, 1); renderServices(); };
+        window.addPortfolio = () => { currentContent.portfolio.push({ title: 'New Project', desc: 'Project description', category: 'hardware', image: 'images/work1.jpg', tags: ['New'] }); renderPortfolio(); };
+        window.removePortfolio = (index) => { currentContent.portfolio.splice(index, 1); renderPortfolio(); };
+        window.addGamingStat = () => { currentContent.gaming.stats.push({ icon: 'fa-gamepad', value: '0', label: 'New Stat' }); renderGaming(); };
+        window.removeGamingStat = (index) => { currentContent.gaming.stats.splice(index, 1); renderGaming(); };
+        window.addGamingSetup = () => { currentContent.gaming.setup.push({ label: 'New Item', value: 'Value' }); renderGaming(); };
+        window.removeGamingSetup = (index) => { currentContent.gaming.setup.splice(index, 1); renderGaming(); };
+        window.addGame = () => { currentContent.gaming.games.push({ icon: 'fa-gamepad', name: 'New Game' }); renderGaming(); };
+        window.removeGame = (index) => { currentContent.gaming.games.splice(index, 1); renderGaming(); };
+        
+        document.getElementById('saveBtn').addEventListener('click', saveAll);
+        document.getElementById('saveAllBtn').addEventListener('click', saveAll);
+    </script>
 </body>
 </html>
