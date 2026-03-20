@@ -19,33 +19,100 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Login Modal -->
-    <div class="login-modal" id="loginModal">
-        <div class="modal-content">
-            <span class="close-modal" id="closeModal">&times;</span>
-            <div class="modal-header">
-                <i class="fas fa-user-astronaut"></i>
-                <h2>Welcome Back</h2>
-                <p>Login to access exclusive content</p>
-            </div>
-            <form id="loginForm">
-                <div class="input-group">
-                    <i class="fas fa-envelope"></i>
-                    <input type="email" placeholder="Email Address" required>
-                </div>
-                <div class="input-group">
-                    <i class="fas fa-lock"></i>
-                    <input type="password" placeholder="Password" required>
-                </div>
-                <button type="submit" class="login-btn">
-                    <i class="fas fa-rocket"></i> Launch Access
-                </button>
-                <div class="demo-cred">
-                    <p>Demo: demo@example.com / any password</p>
-                </div>
-            </form>
-        </div>
+    <!-- Simple Login Modal -->
+<style>
+    .simple-login-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.8);
+        z-index: 10000;
+        align-items: center;
+        justify-content: center;
+    }
+    .simple-login-box {
+        background: #111;
+        padding: 40px;
+        border-radius: 20px;
+        width: 350px;
+        text-align: center;
+        border: 1px solid #667eea;
+    }
+    .simple-login-box input {
+        width: 100%;
+        padding: 12px;
+        margin: 10px 0;
+        background: #222;
+        border: 1px solid #333;
+        border-radius: 8px;
+        color: white;
+    }
+    .simple-login-box button {
+        width: 100%;
+        padding: 12px;
+        background: #667eea;
+        border: none;
+        border-radius: 8px;
+        color: white;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+    .simple-login-box button:hover {
+        background: #5a67d8;
+    }
+    .close-modal {
+        float: right;
+        font-size: 24px;
+        cursor: pointer;
+        color: white;
+    }
+</style>
+
+<div class="simple-login-modal" id="simpleLoginModal">
+    <div class="simple-login-box">
+        <span class="close-modal" onclick="closeLoginModal()">&times;</span>
+        <i class="fas fa-user-astronaut" style="font-size: 50px; color: #667eea; margin-bottom: 20px;"></i>
+        <h2>WELCOME BACK</h2>
+        <p>Login to access exclusive content</p>
+        <input type="text" id="modalUsername" placeholder="Username">
+        <input type="password" id="modalPassword" placeholder="Password">
+        <button onclick="checkLogin()">Launch Access</button>
+        <p style="margin-top: 15px; font-size: 12px;">Demo: admin / admin123</p>
     </div>
+</div>
+
+<script>
+    function showLoginModal() {
+        document.getElementById('simpleLoginModal').style.display = 'flex';
+    }
+    
+    function closeLoginModal() {
+        document.getElementById('simpleLoginModal').style.display = 'none';
+    }
+    
+    function checkLogin() {
+        const user = document.getElementById('modalUsername').value;
+        const pass = document.getElementById('modalPassword').value;
+        
+        if (user === 'admin' && pass === 'admin123') {
+            alert('Login successful! Welcome Admin!');
+            closeLoginModal();
+        } else {
+            alert('Invalid credentials! Use: admin / admin123');
+        }
+    }
+    
+    // Add click event to the astronaut icon
+    document.addEventListener('DOMContentLoaded', function() {
+        const loginIcon = document.getElementById('loginIcon');
+        if (loginIcon) {
+            loginIcon.onclick = showLoginModal;
+        }
+    });
+</script>
 
     <!-- Header -->
     <header class="header">
