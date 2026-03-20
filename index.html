@@ -17,102 +17,141 @@
     
     <!-- Main CSS -->
     <link rel="stylesheet" href="style.css">
+    
+    <style>
+        /* Simple Login Modal Styles */
+        .simple-login-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+        .simple-login-box {
+            background: #11111a;
+            padding: 40px;
+            border-radius: 20px;
+            width: 380px;
+            text-align: center;
+            border: 1px solid #6c5ce7;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            animation: fadeInUp 0.3s ease;
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .simple-login-box .close-modal {
+            float: right;
+            font-size: 28px;
+            cursor: pointer;
+            color: #888;
+            transition: color 0.3s;
+        }
+        .simple-login-box .close-modal:hover {
+            color: #ff4757;
+        }
+        .simple-login-box i {
+            font-size: 60px;
+            background: linear-gradient(135deg, #6c5ce7, #00cec9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+        .simple-login-box h2 {
+            color: white;
+            margin-bottom: 10px;
+        }
+        .simple-login-box p {
+            color: #888;
+            margin-bottom: 20px;
+        }
+        .simple-login-box input {
+            width: 100%;
+            padding: 14px;
+            margin: 10px 0;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(108,92,231,0.3);
+            border-radius: 10px;
+            color: white;
+            font-size: 15px;
+        }
+        .simple-login-box input:focus {
+            outline: none;
+            border-color: #6c5ce7;
+        }
+        .simple-login-box button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #6c5ce7, #00cec9);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: transform 0.3s;
+        }
+        .simple-login-box button:hover {
+            transform: translateY(-2px);
+        }
+        .demo-text {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 12px;
+            color: #666;
+        }
+        .demo-text strong {
+            color: #6c5ce7;
+        }
+        .admin-link {
+            margin-top: 10px;
+            font-size: 12px;
+        }
+        .admin-link a {
+            color: #6c5ce7;
+            text-decoration: none;
+        }
+        .admin-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-    <!-- Simple Login Modal -->
-<style>
-    .simple-login-modal {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0,0,0,0.8);
-        z-index: 10000;
-        align-items: center;
-        justify-content: center;
-    }
-    .simple-login-box {
-        background: #111;
-        padding: 40px;
-        border-radius: 20px;
-        width: 350px;
-        text-align: center;
-        border: 1px solid #667eea;
-    }
-    .simple-login-box input {
-        width: 100%;
-        padding: 12px;
-        margin: 10px 0;
-        background: #222;
-        border: 1px solid #333;
-        border-radius: 8px;
-        color: white;
-    }
-    .simple-login-box button {
-        width: 100%;
-        padding: 12px;
-        background: #667eea;
-        border: none;
-        border-radius: 8px;
-        color: white;
-        cursor: pointer;
-        margin-top: 10px;
-    }
-    .simple-login-box button:hover {
-        background: #5a67d8;
-    }
-    .close-modal {
-        float: right;
-        font-size: 24px;
-        cursor: pointer;
-        color: white;
-    }
-</style>
-
-<div class="simple-login-modal" id="simpleLoginModal">
-    <div class="simple-login-box">
-        <span class="close-modal" onclick="closeLoginModal()">&times;</span>
-        <i class="fas fa-user-astronaut" style="font-size: 50px; color: #667eea; margin-bottom: 20px;"></i>
-        <h2>WELCOME BACK</h2>
-        <p>Login to access exclusive content</p>
-        <input type="text" id="modalUsername" placeholder="Username">
-        <input type="password" id="modalPassword" placeholder="Password">
-        <button onclick="checkLogin()">Launch Access</button>
-        <p style="margin-top: 15px; font-size: 12px;">Demo: admin / admin123</p>
+    <!-- Login Modal -->
+    <div class="simple-login-modal" id="simpleLoginModal">
+        <div class="simple-login-box">
+            <span class="close-modal" onclick="closeLoginModal()">&times;</span>
+            <i class="fas fa-user-astronaut"></i>
+            <h2>WELCOME BACK</h2>
+            <p>Login to access exclusive content</p>
+            <input type="text" id="modalUsername" placeholder="Username">
+            <input type="password" id="modalPassword" placeholder="Password">
+            <button onclick="checkLogin()">
+                <i class="fas fa-rocket"></i> Launch Access
+            </button>
+            <div class="demo-text">
+                🔐 Demo: <strong>admin</strong> / <strong>admin123</strong>
+            </div>
+            <div class="admin-link">
+                <i class="fas fa-crown"></i> <a href="admin/dashboard.html">Go to Admin Dashboard</a> to edit content
+            </div>
+        </div>
     </div>
-</div>
-
-<script>
-    function showLoginModal() {
-        document.getElementById('simpleLoginModal').style.display = 'flex';
-    }
-    
-    function closeLoginModal() {
-        document.getElementById('simpleLoginModal').style.display = 'none';
-    }
-    
-    function checkLogin() {
-        const user = document.getElementById('modalUsername').value;
-        const pass = document.getElementById('modalPassword').value;
-        
-        if (user === 'admin' && pass === 'admin123') {
-            alert('Login successful! Welcome Admin!');
-            closeLoginModal();
-        } else {
-            alert('Invalid credentials! Use: admin / admin123');
-        }
-    }
-    
-    // Add click event to the astronaut icon
-    document.addEventListener('DOMContentLoaded', function() {
-        const loginIcon = document.getElementById('loginIcon');
-        if (loginIcon) {
-            loginIcon.onclick = showLoginModal;
-        }
-    });
-</script>
 
     <!-- Header -->
     <header class="header">
@@ -133,7 +172,7 @@
                     <li><a href="#skills">SKILLS</a></li>
                     <li><a href="#services">SERVICES</a></li>
                     <li><a href="#portfolio">PORTFOLIO</a></li>
-                    <li><a href="#gaming" id="gamingTab">GAMING</a></li>
+                    <li><a href="#gaming">GAMING</a></li>
                     <li><a href="#contact">CONTACT</a></li>
                     <li>
                         <button class="login-icon" id="loginIcon">
@@ -518,35 +557,6 @@
         </div>
     </section>
 
-    <!-- Login Modal -->
-<div class="login-modal" id="loginModal">
-    <div class="modal-content">
-        <span class="close-modal" id="closeModal">&times;</span>
-        <div class="modal-header">
-            <i class="fas fa-user-astronaut"></i>
-            <h2>WELCOME BACK</h2>
-            <p>Login to access exclusive content</p>
-        </div>
-        <form id="loginForm">
-            <div class="input-group">
-                <i class="fas fa-user"></i>
-                <input type="text" id="loginUsername" placeholder="Username" required>
-            </div>
-            <div class="input-group">
-                <i class="fas fa-lock"></i>
-                <input type="password" id="loginPassword" placeholder="Password" required>
-            </div>
-            <button type="submit" class="login-btn">
-                <i class="fas fa-rocket"></i> Launch Access
-            </button>
-            <div class="demo-cred">
-                <p>🔐 Demo: <strong>admin</strong> / <strong>admin123</strong></p>
-                <p style="font-size: 12px; margin-top: 10px;">⬅️ Go to <a href="admin/dashboard.html" style="color: #6c5ce7;">Admin Dashboard</a> to edit content</p>
-            </div>
-        </form>
-    </div>
-</div>
-
     <!-- Contact Section -->
     <section class="section" id="contact">
         <div class="container">
@@ -673,7 +683,70 @@
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="script.js"></script>
     
-    <!-- Dynamic Content Loader - Connects with Admin Dashboard -->
+    <!-- Login Modal Script -->
+    <script>
+        // Login Modal Functions
+        function showLoginModal() {
+            document.getElementById('simpleLoginModal').style.display = 'flex';
+        }
+        
+        function closeLoginModal() {
+            document.getElementById('simpleLoginModal').style.display = 'none';
+        }
+        
+        function checkLogin() {
+            const username = document.getElementById('modalUsername').value;
+            const password = document.getElementById('modalPassword').value;
+            
+            if (username === 'admin' && password === 'admin123') {
+                alert('✅ Login successful! Welcome Admin!\n\nYou can now manage content from the Admin Dashboard.');
+                closeLoginModal();
+                document.getElementById('modalUsername').value = '';
+                document.getElementById('modalPassword').value = '';
+            } else {
+                alert('❌ Invalid credentials!\n\nDemo: admin / admin123');
+            }
+        }
+        
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('simpleLoginModal');
+            if (event.target === modal) {
+                closeLoginModal();
+            }
+        }
+        
+        // Add click event to astronaut icon when DOM loads
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginIcon = document.getElementById('loginIcon');
+            if (loginIcon) {
+                loginIcon.onclick = showLoginModal;
+            }
+        });
+        
+        // Enter key submit
+        document.addEventListener('DOMContentLoaded', function() {
+            const passwordInput = document.getElementById('modalPassword');
+            if (passwordInput) {
+                passwordInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        checkLogin();
+                    }
+                });
+            }
+            
+            const usernameInput = document.getElementById('modalUsername');
+            if (usernameInput) {
+                usernameInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        checkLogin();
+                    }
+                });
+            }
+        });
+    </script>
+    
+    <!-- Dynamic Content Loader -->
     <script>
         // Load dynamic content from localStorage (saved by admin dashboard)
         function loadDynamicContent() {
@@ -688,17 +761,14 @@
                         if (heroBadge && content.hero.badge) {
                             heroBadge.innerHTML = `<i class="fas fa-bolt"></i> ${content.hero.badge}`;
                         }
-                        
                         const heroTitle = document.getElementById('heroTitle');
                         if (heroTitle && content.hero.title) {
                             heroTitle.innerHTML = content.hero.title.replace(/\n/g, '<br>');
                         }
-                        
                         const heroDesc = document.getElementById('heroDesc');
-                        if (heroDesc && content.hero.description) {
-                            heroDesc.textContent = content.hero.description;
+                        if (heroDesc && content.hero.desc) {
+                            heroDesc.textContent = content.hero.desc;
                         }
-                        
                         const heroStats = document.getElementById('heroStats');
                         if (heroStats && content.hero.stats && content.hero.stats.length >= 3) {
                             const stats = heroStats.querySelectorAll('.stat');
@@ -713,229 +783,18 @@
                         }
                     }
                     
-                    // Update About Section
-                    if (content.about) {
-                        const aboutSubtitle = document.getElementById('aboutSubtitle');
-                        if (aboutSubtitle && content.about.subtitle) {
-                            aboutSubtitle.innerHTML = content.about.subtitle;
-                        }
-                        
-                        const aboutDesc1 = document.getElementById('aboutDesc1');
-                        if (aboutDesc1 && content.about.description1) {
-                            aboutDesc1.textContent = content.about.description1;
-                        }
-                        
-                        const aboutDesc2 = document.getElementById('aboutDesc2');
-                        if (aboutDesc2 && content.about.description2) {
-                            aboutDesc2.textContent = content.about.description2;
-                        }
-                        
-                        const aboutStats = document.getElementById('aboutStats');
-                        if (aboutStats && content.about.stats && content.about.stats.length >= 3) {
-                            const stats = aboutStats.querySelectorAll('.stat-item');
-                            stats.forEach((stat, i) => {
-                                if (content.about.stats[i]) {
-                                    const numberSpan = stat.querySelector('.stat-number');
-                                    const labelSpan = stat.querySelector('.stat-label');
-                                    if (numberSpan) {
-                                        numberSpan.textContent = content.about.stats[i].value;
-                                        numberSpan.setAttribute('data-count', content.about.stats[i].value);
-                                    }
-                                    if (labelSpan) labelSpan.textContent = content.about.stats[i].label;
-                                }
-                            });
-                        }
-                    }
-                    
-                    // Update Skills Section
-                    if (content.skills) {
-                        // Technical Skills
-                        const techContainer = document.getElementById('technicalSkills');
-                        if (techContainer && content.skills.technical && content.skills.technical.length > 0) {
-                            techContainer.innerHTML = '';
-                            content.skills.technical.forEach(skill => {
-                                const skillHtml = `
-                                    <div class="skill-item">
-                                        <div class="skill-header">
-                                            <span class="skill-name">${skill.name}</span>
-                                            <span class="skill-percent">${skill.percent}%</span>
-                                        </div>
-                                        <div class="skill-bar">
-                                            <div class="skill-progress" data-width="${skill.percent}" style="width: ${skill.percent}%"></div>
-                                        </div>
-                                    </div>
-                                `;
-                                techContainer.innerHTML += skillHtml;
-                            });
-                        }
-                        
-                        // Development Skills
-                        const devContainer = document.getElementById('devSkills');
-                        if (devContainer && content.skills.development && content.skills.development.length > 0) {
-                            devContainer.innerHTML = '';
-                            content.skills.development.forEach(skill => {
-                                const skillHtml = `
-                                    <div class="skill-item">
-                                        <div class="skill-header">
-                                            <span class="skill-name">${skill.name}</span>
-                                            <span class="skill-percent">${skill.percent}%</span>
-                                        </div>
-                                        <div class="skill-bar">
-                                            <div class="skill-progress" data-width="${skill.percent}" style="width: ${skill.percent}%"></div>
-                                        </div>
-                                    </div>
-                                `;
-                                devContainer.innerHTML += skillHtml;
-                            });
-                        }
-                    }
-                    
-                    // Update Services Section
-                    if (content.services && content.services.length > 0) {
-                        const servicesGrid = document.getElementById('servicesGrid');
-                        if (servicesGrid) {
-                            servicesGrid.innerHTML = '';
-                            content.services.forEach((service, index) => {
-                                const delay = index * 100;
-                                const serviceHtml = `
-                                    <div class="service-card" data-aos="zoom-in" data-aos-delay="${delay}">
-                                        <div class="service-icon">
-                                            <i class="fas ${service.icon}"></i>
-                                        </div>
-                                        <h3>${service.title}</h3>
-                                        <p>${service.description}</p>
-                                    </div>
-                                `;
-                                servicesGrid.innerHTML += serviceHtml;
-                            });
-                            
-                            // Re-initialize AOS for new elements
-                            AOS.refresh();
-                        }
-                    }
-                    
-                    // Update Portfolio Section
-                    if (content.portfolio && content.portfolio.length > 0) {
-                        const portfolioGrid = document.getElementById('portfolioGrid');
-                        if (portfolioGrid) {
-                            portfolioGrid.innerHTML = '';
-                            content.portfolio.forEach(item => {
-                                const tagsHtml = item.tags.map(tag => `<span class="tag">${tag}</span>`).join('');
-                                const portfolioHtml = `
-                                    <div class="portfolio-item" data-category="${item.category}">
-                                        <div class="portfolio-img">
-                                            <img src="${item.image}" alt="${item.title}">
-                                        </div>
-                                        <div class="portfolio-info">
-                                            <h3>${item.title}</h3>
-                                            <p>${item.description}</p>
-                                            <div class="portfolio-tags">
-                                                ${tagsHtml}
-                                            </div>
-                                        </div>
-                                    </div>
-                                `;
-                                portfolioGrid.innerHTML += portfolioHtml;
-                            });
-                            
-                            // Re-initialize portfolio filter if needed
-                            if (typeof initPortfolioFilter === 'function') {
-                                initPortfolioFilter();
-                            }
-                        }
-                    }
-                    
-                    // Update Gaming Section
-                    if (content.gaming) {
-                        // Gaming Stats
-                        const gamingStats = document.getElementById('gamingStats');
-                        if (gamingStats && content.gaming.stats && content.gaming.stats.length > 0) {
-                            gamingStats.innerHTML = '';
-                            content.gaming.stats.forEach(stat => {
-                                const statHtml = `
-                                    <div class="gaming-stat-card">
-                                        <i class="fas ${stat.icon}"></i>
-                                        <span class="stat-value">${stat.value}</span>
-                                        <span class="stat-label">${stat.label}</span>
-                                    </div>
-                                `;
-                                gamingStats.innerHTML += statHtml;
-                            });
-                        }
-                        
-                        // Gaming Setup
-                        const gamingSetup = document.getElementById('gamingSetup');
-                        if (gamingSetup && content.gaming.setup && content.gaming.setup.length > 0) {
-                            const setupList = gamingSetup.querySelector('.setup-list');
-                            if (setupList) {
-                                setupList.innerHTML = '';
-                                content.gaming.setup.forEach(item => {
-                                    const setupHtml = `
-                                        <div class="setup-item">
-                                            <span class="setup-label">${item.label}:</span>
-                                            <span>${item.value}</span>
-                                        </div>
-                                    `;
-                                    setupList.innerHTML += setupHtml;
-                                });
-                            }
-                        }
-                        
-                        // Featured Games
-                        const featuredGames = document.getElementById('featuredGames');
-                        if (featuredGames && content.gaming.games && content.gaming.games.length > 0) {
-                            const gamesGrid = featuredGames.querySelector('.games-grid');
-                            if (gamesGrid) {
-                                gamesGrid.innerHTML = '';
-                                content.gaming.games.forEach(game => {
-                                    const gameHtml = `
-                                        <div class="game-card">
-                                            <i class="fas ${game.icon}"></i>
-                                            <span>${game.name}</span>
-                                        </div>
-                                    `;
-                                    gamesGrid.innerHTML += gameHtml;
-                                });
-                            }
-                        }
-                    }
-                    
-                    // Update Contact Section
-                    if (content.contact) {
-                        const contactInfo = document.getElementById('contactInfo');
-                        if (contactInfo) {
-                            const cards = contactInfo.querySelectorAll('.info-card');
-                            if (cards.length >= 3) {
-                                const locationP = cards[0].querySelector('.info-content p');
-                                const phoneLink = cards[1].querySelector('.info-content a');
-                                const emailLink = cards[2].querySelector('.info-content a');
-                                
-                                if (locationP && content.contact.location) locationP.textContent = content.contact.location;
-                                if (phoneLink && content.contact.phone) phoneLink.textContent = content.contact.phone;
-                                if (emailLink && content.contact.email) emailLink.textContent = content.contact.email;
-                            }
-                        }
-                    }
-                    
                     console.log('Dynamic content loaded successfully!');
                 } catch (e) {
-                    console.error('Error loading dynamic content:', e);
+                    console.log('Error loading content:', e);
                 }
-            } else {
-                console.log('No saved content found. Using default values.');
             }
         }
         
-        // Load content when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            loadDynamicContent();
-        });
+        document.addEventListener('DOMContentLoaded', loadDynamicContent);
         
-        // Also listen for storage changes (when admin dashboard saves)
+        // Listen for storage changes
         window.addEventListener('storage', function(e) {
             if (e.key === 'portfolio_content') {
-                console.log('Content updated in another tab, reloading...');
-                loadDynamicContent();
                 location.reload();
             }
         });
