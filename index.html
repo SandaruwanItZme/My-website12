@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Janaka Heshan | Neo Portfolio</title>
+    <title>Janaka Heshan | Portfolio</title>
     <meta name="description" content="Computer Hardware Technician & Web Developer - Gaming & Tech Portfolio">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -85,14 +88,18 @@
         <div class="hero-bg-gradient"></div>
         <div class="container hero-content">
             <div class="hero-text" data-aos="fade-up">
-                <div class="hero-badge">
+                <div class="hero-badge" id="heroBadge">
                     <i class="fas fa-bolt"></i> DIGITAL ARTISAN
                 </div>
-                <h1>
+                <h1 id="heroTitle">
                     DISCOVER DIGITAL ART<br>
                     AND <span class="highlight">COLLECT NPTS</span>
                 </h1>
-                <div class="hero-stats">
+                <p id="heroDesc">
+                    Passionate Computer Hardware Technician & Web Developer with expertise in system troubleshooting, 
+                    hardware repair, and modern web development.
+                </p>
+                <div class="hero-stats" id="heroStats">
                     <div class="stat">
                         <span class="stat-value">27K+</span>
                         <span class="stat-label">ARTISTS</span>
@@ -137,18 +144,18 @@
                     <img src="images/img1.jpg" alt="About Janaka Heshan">
                 </div>
                 <div class="about-text" data-aos="fade-left">
-                    <h3>Computer Hardware Technician & <span class="highlight">Developer</span></h3>
-                    <p>
+                    <h3 id="aboutSubtitle">Computer Hardware Technician & <span class="highlight">Developer</span></h3>
+                    <p id="aboutDesc1">
                         I am a dedicated Computer Hardware Technician with hands-on experience in diagnosing, 
                         assembling, and maintaining computer systems. My expertise extends to component-level 
                         repair and system optimization.
                     </p>
-                    <p>
+                    <p id="aboutDesc2">
                         With a foundation in web development, I combine technical hardware knowledge with 
                         modern programming skills to deliver complete technical solutions.
                     </p>
                     
-                    <div class="stats">
+                    <div class="stats" id="aboutStats">
                         <div class="stat-item">
                             <span class="stat-number" data-count="50">0</span>
                             <span class="stat-label">Projects</span>
@@ -182,62 +189,66 @@
             <div class="skills-content">
                 <div class="skills-category" data-aos="fade-right">
                     <h3>Technical Skills</h3>
-                    <div class="skill-item">
-                        <div class="skill-header">
-                            <span class="skill-name">Computer Hardware</span>
-                            <span class="skill-percent">90%</span>
+                    <div id="technicalSkills">
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span class="skill-name">Computer Hardware</span>
+                                <span class="skill-percent">90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="90"></div>
+                            </div>
                         </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-width="90"></div>
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span class="skill-name">Troubleshooting</span>
+                                <span class="skill-percent">85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="85"></div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-header">
-                            <span class="skill-name">Troubleshooting</span>
-                            <span class="skill-percent">85%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-width="85"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-header">
-                            <span class="skill-name">System Maintenance</span>
-                            <span class="skill-percent">80%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-width="80"></div>
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span class="skill-name">System Maintenance</span>
+                                <span class="skill-percent">80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="80"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 
                 <div class="skills-category" data-aos="fade-left">
                     <h3>Development Skills</h3>
-                    <div class="skill-item">
-                        <div class="skill-header">
-                            <span class="skill-name">HTML/CSS</span>
-                            <span class="skill-percent">85%</span>
+                    <div id="devSkills">
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span class="skill-name">HTML/CSS</span>
+                                <span class="skill-percent">85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="85"></div>
+                            </div>
                         </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-width="85"></div>
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span class="skill-name">JavaScript</span>
+                                <span class="skill-percent">60%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="60"></div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-header">
-                            <span class="skill-name">JavaScript</span>
-                            <span class="skill-percent">60%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-width="60"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-header">
-                            <span class="skill-name">Responsive Design</span>
-                            <span class="skill-percent">80%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-width="80"></div>
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span class="skill-name">Responsive Design</span>
+                                <span class="skill-percent">80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="80"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -253,7 +264,7 @@
                 <p>Professional services I offer to clients</p>
             </div>
             
-            <div class="services-grid">
+            <div class="services-grid" id="servicesGrid">
                 <div class="service-card" data-aos="zoom-in">
                     <div class="service-icon">
                         <i class="fas fa-tools"></i>
@@ -296,7 +307,7 @@
                 <button class="filter-btn" data-filter="repair">Repair</button>
             </div>
             
-            <div class="portfolio-grid">
+            <div class="portfolio-grid" id="portfolioGrid">
                 <div class="portfolio-item" data-category="hardware">
                     <div class="portfolio-img">
                         <img src="images/work1.jpg" alt="PC Assembly">
@@ -342,7 +353,7 @@
         </div>
     </section>
 
-    <!-- GAMING SECTION (New Tab) -->
+    <!-- GAMING SECTION -->
     <section class="section gaming-section" id="gaming">
         <div class="container">
             <div class="section-title" data-aos="fade-up">
@@ -352,7 +363,7 @@
             
             <div class="gaming-content">
                 <!-- Gaming Stats -->
-                <div class="gaming-stats" data-aos="fade-up">
+                <div class="gaming-stats" id="gamingStats">
                     <div class="gaming-stat-card">
                         <i class="fas fa-trophy"></i>
                         <span class="stat-value">156</span>
@@ -376,7 +387,7 @@
                 </div>
                 
                 <!-- Gaming Setup -->
-                <div class="gaming-setup" data-aos="fade-right">
+                <div class="gaming-setup" id="gamingSetup">
                     <h3><i class="fas fa-desktop"></i> Gaming Setup</h3>
                     <div class="setup-list">
                         <div class="setup-item">
@@ -403,7 +414,7 @@
                 </div>
                 
                 <!-- Featured Games -->
-                <div class="featured-games" data-aos="fade-left">
+                <div class="featured-games" id="featuredGames">
                     <h3><i class="fas fa-gamepad"></i> Featured Games</h3>
                     <div class="games-grid">
                         <div class="game-card">
@@ -426,7 +437,7 @@
                 </div>
                 
                 <!-- Live Stream Preview -->
-                <div class="live-stream" data-aos="zoom-in">
+                <div class="live-stream">
                     <div class="stream-preview">
                         <i class="fas fa-circle live-badge"></i>
                         <h4>LIVE NOW</h4>
@@ -449,7 +460,7 @@
             </div>
             
             <div class="contact-content">
-                <div class="contact-info" data-aos="fade-right">
+                <div class="contact-info" id="contactInfo">
                     <div class="info-card">
                         <div class="info-icon">
                             <i class="fas fa-map-marker-alt"></i>
@@ -562,7 +573,276 @@
         <source src="audio/TIKI TIKI (Slowed) - Unique Vibes.mp3" type="audio/mpeg">
     </audio>
 
+    <!-- Scripts -->
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="script.js"></script>
+    
+    <!-- Dynamic Content Loader - Connects with Admin Dashboard -->
+    <script>
+        // Load dynamic content from localStorage (saved by admin dashboard)
+        function loadDynamicContent() {
+            const savedContent = localStorage.getItem('portfolio_content');
+            if (savedContent) {
+                try {
+                    const content = JSON.parse(savedContent);
+                    
+                    // Update Hero Section
+                    if (content.hero) {
+                        const heroBadge = document.getElementById('heroBadge');
+                        if (heroBadge && content.hero.badge) {
+                            heroBadge.innerHTML = `<i class="fas fa-bolt"></i> ${content.hero.badge}`;
+                        }
+                        
+                        const heroTitle = document.getElementById('heroTitle');
+                        if (heroTitle && content.hero.title) {
+                            heroTitle.innerHTML = content.hero.title.replace(/\n/g, '<br>');
+                        }
+                        
+                        const heroDesc = document.getElementById('heroDesc');
+                        if (heroDesc && content.hero.description) {
+                            heroDesc.textContent = content.hero.description;
+                        }
+                        
+                        const heroStats = document.getElementById('heroStats');
+                        if (heroStats && content.hero.stats && content.hero.stats.length >= 3) {
+                            const stats = heroStats.querySelectorAll('.stat');
+                            stats.forEach((stat, i) => {
+                                if (content.hero.stats[i]) {
+                                    const valueSpan = stat.querySelector('.stat-value');
+                                    const labelSpan = stat.querySelector('.stat-label');
+                                    if (valueSpan) valueSpan.textContent = content.hero.stats[i].value;
+                                    if (labelSpan) labelSpan.textContent = content.hero.stats[i].label;
+                                }
+                            });
+                        }
+                    }
+                    
+                    // Update About Section
+                    if (content.about) {
+                        const aboutSubtitle = document.getElementById('aboutSubtitle');
+                        if (aboutSubtitle && content.about.subtitle) {
+                            aboutSubtitle.innerHTML = content.about.subtitle;
+                        }
+                        
+                        const aboutDesc1 = document.getElementById('aboutDesc1');
+                        if (aboutDesc1 && content.about.description1) {
+                            aboutDesc1.textContent = content.about.description1;
+                        }
+                        
+                        const aboutDesc2 = document.getElementById('aboutDesc2');
+                        if (aboutDesc2 && content.about.description2) {
+                            aboutDesc2.textContent = content.about.description2;
+                        }
+                        
+                        const aboutStats = document.getElementById('aboutStats');
+                        if (aboutStats && content.about.stats && content.about.stats.length >= 3) {
+                            const stats = aboutStats.querySelectorAll('.stat-item');
+                            stats.forEach((stat, i) => {
+                                if (content.about.stats[i]) {
+                                    const numberSpan = stat.querySelector('.stat-number');
+                                    const labelSpan = stat.querySelector('.stat-label');
+                                    if (numberSpan) {
+                                        numberSpan.textContent = content.about.stats[i].value;
+                                        numberSpan.setAttribute('data-count', content.about.stats[i].value);
+                                    }
+                                    if (labelSpan) labelSpan.textContent = content.about.stats[i].label;
+                                }
+                            });
+                        }
+                    }
+                    
+                    // Update Skills Section
+                    if (content.skills) {
+                        // Technical Skills
+                        const techContainer = document.getElementById('technicalSkills');
+                        if (techContainer && content.skills.technical && content.skills.technical.length > 0) {
+                            techContainer.innerHTML = '';
+                            content.skills.technical.forEach(skill => {
+                                const skillHtml = `
+                                    <div class="skill-item">
+                                        <div class="skill-header">
+                                            <span class="skill-name">${skill.name}</span>
+                                            <span class="skill-percent">${skill.percent}%</span>
+                                        </div>
+                                        <div class="skill-bar">
+                                            <div class="skill-progress" data-width="${skill.percent}" style="width: ${skill.percent}%"></div>
+                                        </div>
+                                    </div>
+                                `;
+                                techContainer.innerHTML += skillHtml;
+                            });
+                        }
+                        
+                        // Development Skills
+                        const devContainer = document.getElementById('devSkills');
+                        if (devContainer && content.skills.development && content.skills.development.length > 0) {
+                            devContainer.innerHTML = '';
+                            content.skills.development.forEach(skill => {
+                                const skillHtml = `
+                                    <div class="skill-item">
+                                        <div class="skill-header">
+                                            <span class="skill-name">${skill.name}</span>
+                                            <span class="skill-percent">${skill.percent}%</span>
+                                        </div>
+                                        <div class="skill-bar">
+                                            <div class="skill-progress" data-width="${skill.percent}" style="width: ${skill.percent}%"></div>
+                                        </div>
+                                    </div>
+                                `;
+                                devContainer.innerHTML += skillHtml;
+                            });
+                        }
+                    }
+                    
+                    // Update Services Section
+                    if (content.services && content.services.length > 0) {
+                        const servicesGrid = document.getElementById('servicesGrid');
+                        if (servicesGrid) {
+                            servicesGrid.innerHTML = '';
+                            content.services.forEach((service, index) => {
+                                const delay = index * 100;
+                                const serviceHtml = `
+                                    <div class="service-card" data-aos="zoom-in" data-aos-delay="${delay}">
+                                        <div class="service-icon">
+                                            <i class="fas ${service.icon}"></i>
+                                        </div>
+                                        <h3>${service.title}</h3>
+                                        <p>${service.description}</p>
+                                    </div>
+                                `;
+                                servicesGrid.innerHTML += serviceHtml;
+                            });
+                            
+                            // Re-initialize AOS for new elements
+                            AOS.refresh();
+                        }
+                    }
+                    
+                    // Update Portfolio Section
+                    if (content.portfolio && content.portfolio.length > 0) {
+                        const portfolioGrid = document.getElementById('portfolioGrid');
+                        if (portfolioGrid) {
+                            portfolioGrid.innerHTML = '';
+                            content.portfolio.forEach(item => {
+                                const tagsHtml = item.tags.map(tag => `<span class="tag">${tag}</span>`).join('');
+                                const portfolioHtml = `
+                                    <div class="portfolio-item" data-category="${item.category}">
+                                        <div class="portfolio-img">
+                                            <img src="${item.image}" alt="${item.title}">
+                                        </div>
+                                        <div class="portfolio-info">
+                                            <h3>${item.title}</h3>
+                                            <p>${item.description}</p>
+                                            <div class="portfolio-tags">
+                                                ${tagsHtml}
+                                            </div>
+                                        </div>
+                                    </div>
+                                `;
+                                portfolioGrid.innerHTML += portfolioHtml;
+                            });
+                            
+                            // Re-initialize portfolio filter if needed
+                            if (typeof initPortfolioFilter === 'function') {
+                                initPortfolioFilter();
+                            }
+                        }
+                    }
+                    
+                    // Update Gaming Section
+                    if (content.gaming) {
+                        // Gaming Stats
+                        const gamingStats = document.getElementById('gamingStats');
+                        if (gamingStats && content.gaming.stats && content.gaming.stats.length > 0) {
+                            gamingStats.innerHTML = '';
+                            content.gaming.stats.forEach(stat => {
+                                const statHtml = `
+                                    <div class="gaming-stat-card">
+                                        <i class="fas ${stat.icon}"></i>
+                                        <span class="stat-value">${stat.value}</span>
+                                        <span class="stat-label">${stat.label}</span>
+                                    </div>
+                                `;
+                                gamingStats.innerHTML += statHtml;
+                            });
+                        }
+                        
+                        // Gaming Setup
+                        const gamingSetup = document.getElementById('gamingSetup');
+                        if (gamingSetup && content.gaming.setup && content.gaming.setup.length > 0) {
+                            const setupList = gamingSetup.querySelector('.setup-list');
+                            if (setupList) {
+                                setupList.innerHTML = '';
+                                content.gaming.setup.forEach(item => {
+                                    const setupHtml = `
+                                        <div class="setup-item">
+                                            <span class="setup-label">${item.label}:</span>
+                                            <span>${item.value}</span>
+                                        </div>
+                                    `;
+                                    setupList.innerHTML += setupHtml;
+                                });
+                            }
+                        }
+                        
+                        // Featured Games
+                        const featuredGames = document.getElementById('featuredGames');
+                        if (featuredGames && content.gaming.games && content.gaming.games.length > 0) {
+                            const gamesGrid = featuredGames.querySelector('.games-grid');
+                            if (gamesGrid) {
+                                gamesGrid.innerHTML = '';
+                                content.gaming.games.forEach(game => {
+                                    const gameHtml = `
+                                        <div class="game-card">
+                                            <i class="fas ${game.icon}"></i>
+                                            <span>${game.name}</span>
+                                        </div>
+                                    `;
+                                    gamesGrid.innerHTML += gameHtml;
+                                });
+                            }
+                        }
+                    }
+                    
+                    // Update Contact Section
+                    if (content.contact) {
+                        const contactInfo = document.getElementById('contactInfo');
+                        if (contactInfo) {
+                            const cards = contactInfo.querySelectorAll('.info-card');
+                            if (cards.length >= 3) {
+                                const locationP = cards[0].querySelector('.info-content p');
+                                const phoneLink = cards[1].querySelector('.info-content a');
+                                const emailLink = cards[2].querySelector('.info-content a');
+                                
+                                if (locationP && content.contact.location) locationP.textContent = content.contact.location;
+                                if (phoneLink && content.contact.phone) phoneLink.textContent = content.contact.phone;
+                                if (emailLink && content.contact.email) emailLink.textContent = content.contact.email;
+                            }
+                        }
+                    }
+                    
+                    console.log('Dynamic content loaded successfully!');
+                } catch (e) {
+                    console.error('Error loading dynamic content:', e);
+                }
+            } else {
+                console.log('No saved content found. Using default values.');
+            }
+        }
+        
+        // Load content when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            loadDynamicContent();
+        });
+        
+        // Also listen for storage changes (when admin dashboard saves)
+        window.addEventListener('storage', function(e) {
+            if (e.key === 'portfolio_content') {
+                console.log('Content updated in another tab, reloading...');
+                loadDynamicContent();
+                location.reload();
+            }
+        });
+    </script>
 </body>
-                            </html>
+</html>
