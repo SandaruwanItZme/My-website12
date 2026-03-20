@@ -40,10 +40,13 @@ if (mobileMenuBtn) {
 }
 
 document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', () => {
-        navLinks.classList.remove('active');
-        if (mobileMenuBtn) {
-            mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+    link.addEventListener('click', (e) => {
+        // Don't close menu if clicking login button or theme toggle
+        if (!link.classList.contains('login-icon') && link.tagName !== 'BUTTON') {
+            navLinks.classList.remove('active');
+            if (mobileMenuBtn) {
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            }
         }
     });
 });
@@ -54,7 +57,8 @@ if (typewriter) {
     const texts = [
         'Computer Hardware Technician',
         'Web Developer',
-        'IT Support Specialist'
+        'IT Support Specialist',
+        'Gaming Enthusiast'
     ];
     let textIndex = 0;
     let charIndex = 0;
@@ -167,6 +171,128 @@ const skillObserver = new IntersectionObserver((entries) => {
 
 skillBars.forEach(bar => skillObserver.observe(bar));
 
+// ==================== GAMING TAB ANIMATIONS ====================
+const gamingSection = document.getElementById('gaming');
+const gamingTab = document.getElementById('gamingTab');
+
+if (gamingTab) {
+    gamingTab.addEventListener('click', (e) => {
+        e.preventDefault();
+        
+        // Smooth scroll to gaming section
+        gamingSection.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+        
+        // Add animation to gaming cards when they come into view
+        setTimeout(() => {
+            const gamingStats = document.querySelectorAll('.gaming-stat-card');
+            gamingStats.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.animation = 'slideUp 0.5s ease forwards';
+                }, index * 100);
+            });
+        }, 500);
+    });
+}
+
+// Animate gaming cards when they enter viewport
+const gamingObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const cards = document.querySelectorAll('.gaming-stat-card, .gaming-setup, .featured-games, .live-stream');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+            gamingObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.3 });
+
+if (gamingSection) {
+    gamingObserver.observe(gamingSection);
+}
+
+// Set initial opacity for gaming cards
+document.querySelectorAll('.gaming-stat-card, .gaming-setup, .featured-games, .live-stream').forEach(card => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(30px)';
+    card.style.transition = 'all 0.6s ease';
+});
+
+// ==================== LOGIN MODAL ====================
+const loginIcon = document.getElementById('loginIcon');
+const loginModal = document.getElementById('loginModal');
+const closeModal = document.getElementById('closeModal');
+const loginFormModal = document.getElementById('loginForm');
+
+if (loginIcon && loginModal) {
+    loginIcon.addEventListener('click', () => {
+        loginModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    });
+    
+    closeModal.addEventListener('click', () => {
+        loginModal.classList.remove('active');
+        document.body.style.overflow = '';
+    });
+    
+    // Close modal when clicking outside
+    window.addEventListener('click', (e) => {
+        if (e.target === loginModal) {
+            loginModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+    
+    // Handle login form submission
+    if (loginFormModal) {
+        loginFormModal.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = loginFormModal.querySelector('input[type="email"]').value;
+            
+            if (email) {
+                alert(`Welcome! You've successfully logged in as ${email}\n\nDemo mode - no actual authentication required.`);
+                loginModal.classList.remove('active');
+                document.body.style.overflow = '';
+                loginFormModal.reset();
+                
+                // Add success animation to login icon
+                loginIcon.style.animation = 'pulse 0.5s ease';
+                setTimeout(() => {
+                    loginIcon.style.animation = '';
+                }, 500);
+            }
+        });
+    }
+}
+
+// ==================== ACTIVE NAVIGATION ====================
+window.addEventListener('scroll', () => {
+    const sections = document.querySelectorAll('section[id]');
+    const scrollY = window.scrollY + 100;
+    
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+        const sectionId = section.getAttribute('id');
+        
+        if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                if (link.getAttribute('href') === '#' + sectionId) {
+                    link.classList.add('active');
+                } else if (link.getAttribute('href') !== '#' && !link.classList.contains('login-icon')) {
+                    link.classList.remove('active');
+                }
+            });
+        }
+    });
+});
+
 // ==================== MUSIC PLAYER WITH AUTOPLAY ====================
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Music player initializing with autoplay...');
@@ -192,7 +318,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
     }
     
-    // Playlist - using your actual file
+    // Playlist - your actual song
     const playlist = [
         { 
             title: 'TIKI TIKI (Slowed)', 
@@ -247,105 +373,99 @@ document.addEventListener('DOMContentLoaded', function() {
         
         console.log('Attempting autoplay...');
         
-        // Set initial low volume
-        audio.volume = 0.3;
+        // Set initial volume
+        audio.volume = 0.4;
         
-        // Try to play (modern browsers will likely block this)
+        // Try to play
         audio.play()
             .then(() => {
-                // Autoplay succeeded!
                 console.log('Autoplay successful!');
                 isPlaying = true;
                 if (playPauseBtn) playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
-                
-                // Show subtle unmute hint
-                setTimeout(() => {
-                    const unmuteHint = document.createElement('div');
-                    unmuteHint.innerHTML = '🔊 Click anywhere to adjust volume';
-                    unmuteHint.style.cssText = `
-                        position: fixed;
-                        bottom: 100px;
-                        right: 30px;
-                        background: rgba(58,108,244,0.9);
-                        color: white;
-                        padding: 8px 16px;
-                        border-radius: 30px;
-                        font-size: 13px;
-                        z-index: 10000;
-                        backdrop-filter: blur(5px);
-                        border: 1px solid rgba(255,255,255,0.2);
-                        animation: fadeOut 4s forwards;
-                    `;
-                    document.body.appendChild(unmuteHint);
-                    
-                    setTimeout(() => {
-                        if (unmuteHint.parentNode) unmuteHint.remove();
-                    }, 4000);
-                }, 2000);
             })
             .catch(error => {
-                // Autoplay blocked - show play button
                 console.log('Autoplay blocked, showing play button');
                 
-                const playButton = document.createElement('button');
-                playButton.innerHTML = '<i class="fas fa-play" style="margin-right: 8px;"></i> Play Music';
+                // Create floating play button
+                const playButton = document.createElement('div');
+                playButton.innerHTML = `
+                    <div class="floating-play-btn">
+                        <i class="fas fa-play"></i>
+                        <span>Play Music</span>
+                    </div>
+                `;
                 playButton.style.cssText = `
                     position: fixed;
                     bottom: 100px;
-                    right: 30px;
-                    background: linear-gradient(135deg, #3a6cf4, #00d4ff);
-                    color: white;
-                    border: none;
-                    padding: 12px 25px;
-                    border-radius: 50px;
-                    font-size: 15px;
-                    font-weight: 600;
-                    cursor: pointer;
+                    right: 100px;
                     z-index: 10000;
-                    box-shadow: 0 10px 30px rgba(58,108,244,0.5);
+                    cursor: pointer;
+                    animation: floatBtn 2s ease-in-out infinite;
+                `;
+                
+                const btnInner = playButton.querySelector('.floating-play-btn');
+                btnInner.style.cssText = `
+                    background: var(--gradient, linear-gradient(135deg, #6c5ce7, #00cec9));
+                    color: white;
+                    padding: 12px 24px;
+                    border-radius: 50px;
                     display: flex;
                     align-items: center;
-                    border: 1px solid rgba(255,255,255,0.2);
-                    animation: pulse 2s infinite;
+                    gap: 10px;
+                    font-weight: 600;
+                    font-size: 14px;
+                    box-shadow: 0 10px 30px rgba(108, 92, 231, 0.5);
+                    transition: transform 0.3s ease;
                 `;
+                
+                btnInner.addEventListener('mouseenter', () => {
+                    btnInner.style.transform = 'scale(1.05)';
+                });
+                
+                btnInner.addEventListener('mouseleave', () => {
+                    btnInner.style.transform = 'scale(1)';
+                });
                 
                 playButton.onclick = function() {
                     togglePlay();
                     this.remove();
+                    
+                    // Add animation style
+                    const style = document.createElement('style');
+                    style.textContent = `
+                        @keyframes floatBtn {
+                            0%, 100% { transform: translateY(0); }
+                            50% { transform: translateY(-10px); }
+                        }
+                    `;
+                    document.head.appendChild(style);
                 };
                 
                 document.body.appendChild(playButton);
                 
-                // Add animation styles
-                const style = document.createElement('style');
-                style.textContent = `
-                    @keyframes pulse {
-                        0% { transform: scale(1); }
-                        50% { transform: scale(1.05); }
-                        100% { transform: scale(1); }
+                // Remove after 10 seconds if not clicked
+                setTimeout(() => {
+                    if (playButton.parentNode) {
+                        playButton.style.opacity = '0';
+                        playButton.style.transition = 'opacity 0.5s';
+                        setTimeout(() => {
+                            if (playButton.parentNode) playButton.remove();
+                        }, 500);
                     }
-                    @keyframes fadeOut {
-                        0% { opacity: 0; transform: translateX(100%); }
-                        10% { opacity: 1; transform: translateX(0); }
-                        80% { opacity: 1; transform: translateX(0); }
-                        100% { opacity: 0; transform: translateX(100%); }
-                    }
-                `;
-                document.head.appendChild(style);
+                }, 10000);
             });
     }
     
-    // Try autoplay after a short delay (ensures DOM is fully ready)
-    setTimeout(attemptAutoplay, 1000);
+    // Try autoplay after short delay
+    setTimeout(attemptAutoplay, 500);
     
-    // Also try on first user interaction with the page
+    // Also try on first user interaction
     const userInteractionEvents = ['click', 'scroll', 'touchstart', 'keydown'];
     userInteractionEvents.forEach(eventType => {
         document.addEventListener(eventType, function autoplayOnInteraction() {
             if (!isPlaying && !autoplayAttempted) {
                 attemptAutoplay();
             }
-            // Remove listeners after first interaction
             userInteractionEvents.forEach(e => {
                 document.removeEventListener(e, autoplayOnInteraction);
             });
@@ -428,13 +548,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // Error handling
-    audio.addEventListener('error', (e) => {
-        console.error('Audio error:', e);
-        
-        // Only show error if user tried to play
-        if (isPlaying) {
-            alert('Audio file not found. Please make sure the file exists at: audio/TIKI TIKI (Slowed) - Unique Vibes.mp3');
-        }
+    audio.addEventListener('error', () => {
+        console.log('Audio file not found. Please add your music file.');
     });
     
     // Format time helper
@@ -462,23 +577,43 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('Music player with autoplay initialized');
 });
 
-// ==================== ACTIVE NAVIGATION ====================
-window.addEventListener('scroll', () => {
-    const sections = document.querySelectorAll('section[id]');
-    const scrollY = window.scrollY + 100;
+// ==================== ADDITIONAL ANIMATIONS ====================
+// Add hover effect to gaming cards
+const gameCards = document.querySelectorAll('.game-card');
+gameCards.forEach(card => {
+    card.addEventListener('mouseenter', () => {
+        card.style.transform = 'translateY(-5px) scale(1.05)';
+    });
     
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.offsetHeight;
-        const sectionId = section.getAttribute('id');
+    card.addEventListener('mouseleave', () => {
+        card.style.transform = 'translateY(0) scale(1)';
+    });
+});
+
+// Smooth scroll for all anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
         
-        if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
-            document.querySelectorAll('.nav-links a').forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === '#' + sectionId) {
-                    link.classList.add('active');
-                }
+        const target = document.querySelector(targetId);
+        if (target) {
+            e.preventDefault();
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
             });
         }
     });
 });
+
+// Add loading animation
+window.addEventListener('load', () => {
+    document.body.style.opacity = '0';
+    document.body.style.transition = 'opacity 0.5s';
+    setTimeout(() => {
+        document.body.style.opacity = '1';
+    }, 100);
+});
+
+console.log('Portfolio with Gaming Hub initialized!');
